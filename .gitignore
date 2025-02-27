@@ -1,0 +1,11 @@
+# Ignorar el entorno virtual
+env/
+
+# Ignorar archivos de Python compilados
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar dependencias si usas pipenv o poetry
+Pipfile
+Pipfile.lock
