@@ -7,21 +7,21 @@
 
 # CARGA DE LIBRERIAS ------------------------------------------------------------------------------
 #                                                                 # Ma P0 P1 P2 P3 P4 P5 P6 P7 P8 #
-import os                                                         # ma -- -- -- -- -- -- -- -- p8 #
-import time                                                       # -- -- p1 -- p3 -- -- -- -- -- #
+import os                                                         # ma p0 -- -- -- -- -- p6 -- p8 #
+import time                                                       # -- -- p1 -- -- -- -- -- -- -- #
 import glob                                                       # -- p0 -- -- -- -- -- -- -- -- #
-import pandas as pd                                               # -- -- -- p2 p3 -- -- -- p7 p8 #
+import pandas as pd                                               # -- -- -- p2 p3 p4 p5 p6 p7 p8 #
 import requests                                                   # -- -- -- -- -- -- p5 -- -- -- #
 import re                                                         # -- -- -- -- -- -- -- p6 -- -- # 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- p8 # 
 from colorama import init, Fore, Back, Style                      # ma -- -- -- -- -- -- -- -- -- #
-from selenium import webdriver                                    # -- -- p1 -- p3 -- -- -- -- -- #
-from selenium.webdriver.chrome.service import Service             # -- -- p1 -- p3 -- -- -- -- -- #
-from selenium.webdriver.chrome.options import Options             # -- -- p1 -- p3 -- -- -- -- -- #
-from selenium.webdriver.support.ui import WebDriverWait           # -- -- p1 -- p3 -- -- -- -- -- #
-from selenium.webdriver.support import expected_conditions as EC  # -- -- p1 -- p3 -- -- -- -- -- #
-from selenium.webdriver.common.by import By                       # -- -- p1 -- p3 -- -- -- -- -- #
-from datetime import datetime as dt                               # ma -- -- -- p3 -- -- -- p7 -- #
+from selenium import webdriver                                    # -- -- p1 -- -- -- -- -- -- -- #
+from selenium.webdriver.chrome.service import Service             # -- -- p1 -- -- -- -- -- -- -- #
+from selenium.webdriver.chrome.options import Options             # -- -- p1 -- -- -- -- -- -- -- #
+from selenium.webdriver.support.ui import WebDriverWait           # -- -- p1 -- -- -- -- -- -- -- #
+from selenium.webdriver.support import expected_conditions as EC  # -- -- p1 -- -- -- -- -- -- -- #
+from selenium.webdriver.common.by import By                       # -- -- p1 -- -- -- -- -- -- -- #
+from datetime import datetime as dt                               # ma -- -- -- -- -- -- -- p7 -- #
 from datetime import timedelta                                    # ma -- -- -- -- p4 -- -- p7 -- #
 from bs4 import BeautifulSoup                                     # -- -- -- -- -- -- -- p6 -- -- #
 from email.mime.multipart import MIMEMultipart                    # -- -- -- -- -- -- -- -- -- p8 #
