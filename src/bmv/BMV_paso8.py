@@ -144,77 +144,103 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
     # fecha_formateada = var_FechasSalida
     fecha_formateada = fecha_actual.strftime("%Y%m%d_%H%M%S")
 
+    ruta = f'{sTv.var_RutaInforme}'
     
     # Creamos DF con los datos por grupos
     df_paso8_P = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','ARCHIVO','URL']]
     df_paso8_M = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','ARCHIVO','URL']]
 
-    # Numero de emisores distintos
-    num_emisores_p = len(df_paso8_P['CLAVE'].unique())
-    num_emisores_m = len(df_paso8_M['CLAVE'].unique())
+    if len(df_paso8_P) > 0:
 
-    # Fecha de los datos
-    fec_emisores_p = df_paso8_P['FECHA'].unique()
-    fec_emisores_m = df_paso8_P['FECHA'].unique()
+        # Numero de emisores distintos
+        num_emisores_p = len(df_paso8_P['CLAVE'].unique())
 
-    # Lista de emisores distintos
-    lst_emisores_p = ', '.join(df_paso8_P['CLAVE'].unique())
-    lst_emisores_m = ', '.join(df_paso8_M['CLAVE'].unique())
-    
-    # Reiniciamos el indice
-    df_paso8_P = df_paso8_P.reset_index(drop=True)
-    df_paso8_M = df_paso8_M.reset_index(drop=True)
+        # Fecha de los datos
+        fec_emisores_p = df_paso8_P['FECHA'].unique()
 
-    # Empezamos por el indice 1 y no por el 0
-    df_paso8_P.index = df_paso8_P.index + 1
-    df_paso8_M.index = df_paso8_M.index + 1
+        # Lista de emisores distintos
+        lst_emisores_p = ', '.join(df_paso8_P['CLAVE'].unique())
+        
+        # Reiniciamos el indice
+        df_paso8_P = df_paso8_P.reset_index(drop=True)
 
-    # Excel de salida
-    nombre_archivo_p = f'{var_NombreSalida}_{fecha_formateada}_P.xlsx' #
-    nombre_archivo_m = f'{var_NombreSalida}_{fecha_formateada}_M.xlsx' #  
+        # Empezamos por el indice 1 y no por el 0
+        df_paso8_P.index = df_paso8_P.index + 1
 
-    # Creo un excel con el resultado del DataFrame
-    df_paso8_P.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_p}',sheet_name='EMISORES', index=True)
-    print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_p}")
-    df_paso8_M.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_m}',sheet_name='EMISORES', index=True)
-    print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_m}")
-    
-    # Cuenta de Email para el GRUPO (P) - TO y CC
-    # to
-    valor_to_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'TO'].iloc[0]
-    valor_to_p2 = str(valor_to_p1)
-    destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p2.split(",")]
-    # cc
-    valor_cc_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'CC'].iloc[0]
-    valor_cc_p2 = str(valor_cc_p1)
-    destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p2.split(",")]
+        # Excel de salida
+        nombre_archivo_p = f'{var_NombreSalida}_{fecha_formateada}_P.xlsx' #  
 
-    # Cuenta de Email para el GRUPO (M) - TO y CC
-    # to
-    valor_to_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'TO'].iloc[0]
-    valor_to_m2 = str(valor_to_m1)
-    destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m2.split(",")]
-    # cc
-    valor_cc_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'CC'].iloc[0]
-    valor_cc_m2 = str(valor_cc_m1)
-    destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m2.split(",")]
+        # Creo un excel con el resultado del DataFrame
+        df_paso8_P.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_p}',sheet_name='EMISORES', index=True)
+        print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_p}")
+        
+        # Cuenta de Email para el GRUPO (P) - TO y CC
+        # to
+        valor_to_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'TO'].iloc[0]
+        valor_to_p2 = str(valor_to_p1)
+        destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p2.split(",")]
+        # cc
+        valor_cc_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'CC'].iloc[0]
+        valor_cc_p2 = str(valor_cc_p1)
+        destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p2.split(",")]
 
-    # Asuntos 
-    asunto_p = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_p[0]}_tda update '
-    asunto_m = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_p[0]}_tda update '
+        # Asuntos 
+        asunto_p = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_p[0]}_tda update '
 
-    # Datos compartidos
-    cuerpo_p = f'Fecha Datos: <b>{fec_emisores_p[0]}</b><br>Número de Emisores: <b>{num_emisores_p}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_P)}</b><br>Lista de Emisores: <b>{lst_emisores_p}</b>'
-    cuerpo_m = f'Fecha Datos: <b>{fec_emisores_m[0]}</b><br>Número de Emisores: <b>{num_emisores_m}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_M)}</b><br>Lista de Emisores: <b>{lst_emisores_m}</b>'
+        # Datos compartidos
+        cuerpo_p = f'Fecha Datos: <b>{fec_emisores_p[0]}</b><br>Número de Emisores: <b>{num_emisores_p}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_P)}</b><br>Lista de Emisores: <b>{lst_emisores_p}</b>'
+        
+        #destinatarios_to_p=['carpios@tda-sgft.com']
+        #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
 
-    ruta = f'{sTv.var_RutaInforme}'
-    
-    #destinatarios_to_p=['carpios@tda-sgft.com']
-    #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
-    #destinatarios_to_m=['carpios@tda-sgft.com']
-    #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
+        # Envio a la función enviar_email los datos necesarios
+        enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
+    else:
+        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
+     
+    if len(df_paso8_M) > 0:
 
-    # Envio a la función enviar_email los datos necesarios
-    enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
-    enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
-   
+        # Numero de emisores distintos
+        num_emisores_m = len(df_paso8_M['CLAVE'].unique())
+
+        # Fecha de los datos
+        fec_emisores_m = df_paso8_P['FECHA'].unique()
+
+        # Lista de emisores distintos
+        lst_emisores_m = ', '.join(df_paso8_M['CLAVE'].unique())
+        
+        # Reiniciamos el indice
+        df_paso8_M = df_paso8_M.reset_index(drop=True)
+
+        # Empezamos por el indice 1 y no por el 0
+        df_paso8_M.index = df_paso8_M.index + 1
+
+        # Excel de salida
+        nombre_archivo_m = f'{var_NombreSalida}_{fecha_formateada}_M.xlsx' #  
+
+        # Creo un excel con el resultado del DataFrame
+        df_paso8_M.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_m}',sheet_name='EMISORES', index=True)
+        print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_m}")
+
+        # Cuenta de Email para el GRUPO (M) - TO y CC
+        # to
+        valor_to_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'TO'].iloc[0]
+        valor_to_m2 = str(valor_to_m1)
+        destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m2.split(",")]
+        # cc
+        valor_cc_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'CC'].iloc[0]
+        valor_cc_m2 = str(valor_cc_m1)
+        destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m2.split(",")]
+
+        # Asuntos 
+        asunto_m = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_p[0]}_tda update '
+
+        # Datos compartidos
+        cuerpo_m = f'Fecha Datos: <b>{fec_emisores_m[0]}</b><br>Número de Emisores: <b>{num_emisores_m}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_M)}</b><br>Lista de Emisores: <b>{lst_emisores_m}</b>'
+        
+        #destinatarios_to_m=['carpios@tda-sgft.com']
+        #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
+
+        # Envio a la función enviar_email los datos necesarios
+        enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
+     

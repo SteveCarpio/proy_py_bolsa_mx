@@ -7,8 +7,8 @@
 # ----------------------------------------------------------------------------------------
 #                          API GOOGLE CHROMEDRIVER
 # ----------------------------------------------------------------------------------------
-#var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/134/chromedriver.exe"         #   Chrome ver 134...
-var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe"          #   Chrome ver 131...
+var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/134/chromedriver.exe"         #   Chrome ver 134... CASA
+#var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe"          #   Chrome ver 131... OFICINA
 
 # ----------------------------------------------------------------------------------------
 #                          URL WEBSCARPING
