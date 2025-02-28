@@ -204,7 +204,7 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
         num_emisores_m = len(df_paso8_M['CLAVE'].unique())
 
         # Fecha de los datos
-        fec_emisores_m = df_paso8_P['FECHA'].unique()
+        fec_emisores_m = df_paso8_M['FECHA'].unique()
 
         # Lista de emisores distintos
         lst_emisores_m = ', '.join(df_paso8_M['CLAVE'].unique())
@@ -233,7 +233,7 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
         destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m2.split(",")]
 
         # Asuntos 
-        asunto_m = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_p[0]}_tda update '
+        asunto_m = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{fec_emisores_m[0]}_tda update '
 
         # Datos compartidos
         cuerpo_m = f'Fecha Datos: <b>{fec_emisores_m[0]}</b><br>Número de Emisores: <b>{num_emisores_m}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_M)}</b><br>Lista de Emisores: <b>{lst_emisores_m}</b>'
@@ -243,4 +243,5 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
 
         # Envio a la función enviar_email los datos necesarios
         enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
-     
+    else:
+        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")

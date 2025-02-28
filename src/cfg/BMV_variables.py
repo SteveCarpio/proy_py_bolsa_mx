@@ -7,8 +7,8 @@
 # ----------------------------------------------------------------------------------------
 #                          API GOOGLE CHROMEDRIVER
 # ----------------------------------------------------------------------------------------
-var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/134/chromedriver.exe"         #   Chrome ver 134... CASA
-#var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe"          #   Chrome ver 131... OFICINA
+#var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/134/chromedriver.exe"         #   Chrome ver 134... CASA
+var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe"          #   Chrome ver 131... OFICINA
 
 # ----------------------------------------------------------------------------------------
 #                          URL WEBSCARPING
@@ -29,7 +29,7 @@ var_RutaConfig=f'{var_RutaRaiz}\\CONFIG\\'
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_NombreEmisores="BMV_Filtro_Emisores"
+var_NombreEmisores="BMV_Filtro_Emisores_DEV"
 var_WarningEmisores=""
 
 # ----------------------------------------------------------------------------------------
