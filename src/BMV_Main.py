@@ -29,7 +29,7 @@ init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
 sTv_paso0(var_NombreSalida, var_FechasSalida)
-input(Fore.WHITE + "Presiona Enter para continuar...")
+
 
 # ------------------------------- MENU -----------------------------------
 
@@ -98,7 +98,7 @@ def limpiar_pantalla():
 def mostrar_menu(par_FechasSalida):
     limpiar_pantalla()
     print(Fore.MAGENTA + "=" * 37)
-    print(Fore.WHITE + "  Fecha Referencia: " + par_FechasSalida)
+    print(Fore.WHITE + "  Fecha Ejecución:  " + dt.now().strftime("%Y%m%d_%H%M%S"))  # par_FechasSalida
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
@@ -148,6 +148,12 @@ def ejecutar_menu(par_FechasSalida):
         # Pausa para que el usuario vea los resultados
         input(Fore.WHITE + "Presiona Enter para continuar...")
 
-# Ejecutar el menú
-ejecutar_menu(var_FechasSalida)
-# FIN: By Steve Carpio - 2025     
+
+if len(sys.argv) > 1 and sys.argv[1] == "RUN":
+    todos()
+else:
+    input(Fore.WHITE + "Presiona Enter para continuar...")
+    # Ejecutar el menú
+    ejecutar_menu(var_FechasSalida)
+
+# FIN: By Steve Carpio - 2025    
