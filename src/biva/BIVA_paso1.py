@@ -30,7 +30,7 @@ def sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida):
     with open(salidaHtml, "w", encoding="utf-8") as file:
         file.write(page_source)
    
-    print(f"- HTML creado correctamente: {var_NombreSalida}_paso1_{var_FechasSalida}.html")
+    print(f"- HTML creado correctamente: {var_NombreSalida}_paso1_{var_FechasSalida}.html\n")
     driver.quit()
 
 def sTv_paso1(var_NombreSalida, var_FechasSalida):

@@ -19,9 +19,9 @@ var_WEBSCRAPING2="https://www.biva.mx/emisoras/empresas/xls?biva=false&cancelada
 #-----------------------------------------------------------------------------------------
 #                          RUTAS DE APOYO
 # ----------------------------------------------------------------------------------------
-var_RutaRaiz='C:\\MisCompilados\\PROY_BMV_EVENTOS\\'
-var_RutaInforme=f'{var_RutaRaiz}INFORMES_V2\\'
-var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES_V2\\'
+var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\'
+var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
+var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES\\'
 var_RutaConfig=f'{var_RutaRaiz}\\CONFIG\\'
 
 # ----------------------------------------------------------------------------------------
