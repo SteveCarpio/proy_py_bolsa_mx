@@ -20,7 +20,7 @@ def sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida):
 
     # Leo Todo el contenido del excel en una variable
     with open(html_content, "r", encoding="utf-8") as file:
-        html_content = file.readlines()
+        html_content = file.readlines() 
 
     # Filtro solo las cadenas que necesito del HMTL
     filtered_lines = [line.strip() for line in html_content if "/es/emisoras/perfil/-" in line]
