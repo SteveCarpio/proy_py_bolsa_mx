@@ -10,13 +10,13 @@ from   cfg.BIVA_librerias import *
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida):
+def sTv_paso2_lee_html(var_NombreSalida):
 
     # Ajustar la configuración para mostrar el texto completo en las columnas sin truncar
     pd.set_option('display.max_colwidth', None)  # None para no truncar
 
     # Var con el HMTL generado
-    html_content = f'{sTv.var_RutaWebFiles}{var_NombreSalida}_paso1_{var_FechasSalida}.html'  
+    html_content = f'{sTv.var_RutaWebFiles}{var_NombreSalida}_paso1.html'  
 
     # Leo Todo el contenido del excel en una variable
     with open(html_content, "r", encoding="utf-8") as file:
@@ -42,11 +42,11 @@ def sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida):
   
 
     # Creo un excel con el resultado del DataFrame
-    df_paso2.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso2_{var_FechasSalida}.xlsx',sheet_name='URL', index=False)
-    print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso2_{var_FechasSalida}.xlsx")
+    df_paso2.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso2.xlsx',sheet_name='URL', index=False)
+    print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso2.xlsx")
     print(df_paso2.head(2))
     print("\n")
 
-def sTv_paso2(var_NombreSalida, var_FechasSalida):
-    sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida)
+def sTv_paso2(var_NombreSalida):
+    sTv_paso2_lee_html(var_NombreSalida)
     

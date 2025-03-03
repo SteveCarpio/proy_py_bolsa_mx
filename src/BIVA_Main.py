@@ -13,7 +13,7 @@ from   biva.BIVA_paso2     import sTv_paso2
 
 tiempo_inicio = dt.now()
 var_NombreSalida= 'BIVA'
-var_FechasSalida= ""  # tiempo_inicio.strftime("%Y%m%d_%H%M%S")
+var_Fechas1= tiempo_inicio.strftime("%Y-%m-%d")
 
 os.system("cls")
 
@@ -21,7 +21,7 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-sTv_paso0(var_NombreSalida, var_FechasSalida)
+sTv_paso0(var_NombreSalida)
 
 
 # ------------------------------- MENU -----------------------------------
@@ -29,12 +29,12 @@ sTv_paso0(var_NombreSalida, var_FechasSalida)
 # Funciones para los pasos
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} 👌\n")
-    sTv_paso1(var_NombreSalida, var_FechasSalida)
+    sTv_paso1(var_NombreSalida, var_Fechas1)
     print(Fore.YELLOW + "\nPaso 1 completado! \n")
 
 def paso2():
     print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} 👌\n")
-    sTv_paso2(var_NombreSalida, var_FechasSalida)
+    sTv_paso2(var_NombreSalida)
     print(Fore.GREEN + "\nPaso 2 completado! \n")
 
 def todos():
@@ -55,7 +55,7 @@ def limpiar_pantalla():
 def mostrar_menu(par_FechasSalida):
     limpiar_pantalla()
     print(Fore.MAGENTA + "=" * 37)
-    print(Fore.WHITE + "  Fecha Ejecución:  " + dt.now().strftime("%Y%m%d_%H%M%S"))  # par_FechasSalida
+    print(Fore.WHITE + "     Bolsa BIVA MX:  " + par_FechasSalida)
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
@@ -93,6 +93,6 @@ if len(sys.argv) > 1 and sys.argv[1] == "RUN":
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     # Ejecutar el menú
-    ejecutar_menu(var_FechasSalida)
+    ejecutar_menu(var_Fechas1)
 
 # FIN: By Steve Carpio - 2025    
