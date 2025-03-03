@@ -1,10 +1,8 @@
 # Análisis Bolsas de México - BMV y BIVA
 <br><br>
-----[En construcción]----
+----[En-Construcción]----
 <br><br>
 
-
-# Crear entorno virtual - env
 ## Instalar el entorno virtual
 pip install virtualenv
 
