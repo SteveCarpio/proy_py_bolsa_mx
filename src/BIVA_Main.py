@@ -30,12 +30,12 @@ sTv_paso0(var_NombreSalida, var_FechasSalida)
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} 👌\n")
     sTv_paso1(var_NombreSalida, var_FechasSalida)
-    print(Fore.YELLOW + "Paso 1 completado! \n")
+    print(Fore.YELLOW + "\nPaso 1 completado! \n")
 
 def paso2():
     print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} 👌\n")
     sTv_paso2(var_NombreSalida, var_FechasSalida)
-    print(Fore.GREEN + "Paso 2 completado! \n")
+    print(Fore.GREEN + "\nPaso 2 completado! \n")
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")

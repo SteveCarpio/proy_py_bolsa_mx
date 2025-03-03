@@ -98,7 +98,7 @@ def limpiar_pantalla():
 def mostrar_menu(par_FechasSalida):
     limpiar_pantalla()
     print(Fore.MAGENTA + "=" * 37)
-    print(Fore.WHITE + "  Fecha Ejecución:  " + dt.now().strftime("%Y%m%d_%H%M%S"))  # par_FechasSalida
+    print(Fore.WHITE + "   BOLSA BMV DATE: " + dt.now().strftime("%Y%m%d_%H%M%S"))  # par_FechasSalida
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
