@@ -1,33 +1,40 @@
-
-
-import feedparser
+import requests
+import xml.etree.ElementTree as ET
 import pandas as pd
 
-# URL del feed RSS
-rss_url = "https://www.biva.mx/emisoras/banco-informacion/rss"  # Reemplaza con la URL del feed RSS que quieras leer
+# URL del RSS
+rss_url = "https://www.biva.mx/emisoras/banco-informacion/rss"
+           
 
-rss_url = "https://www.biva.mx/emisoras/banco-informacion/rss?tipoDocumento=38,197,198"
+# Realiza la solicitud HTTP para obtener el RSS
+response = requests.get(rss_url,verify=False)
+if response.status_code == 200:
+    # Parsea el contenido XML del RSS
+    root = ET.fromstring(response.content)
 
-rss_url="https://biva.mx/emisoras/empresas/calificadoras/rss"
+    # Lista para almacenar los artículos
+    articles = []
 
-# Leer el feed RSS
-feed = feedparser.parse(rss_url)
+    # Extrae la información de los artículos
+    for item in root.findall(".//item"):
+        title = item.find("title").text
+        link = item.find("link").text
+        pub_date = item.find("pubDate").text
+        description = item.find("description").text if item.find("description") is not None else ''
 
-# Extraer datos relevantes
-entries = []
-for entry in feed.entries:
-    entries.append({
-        "Título": entry.title,
-        "Link": entry.link,
-        "Descripción": entry.get("description", ""),  # Algunas entradas pueden no tener descripción
-        "Fecha": entry.get("published", "")  # Algunas pueden no tener fecha publicada
-    })
+        articles.append({
+            'Título': title,
+            'Enlace': link,
+            'Fecha': pub_date,
+            'Resumen': description
+        })
 
-# Crear un DataFrame de pandas
-df = pd.DataFrame(entries)
+    # Crea un DataFrame con los artículos
+    df = pd.DataFrame(articles)
 
-# Guardar en un archivo Excel
-excel_filename = "rss_feed_calificadoras.xlsx"
-df.to_excel(excel_filename, index=False)
+    # Guarda el DataFrame en un archivo Excel
+    df.to_excel("rss_contenido.xlsx", index=False)
+    print("El archivo Excel ha sido creado exitosamente.")
+else:
+    print(f"Error al obtener el RSS. Código de estado: {response.status_code}")
 
-print(f"Archivo '{excel_filename}' generado exitosamente.")

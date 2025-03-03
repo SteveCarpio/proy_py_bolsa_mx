@@ -13,10 +13,8 @@ var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe" 
 # ----------------------------------------------------------------------------------------
 #                          URL WEBSCARPING
 # ----------------------------------------------------------------------------------------
-var_WEBSCRAPING1="https://www.biva.mx/empresas/emisoras_inscritas/emisoras_inscritas"
-var_WEBSCRAPING2="https://www.biva.mx/emisoras/empresas/xls?biva=false&canceladas=false"  # Excel con la Lista de emisores Todos
-var_WEBSCRAPING3=""
-var_WEBSCRAPING4=""
+var_WEBSCRAPING1="https://www.biva.mx/empresas/emisoras_inscritas/banco_de_informacion"
+var_WEBSCRAPING2="https://www.biva.mx/emisoras/empresas/xls?biva=false&canceladas=false"  # Excel con la Lista de Todos los Emisores
 
 #-----------------------------------------------------------------------------------------
 #                          RUTAS DE APOYO
