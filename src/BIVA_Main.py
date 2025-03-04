@@ -11,6 +11,7 @@ from   biva.BIVA_paso0     import sTv_paso0
 from   biva.BIVA_paso1     import sTv_paso1
 from   biva.BIVA_paso2     import sTv_paso2
 from   biva.BIVA_paso3     import sTv_paso3
+from   biva.BIVA_paso4     import sTv_paso4
 
 tiempo_inicio = dt.now()
 var_NombreSalida = 'BIVA'
@@ -42,11 +43,17 @@ def paso3():
     sTv_paso3(var_NombreSalida, var_Fechas1)
     print(Fore.GREEN + "\nPaso 3 completado! \n")
 
+def paso4():
+    print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} 👌\n")
+    sTv_paso4(var_NombreSalida, var_Fechas1)
+    print(Fore.GREEN + "\nPaso 4 completado! \n")
+
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
     paso1()
     paso2()
     paso3()
+    paso4()
     print(Fore.LIGHTBLUE_EX + "¡Todos los pasos completados exitosamente! 🎉 \n")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
     print(Fore.CYAN + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
@@ -68,6 +75,7 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.YELLOW       + "1) 🟡 Ejecutar el PASO_1         ")
     print(Fore.GREEN        + "2) 🟢 Ejecutar el PASO_2         ")
     print(Fore.GREEN        + "3) 🟢 Ejecutar el PASO_3         ")
+    print(Fore.GREEN        + "4) 🟢 Ejecutar el PASO_4         ")
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
 
@@ -85,6 +93,8 @@ def ejecutar_menu(par_FechasSalida):
             paso2()
         elif option == '3':
             paso3()
+        elif option == '4':
+            paso4()
         elif option.upper() == 'X':
             print(Fore.RED + "\n¡Saliendo del programa! 👋\n")
             break
