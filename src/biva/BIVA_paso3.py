@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-#  PASO2: CREA XLS CON LAS URLs PARA EXTRAER LA INFO DE LA BOLSA
+#  PASO3: CREA XLS CON LAS URLs PARA EXTRAER LA INFO DE LA BOLSA
 #  Autor: SteveCarpio-2025
 # ----------------------------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ from   cfg.BIVA_librerias import *
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
-def sTv_paso2_lee_html(par_html_content):
+def sTv_paso3_lee_html(par_html_content):
 
     # Ajustar la configuración para mostrar el texto completo en las columnas sin truncar
     pd.set_option('display.max_colwidth', None)  # None para no truncar
@@ -89,9 +89,9 @@ def sTv_paso2_lee_html(par_html_content):
     return df
 
 # ----------------------------------------------------------------------------------------
-#                               INICIO PASO 2
+#                               INICIO PASO 3
 # ---------------------------------------------------------------------------------------- 
-def sTv_paso2(var_NombreSalida):
+def sTv_paso3(var_NombreSalida):
 
     # Lista para almacenar los DF
     resultados = []
@@ -110,6 +110,6 @@ def sTv_paso2(var_NombreSalida):
     df_paso2 = pd.concat(resultados, ignore_index=True)
 
     # Creo un excel con el resultado del DataFrame
-    df_paso2.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso2.xlsx',sheet_name='PASO2', index=False)
-    print(f"\n- Datos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso2.xlsx")
+    df_paso3.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx',sheet_name='PASO3', index=False)
+    print(f"\n- Datos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx")
     

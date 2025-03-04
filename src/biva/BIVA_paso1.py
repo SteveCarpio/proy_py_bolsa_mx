@@ -7,7 +7,7 @@ import cfg.BIVA_variables as sTv
 from   cfg.BIVA_librerias import *
 
 # ----------------------------------------------------------------------------------------
-#                               INICIO WEB SCRAPPING
+#                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
 def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
 
@@ -41,8 +41,12 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
         driver.quit()
         return 0 # Si no tiene datos envía este valor
 
-    
+# ----------------------------------------------------------------------------------------
+#                               INICIO PASO 1
+# ----------------------------------------------------------------------------------------    
 def sTv_paso1(var_NombreSalida, var_Fechas1):
+
+    # Declaración de fechas de entrada
     var_fecha_ini= "2025-02-28"    #  var_Fechas1
     var_fecha_fin= var_fecha_ini
 
@@ -51,7 +55,8 @@ def sTv_paso1(var_NombreSalida, var_Fechas1):
         var_pagina = f'{i+1}'
         var_url = f'{sTv.var_WEBSCRAPING1}?fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&page={var_pagina}'
         var_i = i + 1
-        # Si no existe más páginas nos llegará el valor 0 de lo contrario nos llegará el valor 1
+
+        # Si no existe más páginas llegará el valor 0 de lo contrario llegará 1
         retorno = sTv_paso1_WebScraping(var_NombreSalida, var_url, var_i)  # WEBSCRAPING BIVA
         if retorno == 0:
             break
