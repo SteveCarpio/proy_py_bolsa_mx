@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-#  PASO3: CREA XLS CON LAS URLs PARA EXTRAER LA INFO DE LA BOLSA
+#  PASO3: CREA XLS AÑADIENDO LOS ID DE LOS EMISORES
 #  Autor: SteveCarpio-2025
 # ----------------------------------------------------------------------------------------
 
@@ -9,107 +9,64 @@ from   cfg.BIVA_librerias import *
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
-def sTv_paso3_lee_html(par_html_content):
+def sTv_paso3_crea_ID_emisores():
 
-    # Ajustar la configuración para mostrar el texto completo en las columnas sin truncar
-    pd.set_option('display.max_colwidth', None)  # None para no truncar
-
-    # Creo un df vació
-    df_paso2 = pd.DataFrame(columns=['CLAVE', 'CODIGO', 'URL1', 'URL2', 'URL3'])
-
-      # Leer el contenido del archivo HTML
-    with open(par_html_content, "r", encoding="utf-8") as file:
+    # Leer el contenido del archivo HTML
+    with open(f'{sTv.var_RutaWebFiles}BIVA_paso1_pag1.html', "r", encoding="utf-8") as file:
         html_content = file.read()
 
     # Parsear el contenido HTML con BeautifulSoup
     soup = BeautifulSoup(html_content, "html.parser")
 
-    # Lista para almacenar los resultados
-    resultados = []
+    # Buscar todos las opciones dentro del select con id="clave_emisoras"
+    options = soup.select("#claves_emisoras option")
 
-    # Buscar todos los DIVs que contienen la información
-    divs = soup.find_all("div", class_="Toggle__contenedor_card__25JOq")
+    # Extraer los valores de los atributos 'value' y separarlos en dos campos
+    data = []
+    for option in options:
+        value = option.get('value')
+        if value:  # Verificamos que haya un valor
+            campo1, campo2 = value.split('_')  # Separamos por el guión bajo
+            data.append({"CLAVE": campo2, "CODIGO": campo1})
 
-    # Recorrer todos los divs encontrados
-    for div in divs:
-
-        # Inicializar las variables
-        CLAVE   = ""
-        FECHA   = ""
-        ARCHIVO = ""
-        ASUNTO  = ""
-
-        # Extraer la Clave
-        CLAVE_tag = div.find("span", class_="texto_24_17 nunito bold")
-        if CLAVE_tag:
-            CLAVE = CLAVE_tag.get_text(strip=True)
-
-        # Extraer la Fecha de Publicación
-        # Buscar el contenedor de "Fecha de Publicación"
-        FECHA_tag = div.find("span", text="Fecha de Publicación")
-        if FECHA_tag:
-            # La fecha está en el siguiente span
-            FECHA_tag = FECHA_tag.find_next("span", class_="texto_16_17 montse regular")
-            if FECHA_tag:
-                FECHA = FECHA_tag.get_text(strip=True)
-
-        # Extraer el HREF del enlace del archivo
-        ARCHIVO_tag = div.find("a", href=True, download=True)
-        if ARCHIVO_tag:
-            ARCHIVO = ARCHIVO_tag["href"]
-
-        # Extraer la Descripción
-        # Buscar el contenedor de "Descripción"
-        ASUNTO_tag = div.find("span", text="Descripción")
-        if ASUNTO_tag:
-            # La descripción está en el siguiente span
-            ASUNTO_tag_span = ASUNTO_tag.find_next("span", class_="texto_16_17 montse regular")
-            if ASUNTO_tag_span:
-                ASUNTO = ASUNTO_tag_span.get_text(strip=True)
-
-
-        # Agregar el resultado a la lista
-        resultados.append({
-            "CLAVE":    CLAVE,
-            "SECCION":  "Banco de Información",
-            "FECHA":    FECHA,
-            "ASUNTO":   ASUNTO,
-            #"ARCHIVO":  ARCHIVO,  No me rellena todos los registros, creare mejor en el paso3 una URL del emisor
-            #"URL":      "https............"  lo crearé en el paso3
-            
-        })
-
-    # Mostrar los resultados
-    for resultado in resultados:
-        print(f"    Clave: {resultado["CLAVE"]}  -  Fecha de Publicación: {resultado["FECHA"]}")
-        #print("    " + "-"*60)  # Línea separadora para claridad
-
-    # Crear un DataFrame con esos valores
-    df = pd.DataFrame(resultados)
+    # Crear un DataFrame a partir de los datos
+    df = pd.DataFrame(data)
     return df
+
+def sTv_paso3_crea_df_final(var_NombreSalida, df_id,var_Fechas1 ):
+    
+    # Leo excel del paso2 en un dataframe
+    df_lista = pd.read_excel(f"{sTv.var_RutaInforme}{var_NombreSalida}_paso2.xlsx", sheet_name="PASO2")
+
+    # Hago un merge de ambos df
+    df_merge = df_lista.merge(df_id, on="CLAVE", how="left")
+
+    # Reorganizo la posición de los campos
+    df_merge = df_merge[['CLAVE', 'CODIGO', 'SECCION', 'FECHA', 'ASUNTO']]
+
+    url1 = f"https://www.biva.mx/empresas/emisoras_inscritas/emisoras_inscritas?emisora_id="
+    url2 = f"&tipoInformacion=null&tipoDocumento=null&fechaInicio="
+    url3 = f"&fechaFin="
+    url4 = f"&periodo=null&ejercicio=null&tipo=null&subTab=2&biva=null&canceladas=false&page=1"
+
+    df_merge['URL'] = url1 + df_merge['CODIGO'] + url2 + var_Fechas1 + url3 + var_Fechas1 + url4
+    
+    return df_merge
 
 # ----------------------------------------------------------------------------------------
 #                               INICIO PASO 3
 # ---------------------------------------------------------------------------------------- 
-def sTv_paso3(var_NombreSalida):
+def sTv_paso3(var_NombreSalida, var_Fechas1):
+ 
+    print(f'- Creo excel con los ID Emisores ')
+    df_paso3       = sTv_paso3_crea_ID_emisores()
+    # Creo un excel con la lista de emisores
+    df_paso3.to_excel(f'{sTv.var_RutaConfig}{var_NombreSalida}_paso3_id_emisores.xlsx',sheet_name='ID', index=False)
+    print(f"- Datos temporales guardados en {sTv.var_RutaConfig}{var_NombreSalida}_paso3_id_emisores.xlsx")    
 
-    # Lista para almacenar los DF
-    resultados = []
-
-    # Leo todo los archivos .html que hemos descargado
-    archivos = glob.glob(f'{sTv.var_RutaWebFiles}*.html')
-    print(f'- Se analizan {len(archivos)} páginas de los ficheros .html que se descargaron en el Paso1')
-    cont = 0
-    for archivo in archivos:
-        cont = cont + 1 
-        print(f'\n- Analizando página [{cont}]: {archivo} ')
-        df =sTv_paso2_lee_html(archivo)
-        resultados.append(df)
-    
-    # Unir todos los dataframe de la lista de resultados
-    df_paso2 = pd.concat(resultados, ignore_index=True)
-
-    # Creo un excel con el resultado del DataFrame
-    df_paso3.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx',sheet_name='PASO3', index=False)
-    print(f"\n- Datos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx")
+    print(f'- Creo excel agregando los ID Emisores"')
+    df_paso3_final = sTv_paso3_crea_df_final(var_NombreSalida, df_paso3, var_Fechas1) 
+     # Creo un excel con el resultado del DataFrame
+    df_paso3_final.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx',sheet_name='PASO3', index=False)
+    print(f"- Datos temporales guardados en {sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx")
     

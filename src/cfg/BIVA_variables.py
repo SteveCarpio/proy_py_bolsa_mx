@@ -22,7 +22,7 @@ var_WEBSCRAPING2="https://www.biva.mx/emisoras/empresas/xls?biva=false&cancelada
 var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
 var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES\\'
-var_RutaConfig=f'{var_RutaRaiz}\\CONFIG\\'
+var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO

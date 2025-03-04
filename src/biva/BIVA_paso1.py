@@ -47,8 +47,8 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
 def sTv_paso1(var_NombreSalida, var_Fechas1):
 
     # Declaración de fechas de entrada
-    var_fecha_ini= "2025-02-28"    #  var_Fechas1
-    var_fecha_fin= var_fecha_ini
+    var_fecha_ini = var_Fechas1
+    var_fecha_fin = var_Fechas1
 
     # Bucle para leer todas las Paginas de la WEB
     for i in range(10):

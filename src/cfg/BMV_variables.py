@@ -24,7 +24,7 @@ var_WEBSCRAPING4="https://www.bmv.com.mx/es/emisoras/eventosrelevantes/"
 var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\BMV\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
 var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES\\'
-var_RutaConfig=f'{var_RutaRaiz}\\CONFIG\\'
+var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO

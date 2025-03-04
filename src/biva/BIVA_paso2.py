@@ -11,12 +11,6 @@ from   cfg.BIVA_librerias import *
 # ----------------------------------------------------------------------------------------
 def sTv_paso2_lee_html(par_html_content):
 
-    # Ajustar la configuración para mostrar el texto completo en las columnas sin truncar
-    pd.set_option('display.max_colwidth', None)  # None para no truncar
-
-    # Creo un df vació
-    df_paso2 = pd.DataFrame(columns=['CLAVE', 'CODIGO', 'URL1', 'URL2', 'URL3'])
-
       # Leer el contenido del archivo HTML
     with open(par_html_content, "r", encoding="utf-8") as file:
         html_content = file.read()
