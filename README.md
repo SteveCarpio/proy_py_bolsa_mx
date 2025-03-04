@@ -16,6 +16,6 @@ virtualenv -p python3 env
 deactivate
 
 ## Crear un archivo requerimientos 
-pip freeze > requeriments.txt
+pip freeze > requirements.txt
 
 

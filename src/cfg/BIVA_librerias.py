@@ -1,11 +1,11 @@
 # -------------------------------------------------------------------------------------------------
-#                      LIBRERIAS NECESARIAS y OPCIONES
+#                      LIBRERÍAS NECESARIAS y OPCIONES
 # Descripción: Abajo listo las librerías necesarias para su ejecución x pasos
 # Autor: SteveCarpio-2025
 # -------------------------------------------------------------------------------------------------
 
 
-# CARGA DE LIBRERIAS ------------------------------------------------------------------------------
+# CARGA DE LIBRERÍAS ------------------------------------------------------------------------------
 #                                                                 # Ma P0 P1 P2 P3 P4 P5 P6 P7 P8 #
 import os                                                         # ma p0 -- -- -- -- -- -- -- -- #
 import time                                                       # -- -- -- -- -- -- -- -- -- -- #
@@ -31,7 +31,7 @@ from email.mime.application import MIMEApplication                # -- -- -- -- 
 # -------------------------------------------------------------------------------------------------
 
 
-# CUSTOMIZAR LAS LIBRERIAS ---------------------------------------------------------------------------------------------------
+# CUSTOMIZE LAS LIBRERÍAS ---------------------------------------------------------------------------------------------------
 chrome_options = Options()
 prefs = {"profile.managed_default_content_settings.images": 2 ,       # 2 = Bloquear  Imágenes
          "profile.managed_default_content_settings.javascript": 1}    # 1 = Habilitar JavaScript 

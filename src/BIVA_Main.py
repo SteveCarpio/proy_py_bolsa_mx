@@ -6,7 +6,7 @@
 # Versión: V2 2025
 # ----------------------------------------------------------------------------------------
 
-from   cfg.BMV_librerias import *
+from   cfg.BIVA_librerias import *
 from   biva.BIVA_paso0     import sTv_paso0
 from   biva.BIVA_paso1     import sTv_paso1
 from   biva.BIVA_paso2     import sTv_paso2
@@ -41,7 +41,7 @@ def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
     paso1()
     paso2()
-    print(Fore.LIGHTBLUE_EX + "¡Todos los pasos completados exitosamentex! 🎉 \n")
+    print(Fore.LIGHTBLUE_EX + "¡Todos los pasos completados exitosamente! 🎉 \n")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
     print(Fore.CYAN + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
@@ -70,15 +70,15 @@ def mostrar_menu(par_FechasSalida):
 def ejecutar_menu(par_FechasSalida):
     while True:
         mostrar_menu(par_FechasSalida)
-        opcion = input(Fore.WHITE + "Selecciona una opción: ")
+        option = input(Fore.WHITE + "Selecciona una opción: ")
 
-        if opcion   == '0':
+        if option   == '0':
             todos()
-        elif opcion == '1':
+        elif option == '1':
             paso1()
-        elif opcion == '2':
+        elif option == '2':
             paso2()
-        elif opcion.upper() == 'X':
+        elif option.upper() == 'X':
             print(Fore.RED + "\n¡Saliendo del programa! 👋\n")
             break
         else:

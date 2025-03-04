@@ -11,7 +11,7 @@
 var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/131/chromedriver.exe"          #   Chrome ver 131... OFICINA
 
 # ----------------------------------------------------------------------------------------
-#                          URL WEBSCARPING
+#                          URL WEBSCRAPING
 # ----------------------------------------------------------------------------------------
 var_WEBSCRAPING1="https://www.biva.mx/empresas/emisoras_inscritas/banco_de_informacion"
 var_WEBSCRAPING2="https://www.biva.mx/emisoras/empresas/xls?biva=false&canceladas=false"  # Excel con la Lista de Todos los Emisores
