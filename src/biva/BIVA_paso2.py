@@ -10,7 +10,7 @@ from   cfg.BIVA_librerias import *
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso2_lee_html(var_NombreSalida):
+def sTv_paso2_lee_html(var_NombreSalida, par_file_html):
 
     # Ajustar la configuración para mostrar el texto completo en las columnas sin truncar
     pd.set_option('display.max_colwidth', None)  # None para no truncar
@@ -48,5 +48,12 @@ def sTv_paso2_lee_html(var_NombreSalida):
     print("\n")
 
 def sTv_paso2(var_NombreSalida):
-    sTv_paso2_lee_html(var_NombreSalida)
+    # Leo todo los archivos .html que hemos descargado
+    archivos = glob.glob(f'{sTv.var_RutaWebFiles}*.html')
+    print(f'- Se analizan {len(archivos)} paginas de los ficheros del paso1')
+    cont = 0
+    for archivo in archivos:
+        cont = cont + 1 
+        print(f'- Analizando página [{cont}]: {archivo}')
+        #sTv_paso2_lee_html(var_NombreSalida, archivo)
     

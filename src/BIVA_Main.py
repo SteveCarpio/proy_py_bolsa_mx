@@ -21,8 +21,7 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-sTv_paso0(var_NombreSalida)
-
+#sTv_paso0(var_NombreSalida)
 
 # ------------------------------- MENU -----------------------------------
 
@@ -46,7 +45,6 @@ def todos():
     print(Fore.CYAN + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
 
-
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
     os.system("cls")  
@@ -64,7 +62,6 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.GREEN        + "2) 🟢 Ejecutar el PASO_2         ")
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
-
 
 # Función principal para gestionar el menú
 def ejecutar_menu(par_FechasSalida):
@@ -86,7 +83,6 @@ def ejecutar_menu(par_FechasSalida):
         
         # Pausa para que el usuario vea los resultados
         input(Fore.WHITE + "Presiona Enter para continuar...")
-
 
 if len(sys.argv) > 1 and sys.argv[1] == "RUN":
     todos()

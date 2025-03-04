@@ -43,7 +43,7 @@ def sTv_paso0(var_NombreSalida):
     valida_carpetas(sTv.var_RutaInforme)
 
     # Borra todos los files 
-    borrar_archivos(sTv.var_RutaWebFiles, f'{var_NombreSalida}_paso1.html')
+    borrar_archivos(sTv.var_RutaWebFiles, f'{var_NombreSalida}_paso1_*.html')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso2.xlsx')
     
     
