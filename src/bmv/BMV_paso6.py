@@ -122,4 +122,4 @@ def sTv_paso6(var_NombreSalida, var_FechasSalida):
      # Creo un excel con el resultado del DataFrame
     df_paso6_global.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso6_{var_FechasSalida}.xlsx',sheet_name='URL', index=False)
     print(f"        -  \nDatos temporales guardados en el excel {sTv.var_RutaInforme}{var_NombreSalida}_paso6_{var_FechasSalida}.xlsx\n")
-    print(df_paso6_global)
+    #print(df_paso6_global)
