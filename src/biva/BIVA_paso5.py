@@ -77,7 +77,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
             <p></p><br><p></p>
             
             <p>  </p><br><p></p>
-            <i> ** Este email fue enviado desde un proceso automático desde TdA_España. Por favor, no responder a este email. ** </i>
+            <i> ** Este email fue enviado desde un proceso automático desde TdA. Por favor, no responder a este email. ** </i>
             <p><br><br>
 
             <table style="border: none; padding: 10px; border-spacing: 2px; width: 600px; table-layout: fixed;">
