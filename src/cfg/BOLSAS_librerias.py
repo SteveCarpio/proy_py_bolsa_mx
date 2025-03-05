@@ -6,6 +6,7 @@
 
 # CARGA DE LIBRERÍAS ------------------------------------------------------------------------------
 #                                                                 # Ma P0 P1 P2 P3 P4 P5 P6 P7 P8 #
+
 import os                                                         # ma -- -- -- -- -- -- -- -- -- #
 import time                                                       # -- -- -- -- -- -- -- -- -- -- #
 import glob                                                       # -- -- -- -- -- -- -- -- -- -- #
@@ -14,6 +15,7 @@ import requests                                                   # -- -- -- -- 
 import re                                                         # -- -- -- -- -- -- -- -- -- -- # 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- -- # 
 import sys                                                        # -- -- -- -- -- -- -- -- -- -- #
+import subprocess
 from colorama import init, Fore, Back, Style                      # -- -- -- -- -- -- -- -- -- -- #
 from datetime import datetime as dt                               # ma -- -- -- -- -- -- -- -- -- #
 from datetime import timedelta                                    # ma -- -- -- -- -- -- -- -- -- #

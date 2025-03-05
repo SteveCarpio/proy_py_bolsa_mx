@@ -9,8 +9,7 @@
 from   cfg.BOLSAS_librerias import *
 from   bolsas.BOLSAS_paso0  import sTv_paso0
 from   bolsas.BOLSAS_paso1  import sTv_paso1
-
-
+from   bolsas.BOLSAS_paso2  import sTv_paso2
 
 var_NombreSalida = 'BOLSAS'
 var_SendEmail= 'S'
@@ -39,15 +38,20 @@ sTv_paso0(var_NombreSalida, var_Fechas3)
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.GREEN + f"\nEjecutando PASO_1........ {dt.now()} 👌\n")
-    sTv_paso1(var_NombreSalida, var_Fechas1)
-    print(Fore.GREEN + "\nPaso 1 completado! \n")
+    print(Fore.GREEN + f"\nEjecutando BOLSA BMV........ {dt.now()} 👌\n")
+    sTv_paso1(tiempo_inicio)
+    print(Fore.GREEN + "\nPaso completado - BOLSA BMV! \n")
 
+def paso2():
+    print(Fore.GREEN + f"\nEjecutando BOLSA BIVA........ {dt.now()} 👌\n")
+    sTv_paso2(tiempo_inicio)
+    print(Fore.GREEN + "\nPaso completado - BOLSA BIVA! \n")
 
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
     paso1()
+    paso2()
     
     print(Fore.LIGHTBLUE_EX + "¡Todos los pasos completados exitosamente! 🎉 \n")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
@@ -67,7 +71,8 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.LIGHTBLUE_EX + "0) 🔵 Ejecutar TODOS los pasos   ")
-    print(Fore.GREEN        + "1) 🟢 Ejecutar el PASO_1         ")
+    print(Fore.GREEN        + "1) 🟢 Ejecutar el BOLSA BMV      ")
+    print(Fore.GREEN        + "2) 🟢 Ejecutar el BOLSA BIVA     ")
     
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
@@ -82,7 +87,9 @@ def ejecutar_menu(par_FechasSalida):
             todos()
         elif option == '1':
             paso1()
-        
+        elif option == '2':
+            paso2()
+
         elif option.upper() == 'X':
             print(Fore.RED + "\n¡Saliendo del programa! 👋\n")
             break
