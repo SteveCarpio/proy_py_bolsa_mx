@@ -36,7 +36,7 @@ def borrar_archivos(ruta_carpeta, patron):
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso0(var_NombreSalida, var_FechasSalida):
+def sTv_paso0(var_NombreSalida, var_FechasSalida, var_Fechas3):
     # Valida carpetas de CNBV
     valida_carpetas(sTv.var_RutaRaiz)
     valida_carpetas(sTv.var_RutaWebFiles)
@@ -50,5 +50,6 @@ def sTv_paso0(var_NombreSalida, var_FechasSalida):
     borrar_archivos(sTv.var_RutaWebFiles, f'{var_NombreSalida}_paso5_*.html')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso6_*.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso7_*.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_{var_Fechas3}_?.xlsx')
     
     print(Fore.WHITE + "\nRequisitos previos ok\n")

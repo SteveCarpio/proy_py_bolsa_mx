@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-#                                  WebScraping BMV "DEUDAS"
+#                                  WebScraping BMV Comunicados
 #
 # Programa que extraerá información contable de la Web BMV 
 # Autor: SteveCarpio
@@ -20,8 +20,13 @@ from   bmv.BMV_paso8     import sTv_paso8
 var_NombreSalida= 'BMV'
 var_SendEmail= 'S'
 
-# Tratamiento de fechas
-tiempo_inicio = dt.now()
+if len(sys.argv) > 1 :
+    var_param1 = sys.argv[1]
+    var_param2 = sys.argv[2]
+    tiempo_inicio = dt.strptime(var_param2, "%Y-%m-%d %H:%M:%S.%f")
+else: 
+    tiempo_inicio = dt.now()
+
 # Restar 1 día a la fecha actual
 fecha_reducida = tiempo_inicio - timedelta(days=1)
 # Crear variables con los formatos que necesitamos
@@ -37,7 +42,7 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-sTv_paso0(var_NombreSalida, var_FechasSalida)
+sTv_paso0(var_NombreSalida, var_FechasSalida, var_Fechas3)
 
 # ------------------------------- MENU -----------------------------------
 
@@ -156,20 +161,15 @@ def ejecutar_menu(par_FechasSalida):
         # Pausa para que el usuario vea los resultados
         input(Fore.WHITE + "Presiona Enter para continuar...")
 
-
 # Evaluamos como ejecutamos el proceso
 if len(sys.argv) > 1 :
-    var_param = sys.argv[1]
-
-    if var_param == "RUN-NO-EMAIL":
+    if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
-    
-    if "RUN" in var_param:
+    if "RUN" in var_param1:
         todos()
-
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
-    # Ejecutar el menú
     ejecutar_menu(var_Fechas1)
+
 
 # FIN: By Steve Carpio - 2025    

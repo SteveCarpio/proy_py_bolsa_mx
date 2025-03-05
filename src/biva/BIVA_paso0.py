@@ -36,7 +36,7 @@ def borrar_archivos(ruta_carpeta, patron):
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso0(var_NombreSalida):
+def sTv_paso0(var_NombreSalida, var_Fechas3):
     # Valida carpetas de BIVA
     valida_carpetas(sTv.var_RutaRaiz)
     valida_carpetas(sTv.var_RutaWebFiles)
@@ -47,6 +47,7 @@ def sTv_paso0(var_NombreSalida):
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso2.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso3.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso4.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_{var_Fechas3}_?.xlsx')
     borrar_archivos(sTv.var_RutaConfig,  f'{var_NombreSalida}_paso3_id_emisores.xlsx')
     
     
