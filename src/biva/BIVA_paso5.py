@@ -135,7 +135,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso5(var_NombreSalida, var_Fechas1, var_Fechas2):
+def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
     
     # Leer el excel de entrada 
     df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx')
@@ -144,7 +144,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas1, var_Fechas2):
     #fecha_actual = dt.now()
 
     # <--OJO--> usar esta variable "var_FechasSalida" si la tenemos activa
-    fecha_formateada = var_Fechas1
+    fecha_formateada = var_Fechas3
     #fecha_formateada = fecha_actual.strftime("%Y%m%d_%H%M%S")
 
     ruta = f'{sTv.var_RutaInforme}'

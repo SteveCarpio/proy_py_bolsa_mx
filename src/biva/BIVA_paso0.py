@@ -45,6 +45,9 @@ def sTv_paso0(var_NombreSalida):
     # Borra todos los files 
     borrar_archivos(sTv.var_RutaWebFiles, f'{var_NombreSalida}_paso1_*.html')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso2.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso3.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso4.xlsx')
+    borrar_archivos(sTv.var_RutaConfig,  f'{var_NombreSalida}_paso3_id_emisores.xlsx')
     
     
     print(Fore.WHITE + "\nRequisitos previos ok\n")

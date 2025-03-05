@@ -85,13 +85,21 @@ def sTv_paso2_lee_html(par_html_content):
 # ----------------------------------------------------------------------------------------
 #                               INICIO PASO 2
 # ---------------------------------------------------------------------------------------- 
-def sTv_paso2(var_NombreSalida):
+def sTv_paso2(var_NombreSalida, var_Fechas1):
 
     # Lista para almacenar los DF
     resultados = []
 
     # Leo todo los archivos .html que hemos descargado
     archivos = glob.glob(f'{sTv.var_RutaWebFiles}*.html')
+
+    # Valida si hay paginas descargadas.
+    if len(archivos) == 0:
+        print(f"- ¡¡¡ATENCIÓN!!! : No existen datos para analizar del día {var_Fechas1}, por favor revisar la URL manualmente por si es un error del proceso")
+        print(f'- https://www.biva.mx/empresas/emisoras_inscritas/banco_de_informacion?fechaInicio={var_Fechas1}&fechaFin={var_Fechas1}&page=1')
+        print('\n --- Fin del proceso ---')
+        sys.exit()
+
     print(f'- Se analizan {len(archivos)} páginas de los ficheros .html que se descargaron en el Paso1')
     cont = 0
     for archivo in archivos:

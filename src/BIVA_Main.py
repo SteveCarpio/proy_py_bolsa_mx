@@ -25,6 +25,11 @@ fecha_reducida = tiempo_inicio - timedelta(days=1)
 # Crear variables con los formatos que necesitamos
 var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')  # Formato "2025-03-04"
 var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')  # Formato "04-03-2025"
+var_Fechas3 = fecha_reducida.strftime('%Y%m%d')    # Formato "20250304"
+
+#var_Fechas1 = "2025-02-01"
+#var_Fechas2 = "01-02-2025"
+#var_Fechas3 = "20250201"
 
 os.system("cls")
 
@@ -32,7 +37,7 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-#sTv_paso0(var_NombreSalida)
+sTv_paso0(var_NombreSalida)
 
 # ------------------------------- MENU -----------------------------------
 
@@ -44,7 +49,7 @@ def paso1():
 
 def paso2():
     print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} 👌\n")
-    sTv_paso2(var_NombreSalida)
+    sTv_paso2(var_NombreSalida, var_Fechas1)
     print(Fore.GREEN + "\nPaso 2 completado! \n")
 
 def paso3():
@@ -59,9 +64,8 @@ def paso4():
 
 def paso5():
     print(Fore.GREEN + f"\nEjecutando PASO_5........ {dt.now()} 👌\n")
-    sTv_paso5(var_NombreSalida, var_Fechas1, var_Fechas2)
+    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3)
     print(Fore.GREEN + "\nPaso 5 completado! \n")
-
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
