@@ -13,16 +13,21 @@ def sTv_paso4_uno_DF(df_datos1, df_grupo1):
     
     # Customizamos el DATAFRAME 1 -------------------------
     # Convertir la columna 'FECHA' a tipo datetime
-    df_datos1['FECHA'] = pd.to_datetime(df_datos1['FECHA'], format='%d/%m/%Y %H:%M')
-    # Crear una columna 'FECHA' solo con la fecha
-    df_datos1['FECHA2'] = df_datos1['FECHA'].dt.date
-    # Crear una columna 'HORA' solo con la hora
-    df_datos1['HORA'] = df_datos1['FECHA'].dt.strftime('%H:%M')
-    # Borro el campo FECHA formato date_hora
+    df_datos1['FECHAx'] = pd.to_datetime(df_datos1['FECHA'], format='%d/%m/%Y %H:%M')
+
     df_datos1.drop(columns=['FECHA'], inplace=True)
+
+    # Crear una columna 'FECHA' solo con la fecha
+    df_datos1['FECHA'] = df_datos1['FECHAx'].dt.strftime('%d-%m-%Y')
+    
+    # Crear una columna 'HORA' solo con la hora
+    df_datos1['HORA'] = df_datos1['FECHAx'].dt.strftime('%H:%M')
+
+
+    # Borro el campo FECHA formato date_hora
+    df_datos1.drop(columns=['FECHAx'], inplace=True)
+
     # otro
-    df_datos1['FECHA'] = df_datos1['FECHA2']
-    df_datos1.drop(columns=['FECHA2'], inplace=True)
     df_datos1['CODIGO'] = df_datos1['CODIGO'].fillna(0).astype(int)
 
     # Customizamos el DATAFRAME 2 -------------------------
@@ -50,7 +55,6 @@ def sTv_paso4(var_NombreSalida, var_Fechas1):
 
     # Leemos los filtros y emails
     df_grupo = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}.xlsx', sheet_name="FILTRO")
-
 
     print(f'- Creo excel los datos Finales ')
     df_paso4 = sTv_paso4_uno_DF(df_datos, df_grupo)

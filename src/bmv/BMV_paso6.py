@@ -7,7 +7,7 @@
 import cfg.BMV_variables as sTv
 from   cfg.BMV_librerias import *
 
-# Funcion: que nos sirve para obetener el nombre de los fichros *.html en 2 listas
+# Función: que nos sirve para obtener el nombre de los ficheros *.html en 2 listas
 def stv_paso6_lee_hmtl_files():
     ruta = sTv.var_RutaWebFiles
     ficheros2 = []
@@ -26,7 +26,7 @@ def stv_paso6_lee_hmtl_files():
     print(f"- Se detectaron ({num_reg}) ficheros '{ruta}BMV_paso5__*_?.html' para procesar")
     return ficheros2, ficheros3
 
-# Funcion: Lee datos de los HMTL(2 y 3) - INFORMACION JURIDICA CORPORATIVA y EVENTOS RELEVANTES
+# Función: Lee datos de los HMTL(2 y 3) - INFORMACIÓN JURÍDICA CORPORATIVA y EVENTOS RELEVANTES
 def sTv_paso6_lee_html_dato(file, seccion, tipo_html):
     
     # Defino como global mi dataframe
@@ -96,8 +96,8 @@ def sTv_paso6(var_NombreSalida, var_FechasSalida):
     global df_paso6_global
     df_paso6_global = pd.DataFrame(columns=['CLAVE', 'CODIGO', 'T', 'SECCION', 'FECHA', 'HORA', 'ASUNTO', 'ARCHIVO', 'URL'])
 
-    # Lee datos de los HMTL(2) --- INFORMACION JURIDICA CORPORATIVA
-    print("\n------------------- INFORMACION JURIDICA CORPORATIVA --------------------------")
+    # Lee datos de los HMTL(2) --- INFORMACIÓN JURÍDICA CORPORATIVA
+    print("\n------------------- INFORMACIÓN JURÍDICA CORPORATIVA --------------------------")
     cont2 = 0
     for file2 in files2:
         cont2 = cont2 + 1
