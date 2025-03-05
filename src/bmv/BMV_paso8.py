@@ -6,7 +6,7 @@
 import cfg.BMV_variables as sTv
 from   cfg.BMV_librerias import *
 
-# Función envio de Email
+# Función envió de Email
 def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo, ruta, nombre_archivo, df):
     # Configuración del servidor SMTP (Zimbra)
     smtp_server = 'zimbra.tda-sgft.com'
@@ -132,23 +132,23 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso8(var_NombreSalida, var_FechasSalida):
+def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
     
     # Leer el excel de entrada 
     df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso7_{var_FechasSalida}.xlsx')
 
     # Obtener la fecha actual
-    fecha_actual = dt.now()
+    #fecha_actual = dt.now()
 
     # <--OJO--> usar esta variable "var_FechasSalida" si la tenemos activa
     # fecha_formateada = var_FechasSalida
-    fecha_formateada = fecha_actual.strftime("%Y%m%d_%H%M%S")
+    fecha_formateada = var_Fechas3
 
     ruta = f'{sTv.var_RutaInforme}'
     
     # Creamos DF con los datos por grupos
-    df_paso8_P = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','ARCHIVO','URL']]
-    df_paso8_M = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','ARCHIVO','URL']]
+    df_paso8_P = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
+    df_paso8_M = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
 
     if len(df_paso8_P) > 0:
 
@@ -194,9 +194,11 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
         #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
 
         # Envio a la función enviar_email los datos necesarios
-        enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
+        if var_SendEmail == "S":
+            enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
     else:
-        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
+        if var_SendEmail == "S":
+            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
      
     if len(df_paso8_M) > 0:
 
@@ -242,6 +244,8 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida):
         #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
 
         # Envio a la función enviar_email los datos necesarios
-        enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
+        if var_SendEmail == "S":
+            enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
-        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")
+        if var_SendEmail == "S":
+            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")

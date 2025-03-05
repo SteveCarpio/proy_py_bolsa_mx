@@ -17,9 +17,18 @@ from   bmv.BMV_paso6     import sTv_paso6
 from   bmv.BMV_paso7     import sTv_paso7
 from   bmv.BMV_paso8     import sTv_paso8
 
-
-tiempo_inicio = dt.now()
 var_NombreSalida= 'BMV'
+var_SendEmail= 'S'
+
+# Tratamiento de fechas
+tiempo_inicio = dt.now()
+# Restar 1 día a la fecha actual
+fecha_reducida = tiempo_inicio - timedelta(days=1)
+# Crear variables con los formatos que necesitamos
+var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')  # Formato "2025-03-04"
+var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')  # Formato "04-03-2025"
+var_Fechas3 = fecha_reducida.strftime('%Y%m%d')    # Formato "20250304"
+# ----
 var_FechasSalida= ""  # tiempo_inicio.strftime("%Y%m%d_%H%M%S")
 
 os.system("cls")
@@ -29,7 +38,6 @@ init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
 sTv_paso0(var_NombreSalida, var_FechasSalida)
-
 
 # ------------------------------- MENU -----------------------------------
 
@@ -71,7 +79,7 @@ def paso7():
 
 def paso8():
     print(Fore.CYAN + f"\nEjecutando PASO_8........ {dt.now()} 👌\n")
-    sTv_paso8(var_NombreSalida, var_FechasSalida)
+    sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail)
     print(Fore.CYAN + "\nPaso 8 completado! \n")
 
 def todos():
@@ -98,7 +106,7 @@ def limpiar_pantalla():
 def mostrar_menu(par_FechasSalida):
     limpiar_pantalla()
     print(Fore.MAGENTA + "=" * 37)
-    print(Fore.WHITE + "   BOLSA BMV DATE: " + dt.now().strftime("%Y%m%d_%H%M%S"))  # par_FechasSalida
+    print(Fore.WHITE + "   BOLSA BMV DATE: " + par_FechasSalida)
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
@@ -149,11 +157,19 @@ def ejecutar_menu(par_FechasSalida):
         input(Fore.WHITE + "Presiona Enter para continuar...")
 
 
-if len(sys.argv) > 1 and sys.argv[1] == "RUN":
-    todos()
+# Evaluamos como ejecutamos el proceso
+if len(sys.argv) > 1 :
+    var_param = sys.argv[1]
+
+    if var_param == "RUN-NO-EMAIL":
+        var_SendEmail = 'N'
+    
+    if "RUN" in var_param:
+        todos()
+
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     # Ejecutar el menú
-    ejecutar_menu(var_FechasSalida)
+    ejecutar_menu(var_Fechas1)
 
 # FIN: By Steve Carpio - 2025    
