@@ -5,6 +5,8 @@ env/
 __pycache__/
 *.pyc
 *.pyo
+build/
+dist/
 
 # Ignorar dependencias si usas pipenv o poetry
 Pipfile
