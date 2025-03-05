@@ -10,7 +10,7 @@ from   cfg.BMV_librerias import *
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso7(var_NombreSalida, var_FechasSalida):
+def sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio):
     
     # Leer el excel de entrada con las URLs filtadas de Deudas
     df_paso7 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso6_{var_FechasSalida}.xlsx')
@@ -23,7 +23,7 @@ def sTv_paso7(var_NombreSalida, var_FechasSalida):
     df_paso7['FECHA2'] = pd.to_datetime(df_paso7['FECHA'], dayfirst=True)
 
     # Filtrar los registros con 1 día de diferencia entre 'fecha' y la fecha de hoy
-    hoy = dt.today()
+    hoy = tiempo_inicio
     df_filtro1 = df_paso7[(hoy - df_paso7['FECHA2']).dt.days == 1]
 
     # FILTRA las filas que cumplan las condiciones:
@@ -35,7 +35,7 @@ def sTv_paso7(var_NombreSalida, var_FechasSalida):
     # Elimino el campo FECHA2 de apoyo
     df_filtro3 = df_filtro2.drop('FECHA2', axis=1)
     
-    # Agreo los campos TO y CC del DF emisores
+    # Agrego los campos TO y CC del DF emisores
     df_filtro4 = pd.merge(df_filtro3, df_emiso, on='CODIGO', how='left')
     
     # Reinicio indices

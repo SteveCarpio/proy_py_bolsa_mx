@@ -147,8 +147,12 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
     ruta = f'{sTv.var_RutaInforme}'
     
     # Creamos DF con los datos por grupos
-    df_paso8_P = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
-    df_paso8_M = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
+    df_paso8_P_ = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
+    df_paso8_M_ = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
+
+    # Ordenar el DataFrame
+    df_paso8_P = df_paso8_P_.sort_values(by='CLAVE')
+    df_paso8_M = df_paso8_M_.sort_values(by='CLAVE')
 
     if len(df_paso8_P) > 0:
 
