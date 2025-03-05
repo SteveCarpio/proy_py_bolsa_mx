@@ -15,6 +15,7 @@ from   biva.BIVA_paso4     import sTv_paso4
 from   biva.BIVA_paso5     import sTv_paso5
 
 var_NombreSalida = 'BIVA'
+var_SendEmail= 'S'
 
 # Tratamiento de fechas
 tiempo_inicio = dt.now()
@@ -37,7 +38,7 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-sTv_paso0(var_NombreSalida)
+#sTv_paso0(var_NombreSalida)
 
 # ------------------------------- MENU -----------------------------------
 
@@ -64,7 +65,7 @@ def paso4():
 
 def paso5():
     print(Fore.GREEN + f"\nEjecutando PASO_5........ {dt.now()} 👌\n")
-    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3)
+    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
     print(Fore.GREEN + "\nPaso 5 completado! \n")
 
 def todos():
@@ -127,11 +128,21 @@ def ejecutar_menu(par_FechasSalida):
         # Pausa para que el usuario vea los resultados
         input(Fore.WHITE + "Presiona Enter para continuar...")
 
-if len(sys.argv) > 1 and sys.argv[1] == "RUN":
-    todos()
+
+# Evaluamos como ejecutamos el proceso
+if len(sys.argv) > 1 :
+    var_param = sys.argv[1]
+
+    if var_param == "RUN-NO-EMAIL":
+        var_SendEmail = 'N'
+    
+    if "RUN" in var_param:
+        todos()
+
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     # Ejecutar el menú
     ejecutar_menu(var_Fechas1)
+    
 
 # FIN: By Steve Carpio - 2025    

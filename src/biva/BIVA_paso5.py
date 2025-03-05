@@ -135,7 +135,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
+def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     
     # Leer el excel de entrada 
     df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx')
@@ -194,9 +194,11 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
         #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
 
         # Envió a la función enviar_email los datos necesarios
-        enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
+        if var_SendEmail == "S":
+            enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
     else:
-        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
+        if var_SendEmail == "S":
+            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
      
     if len(df_paso8_M) > 0:
 
@@ -239,6 +241,8 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
         #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
 
         # Envio a la función enviar_email los datos necesarios
-        enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
+        if var_SendEmail == "S":
+            enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
-        print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")
+        if var_SendEmail == "S":
+            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")
