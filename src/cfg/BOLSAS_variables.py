@@ -17,7 +17,7 @@ var_RutaCompile='C:\\MisCompilados\\dist\\'
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_NombreEmisores="BOLSAS_Filtro_Emisores"
+var_NombreEmisores="BOLSAS_Filtro_Emisores_DEV"
 var_NombreBMV="BMV_Main_v2.exe"
 var_NombreBIVA="BIVA_Main_v2.exe"
 

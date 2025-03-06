@@ -10,7 +10,7 @@ from   cfg.BOLSAS_librerias import *
 #                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
 # Función envió de Email
-def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo, ruta, nombre_archivo, df):
+def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1, cuerpo2, ruta, nombre_archivo, df1, df2):
     # Configuración del servidor SMTP (Zimbra)
     smtp_server = 'zimbra.tda-sgft.com'
     smtp_port = 25  
@@ -28,7 +28,8 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
     todos_destinatarios = destinatarios_to + destinatarios_cc 
 
     # Convertir el DataFrame a HTML
-    tabla_html = df.to_html(index=True)  # con el índice
+    tabla_html1 = df1.to_html(index=True)  # con el índice
+    tabla_html2 = df2.to_html(index=True)  # con el índice
 
     # Cuerpo del correo usando HTML y CSS
     cuerpo_html = f"""
@@ -71,9 +72,13 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
         <div class="content">
             
             <h2>EVENTOS RELEVANTES Y COMUNICADOS - BIVA</h2>
-            <p>{cuerpo}</p>
-            
-            {tabla_html}  <!-- Aquí se inserta el DF convertido a HTML  -->
+            <p>{cuerpo1}</p>
+            {tabla_html1}  <!-- Aquí se inserta el DF convertido a HTML  -->
+            <p></p><br><p></p>
+
+            <h2>EVENTOS RELEVANTES Y COMUNICADOS - BMV</h2>
+            <p>{cuerpo2}</p> 
+            {tabla_html2}  <!-- Aquí se inserta el DF convertido a HTML  -->
             <p></p><br><p></p>
             
             <p>  </p><br><p></p>
@@ -110,7 +115,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
     #mensaje.attach(MIMEText(cuerpo, 'plain'))
 
     # Combinar la ruta con el nombre del archivo
-    archivo_completo = os.path.join(ruta, nombre_archivo)
+    # archivo_completo = os.path.join(ruta, nombre_archivo)
 
     # Adjuntar el archivo Excel  --- HEMOS DECIDIDO NO MANDAR EL EXCEL
     #try:
@@ -130,123 +135,117 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
     except Exception as e:
         print(f"- Error al enviar el correo: {e}")
 
+# Función Leer excel y convertirlos en DataFrame
+def sTv_paso4_lee_DF(ruta, bolsa, var_Fechas2):
+
+    # Verificar si el archivo existe
+    if os.path.exists(ruta):
+        try:
+            # Si existe, leer el archivo Excel a un DataFrame
+            df = pd.read_excel(ruta, index_col=0)
+            print(f"- Archivo encontrado: {ruta}")
+            return df
+        except Exception as e:
+            print(f"- Error al leer el archivo: {e} - {ruta} - {bolsa}")
+            return None
+    else:
+        # Si no existe, crear un DataFrame con las columnas predefinidas
+        print(f"- El archivo no se encuentra en {ruta}. Creando DataFrame por defecto para {bolsa}.")
+        df = pd.DataFrame({
+            'CLAVE': ["none"],
+            'CODIGO': [bolsa],
+            'INFO': [f'No existen datos con la fecha de búsqueda: {var_Fechas2}']
+        })  
+        return df
 
 # ----------------------------------------------------------------------------------------
-#                               INICIO DEL PROGRAMA
+#                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
 def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     
-    # Leer el excel de entrada 
-    df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx')
+    # Ruta del archivo Excel
+    ruta_excel1 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_M.xlsx"
+    ruta_excel2 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_P.xlsx"
+    ruta_excel3 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_M.xlsx"
+    ruta_excel4 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_P.xlsx"
 
-    # Obtener la fecha actual
-    #fecha_actual = dt.now()
+    # Leer el archivo o crear el DataFrame por defecto
+    df_BIVA_M = sTv_paso4_lee_DF(ruta_excel1, "BIVA", var_Fechas2)
+    df_BIVA_P = sTv_paso4_lee_DF(ruta_excel2, "BIVA", var_Fechas2)
+    df_BMV_M = sTv_paso4_lee_DF(ruta_excel3,  "BMV",  var_Fechas2)
+    df_BMV_P = sTv_paso4_lee_DF(ruta_excel4,  "BMV",  var_Fechas2)
 
-    # <--OJO--> usar esta variable "var_FechasSalida" si la tenemos activa
-    fecha_formateada = var_Fechas3
-    #fecha_formateada = fecha_actual.strftime("%Y%m%d_%H%M%S")
+    # Mostrar el DataFrame resultante
+    print(f'\n- Datos de BIVA para el grupo (M)\n\n{df_BIVA_M}')
+    print(f'\n- Datos de BIVA para el grupo (P)\n\n{df_BIVA_P}')
+    print(f'\n- Datos de BMV para el grupo (M)\n\n{df_BMV_M}')
+    print(f'\n- Datos de BMV para el grupo (P)\n\n{df_BMV_P}') 
 
+    # Lista de emisores distintos
+    lst_emisores_m1 = ', '.join(df_BIVA_M['CLAVE'].unique())
+    lst_emisores_m2 = ', '.join(df_BMV_M['CLAVE'].unique())
+    lst_emisores_p1 = ', '.join(df_BIVA_P['CLAVE'].unique())
+    lst_emisores_p2 = ', '.join(df_BMV_P['CLAVE'].unique())
+
+    # Numero de emisores y eventos distintos
+    if lst_emisores_m1 == "none":
+        num_emisores_m1 = 0
+        num_eventos_m1 = 0
+        lst_emisores_m1 = ""
+    else:
+        num_emisores_m1 = len(df_BIVA_M['CLAVE'].unique())
+        num_eventos_m1 = len(df_BIVA_M)
+
+    if lst_emisores_m2 == "none":
+        num_emisores_m2 = 0
+        num_eventos_m2 = 0
+        lst_emisores_m2 = ""
+    else:
+        num_emisores_m2 = len(df_BMV_M['CLAVE'].unique())
+        num_eventos_m2 = len(df_BMV_M)
+
+    if lst_emisores_p1 == "none":
+        num_emisores_p1 = 0
+        num_eventos_p1 = 0
+        lst_emisores_p1 = ""
+    else:
+        num_emisores_p1 = len(df_BIVA_P['CLAVE'].unique())
+        num_eventos_p1 = len(df_BIVA_P)
+        
+    if lst_emisores_p2 == "none":
+        num_emisores_p2 = 0
+        num_eventos_p2 = 0
+        lst_emisores_p2 = ""
+    else:
+        num_emisores_p2 = len(df_BMV_P['CLAVE'].unique())
+        num_eventos_p2 = len(df_BMV_P)
+
+    # Extraer los destinatarios de correo del excel
+    df_email = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}.xlsx')
+    # to
+    valor_to_m1 = df_email.loc[df_email['GRUPO'] == 'M', 'TO'].iloc[0]
+    valor_to_m = str(valor_to_m1)
+    valor_to_p1 = df_email.loc[df_email['GRUPO'] == 'P', 'TO'].iloc[0]
+    valor_to_p = str(valor_to_p1)
+    # cc
+    valor_cc_m1 = df_email.loc[df_email['GRUPO'] == 'M', 'CC'].iloc[0]
+    valor_cc_m = str(valor_cc_m1)
+    valor_cc_p1 = df_email.loc[df_email['GRUPO'] == 'P', 'CC'].iloc[0]
+    valor_cc_p = str(valor_cc_p1)
+
+    # Mandar Email ------------------------------------------------------
+    destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m.split(",")]
+    destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p.split(",")]
+    destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m.split(",")]
+    destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p.split(",")]
+    asunto = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{var_Fechas2}_tda update '
     ruta = f'{sTv.var_RutaInforme}'
-    
-    # Creamos DF con los datos por grupos
-    df_paso8_P_ = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL']]
-    df_paso8_M_ = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL']]
-
-    # Ordenar el DataFrame
-    df_paso8_P = df_paso8_P_.sort_values(by='CLAVE')
-    df_paso8_M = df_paso8_M_.sort_values(by='CLAVE')
-
-    if len(df_paso8_P) > 0:
-
-        # Numero de emisores distintos
-        num_emisores_p = len(df_paso8_P['CLAVE'].unique())
-
-        # Lista de emisores distintos
-        lst_emisores_p = ', '.join(df_paso8_P['CLAVE'].unique())
-        
-        # Reiniciamos el indice
-        df_paso8_P = df_paso8_P.reset_index(drop=True)
-
-        # Empezamos por el indice 1 y no por el 0
-        df_paso8_P.index = df_paso8_P.index + 1
-
-        # Excel de salida
-        nombre_archivo_p = f'{var_NombreSalida}_{fecha_formateada}_P.xlsx' #  
-
-        # Creo un excel con el resultado del DataFrame
-        df_paso8_P.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_p}',sheet_name='EMISORES', index=True)
-        print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_p}")
-        
-        # Cuenta de Email para el GRUPO (P) - TO y CC
-        # to
-        valor_to_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'TO'].iloc[0]
-        valor_to_p2 = str(valor_to_p1)
-        destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p2.split(",")]
-        # cc
-        valor_cc_p1 = df_paso8.loc[df_paso8['GRUPO'] == 'P', 'CC'].iloc[0]
-        valor_cc_p2 = str(valor_cc_p1)
-        destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p2.split(",")]
-
-        # Asuntos 
-        asunto_p = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{var_Fechas2}_tda update '
-
-        # Datos compartidos
-        cuerpo_p = f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_P)}</b><br>Lista de Emisores: <b>{lst_emisores_p}</b>'
-        
-        #destinatarios_to_p=['carpios@tda-sgft.com']
-        #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
-
-        # Envió a la función enviar_email los datos necesarios
-        if var_SendEmail == "S":
-            enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
-    else:
-        if var_SendEmail == "S":
-            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
-     
-    if len(df_paso8_M) > 0:
-
-        # Numero de emisores distintos
-        num_emisores_m = len(df_paso8_M['CLAVE'].unique())
-
-        # Lista de emisores distintos
-        lst_emisores_m = ', '.join(df_paso8_M['CLAVE'].unique())
-        
-        # Reiniciamos el indice
-        df_paso8_M = df_paso8_M.reset_index(drop=True)
-
-        # Empezamos por el indice 1 y no por el 0
-        df_paso8_M.index = df_paso8_M.index + 1
-
-        # Excel de salida
-        nombre_archivo_m = f'{var_NombreSalida}_{fecha_formateada}_M.xlsx' #  
-
-        # Creo un excel con el resultado del DataFrame
-        df_paso8_M.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_m}',sheet_name='EMISORES', index=True)
-        print(f"- Datos temporales guardados en el excel {sTv.var_RutaInforme}{nombre_archivo_m}")
-
-        # Cuenta de Email para el GRUPO (M) - TO y CC
-        # to
-        valor_to_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'TO'].iloc[0]
-        valor_to_m2 = str(valor_to_m1)
-        destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m2.split(",")]
-        # cc
-        valor_cc_m1 = df_paso8.loc[df_paso8['GRUPO'] == 'M', 'CC'].iloc[0]
-        valor_cc_m2 = str(valor_cc_m1)
-        destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m2.split(",")]
-
-        # Asuntos 
-        asunto_m = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{var_Fechas2}_tda update '
-
-        # Datos compartidos
-        cuerpo_m = f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_M)}</b><br>Lista de Emisores: <b>{lst_emisores_m}</b>'
-        
-        #destinatarios_to_m=['carpios@tda-sgft.com']
-        #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
-
-        # Envio a la función enviar_email los datos necesarios
-        if var_SendEmail == "S":
-            enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
-    else:
-        if var_SendEmail == "S":
-            print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")
+    nombre_archivo_m = "none" # f'BIVA_{var_Fechas3}_M.zip' : sTv se mandaría un zip con los 2 excel  
+    nombre_archivo_p = "none" # f'BMV_{var_Fechas3}_M.zip'  : sTv se mandaría un zip con los 2 excel
+    cuerpo_m1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_m1}</b><br>Lista de Emisores: <b>{lst_emisores_m1}</b>' 
+    cuerpo_m2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_m2}</b><br>Lista de Emisores: <b>{lst_emisores_m2}</b>'
+    cuerpo_p1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p1}</b><br>Lista de Emisores: <b>{lst_emisores_p1}</b>' 
+    cuerpo_p2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p2}</b><br>Lista de Emisores: <b>{lst_emisores_p2}</b>'
+    enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto, cuerpo_m1, cuerpo_m2, ruta, nombre_archivo_m, df_BIVA_M, df_BMV_M)
+    enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto, cuerpo_p1, cuerpo_p2, ruta, nombre_archivo_p, df_BIVA_P, df_BMV_P)
