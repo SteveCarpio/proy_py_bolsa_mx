@@ -10,6 +10,7 @@ from   cfg.BOLSAS_librerias import *
 from   bolsas.BOLSAS_paso0  import sTv_paso0
 from   bolsas.BOLSAS_paso1  import sTv_paso1
 from   bolsas.BOLSAS_paso2  import sTv_paso2
+from   bolsas.BOLSAS_paso3  import sTv_paso3
 
 var_NombreSalida = 'BOLSAS'
 var_SendEmail= 'S'
@@ -39,14 +40,23 @@ sTv_paso0(var_NombreSalida, var_Fechas3)
 # Funciones para los pasos
 def paso1():
     print(Fore.GREEN + f"\nEjecutando BOLSA BMV........ {dt.now()} 👌\n")
-    sTv_paso1(tiempo_inicio)
+    #sTv_paso1()
     print(Fore.GREEN + "\nPaso completado - BOLSA BMV! \n")
 
 def paso2():
     print(Fore.GREEN + f"\nEjecutando BOLSA BIVA........ {dt.now()} 👌\n")
-    sTv_paso2(tiempo_inicio)
+    #sTv_paso2()
     print(Fore.GREEN + "\nPaso completado - BOLSA BIVA! \n")
 
+def paso3():
+    print(Fore.GREEN + f"\nCopiar Resultados BMV/BIVA........ {dt.now()} 👌\n")
+    sTv_paso3(var_Fechas3)
+    print(Fore.GREEN + "\nPaso completado - Copia de datos BOLSAS BIVA y BMV! \n")
+
+def paso4():
+    print(Fore.GREEN + f"\nMandar Email........ {dt.now()} 👌\n")
+    #sTv_paso4(tiempo_inicio)
+    print(Fore.GREEN + "\nPaso completado - Envió del Email! \n")
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
@@ -73,7 +83,8 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.LIGHTBLUE_EX + "0) 🔵 Ejecutar TODOS los pasos   ")
     print(Fore.GREEN        + "1) 🟢 Ejecutar el BOLSA BMV      ")
     print(Fore.GREEN        + "2) 🟢 Ejecutar el BOLSA BIVA     ")
-    
+    print(Fore.GREEN        + "3) 🟢 Copiar Resultados BMV/BIVA ")
+    print(Fore.GREEN        + "4) 🟢 Mandar Email               ")
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
 
@@ -89,6 +100,10 @@ def ejecutar_menu(par_FechasSalida):
             paso1()
         elif option == '2':
             paso2()
+        elif option == '3':
+            paso3()
+        elif option == '4':
+            paso4()
 
         elif option.upper() == 'X':
             print(Fore.RED + "\n¡Saliendo del programa! 👋\n")

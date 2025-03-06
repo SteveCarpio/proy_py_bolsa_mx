@@ -9,18 +9,17 @@ from   cfg.BOLSAS_librerias import *
 # ----------------------------------------------------------------------------------------
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
-
-def sTv_paso1(tiempo_inicio):
+def sTv_paso1():
   
     # Ruta al archivo .exe
     ruta_programa = f"{sTv.var_RutaCompile}{sTv.var_NombreBMV}"
 
     # Parámetros a pasar al ejecutable
-    param = ["RUN-NO-EMAIL", tiempo_inicio]
+    param = ["RUN-NO-EMAIL"]
 
     # Ejecutar el programa y capturar la salida
     try:
-        #resultado = subprocess.run([ruta_programa] + param, check=True, capture_output=True, text=True)
+        resultado = subprocess.run([ruta_programa] + param, check=True, capture_output=True, text=True)
         print("Salida del programa: \n", resultado.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error al ejecutar el programa: {e}")
