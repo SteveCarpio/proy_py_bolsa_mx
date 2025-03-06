@@ -11,11 +11,10 @@ import os                                                         # ma -- -- -- 
 import time                                                       # -- -- -- -- -- -- -- -- -- -- #
 import glob                                                       # -- -- -- -- -- -- -- -- -- -- #
 import pandas as pd                                               # -- -- -- -- -- -- -- -- -- -- #
-import requests                                                   # -- -- -- -- -- -- -- -- -- -- #
-import re                                                         # -- -- -- -- -- -- -- -- -- -- # 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- -- # 
 import sys                                                        # -- -- -- -- -- -- -- -- -- -- #
-import subprocess
+import subprocess                                                 # -- -- p1 p2 -- -- -- -- -- -- #
+import shutil                                                     # -- -- -- -- p3 -- -- -- -- -- #
 from colorama import init, Fore, Back, Style                      # -- -- -- -- -- -- -- -- -- -- #
 from datetime import datetime as dt                               # ma -- -- -- -- -- -- -- -- -- #
 from datetime import timedelta                                    # ma -- -- -- -- -- -- -- -- -- #

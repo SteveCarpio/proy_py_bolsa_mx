@@ -81,9 +81,9 @@ def paso7():
     print(Fore.GREEN + "\nPaso 7 completado! \n")
 
 def paso8():
-    print(Fore.CYAN + f"\nEjecutando PASO_8........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_8........ {dt.now()} 👌\n")
     sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail)
-    print(Fore.CYAN + "\nPaso 8 completado! \n")
+    print(Fore.YELLOW + "\nPaso 8 completado! \n")
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
@@ -121,7 +121,7 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.YELLOW       + "5) 🟡 Ejecutar el PASO_5         ")
     print(Fore.GREEN        + "6) 🟢 Ejecutar el PASO_6         ")
     print(Fore.GREEN        + "7) 🟢 Ejecutar el PASO_7         ")
-    print(Fore.CYAN         + "8) 🔵 Ejecutar el PASO_8         ")
+    print(Fore.YELLOW       + "8) 🟡 Ejecutar el PASO_8         ")
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
 

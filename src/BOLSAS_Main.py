@@ -11,6 +11,7 @@ from   bolsas.BOLSAS_paso0  import sTv_paso0
 from   bolsas.BOLSAS_paso1  import sTv_paso1
 from   bolsas.BOLSAS_paso2  import sTv_paso2
 from   bolsas.BOLSAS_paso3  import sTv_paso3
+from   bolsas.BOLSAS_paso4  import sTv_paso4
 
 var_NombreSalida = 'BOLSAS'
 var_SendEmail= 'S'
@@ -33,35 +34,37 @@ os.system("cls")
 init(autoreset=True)
 
 # Inicializar carpetas y borrado de files
-sTv_paso0(var_NombreSalida, var_Fechas3)
+sTv_paso0(var_Fechas3)
 
 # ------------------------------- MENU -----------------------------------
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.GREEN + f"\nEjecutando BOLSA BMV........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_1 - BOLSA BMV........ {dt.now()} 👌\n")
     #sTv_paso1()
-    print(Fore.GREEN + "\nPaso completado - BOLSA BMV! \n")
+    print(Fore.GREEN + "\nPaso 1 completado - BOLSA BMV! \n")
 
 def paso2():
-    print(Fore.GREEN + f"\nEjecutando BOLSA BIVA........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_2 - BOLSA BIVA........ {dt.now()} 👌\n")
     #sTv_paso2()
-    print(Fore.GREEN + "\nPaso completado - BOLSA BIVA! \n")
+    print(Fore.GREEN + "\nPaso 2 completado - BOLSA BIVA! \n")
 
 def paso3():
-    print(Fore.GREEN + f"\nCopiar Resultados BMV/BIVA........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_3 - Copiar Resultados BMV/BIVA........ {dt.now()} 👌\n")
     sTv_paso3(var_Fechas3)
-    print(Fore.GREEN + "\nPaso completado - Copia de datos BOLSAS BIVA y BMV! \n")
+    print(Fore.GREEN + "\nPaso 3 completado - Copia de datos BOLSAS BIVA y BMV! \n")
 
 def paso4():
-    print(Fore.GREEN + f"\nMandar Email........ {dt.now()} 👌\n")
-    #sTv_paso4(tiempo_inicio)
-    print(Fore.GREEN + "\nPaso completado - Envió del Email! \n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_4 - Mandar Email........ {dt.now()} 👌\n")
+    sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
+    print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
 
 def todos():
     print(Fore.LIGHTBLUE_EX + "\nEjecutando TODOS los pasos.......................... 💪")
     paso1()
     paso2()
+    paso3()
+    paso4()
     
     print(Fore.LIGHTBLUE_EX + "¡Todos los pasos completados exitosamente! 🎉 \n")
     print(Fore.CYAN + f"---------------------------------------------------------------------------------------")
@@ -84,7 +87,7 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.GREEN        + "1) 🟢 Ejecutar el BOLSA BMV      ")
     print(Fore.GREEN        + "2) 🟢 Ejecutar el BOLSA BIVA     ")
     print(Fore.GREEN        + "3) 🟢 Copiar Resultados BMV/BIVA ")
-    print(Fore.GREEN        + "4) 🟢 Mandar Email               ")
+    print(Fore.YELLOW       + "4) 🟡 Mandar Email               ")
     print(Fore.RED          + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v2)")
     print(Fore.MAGENTA + "=" * 37)
 

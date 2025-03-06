@@ -9,6 +9,8 @@
 # ----------------------------------------------------------------------------------------
 var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
+var_RutaInformeBiva=f'{var_RutaRaiz}BIVA\\INFORMES\\'
+var_RutaInformeBmv=f'{var_RutaRaiz}BMV\\INFORMES\\'
 var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
 var_RutaCompile='C:\\MisCompilados\\dist\\'
 
