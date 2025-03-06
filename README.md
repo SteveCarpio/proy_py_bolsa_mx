@@ -18,4 +18,9 @@ deactivate
 ## Crear un archivo requerimientos 
 pip freeze > requirements.txt
 
+## Compilar
+pyinstaller --onefile --name=BMV_Main BMV_Main.py
+pyinstaller --onefile --name=BIVA_Main MAIN_Main.py
+pyinstaller --onefile --name=BOLSAS_Main BOLSAS_Main.py
+
 
