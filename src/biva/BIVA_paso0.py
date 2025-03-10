@@ -48,7 +48,7 @@ def sTv_paso0(var_NombreSalida, var_Fechas3):
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso3.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso4.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_{var_Fechas3}_?.xlsx')
-    borrar_archivos(sTv.var_RutaConfig,  f'{var_NombreSalida}_paso3_id_emisores.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'{var_NombreSalida}_paso3_id_emisores.xlsx')
     
     
     print(Fore.WHITE + "\nRequisitos previos ok\n")

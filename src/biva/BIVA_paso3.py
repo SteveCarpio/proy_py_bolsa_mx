@@ -61,8 +61,8 @@ def sTv_paso3(var_NombreSalida, var_Fechas1):
     print(f'- Creo excel con los ID Emisores ')
     df_paso3       = sTv_paso3_crea_ID_emisores()
     # Creo un excel con la lista de emisores
-    df_paso3.to_excel(f'{sTv.var_RutaConfig}{var_NombreSalida}_paso3_id_emisores.xlsx',sheet_name='ID', index=False)
-    print(f"- Datos temporales guardados en {sTv.var_RutaConfig}{var_NombreSalida}_paso3_id_emisores.xlsx")    
+    df_paso3.to_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso3_id_emisores.xlsx',sheet_name='ID', index=False)
+    print(f"- Datos temporales guardados en {sTv.var_RutaInforme}{var_NombreSalida}_paso3_id_emisores.xlsx")    
 
     print(f'- Creo excel agregando los ID Emisores"')
     df_paso3_final = sTv_paso3_crea_df_final(var_NombreSalida, df_paso3, var_Fechas1) 
