@@ -41,7 +41,7 @@ def sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida, var_ab, va_Num):
         print(f"Error al Seleccionar el valor CAPITAL del ComboBox : {e}")
     
    
-    # Click en el boton BUSCAR
+    # Click en el botón BUSCAR
     try:
         web_buscar = WebDriverWait(driver, 50).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="btnSearch"]'))

@@ -48,5 +48,5 @@ def sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, var_ab):
     print("\n")
 
 def sTv_paso2(var_NombreSalida, var_FechasSalida):
-    sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, "a")  # DATOS DEUDA
-    sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, "b")  # DATOS CAPITAL 
+    sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, "a")  # DATOS CAPITAL
+    sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, "b")  # DATOS DEUDA 
