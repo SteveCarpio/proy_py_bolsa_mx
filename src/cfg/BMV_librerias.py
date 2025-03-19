@@ -8,13 +8,15 @@
 # CARGA DE LIBRERIAS ------------------------------------------------------------------------------
 #                                                                 # Ma P0 P1 P2 P3 P4 P5 P6 P7 P8 #
 import os                                                         # ma p0 -- -- -- -- -- p6 -- p8 #
-import time                                                       # -- -- p1 -- -- -- -- -- -- -- #
+import time                                                       # -- p0 p1 -- -- -- -- -- -- -- #
 import glob                                                       # -- p0 -- -- -- -- -- -- -- -- #
 import pandas as pd                                               # -- -- -- p2 p3 p4 p5 p6 p7 p8 #
 import requests                                                   # -- -- -- -- -- -- p5 -- -- -- #
 import re                                                         # -- -- -- -- -- -- -- p6 -- -- # 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- p8 # 
 import sys                                                        # ma -- -- -- -- -- -- -- -- -- #
+import subprocess                                                 # -- p0 -- -- -- -- -- -- -- -- #
+import winreg                                                     # -- p0 -- -- -- -- -- -- -- -- #
 from colorama import init, Fore, Back, Style                      # ma -- -- -- -- -- -- -- -- -- #
 from selenium import webdriver                                    # -- -- p1 -- -- -- -- -- -- -- #
 from selenium.webdriver.chrome.service import Service             # -- -- p1 -- -- -- -- -- -- -- #
