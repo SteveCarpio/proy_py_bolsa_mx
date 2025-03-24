@@ -88,8 +88,12 @@ deactivate
 pip freeze > requirements.txt
 
 ## Compilar
+pyinstaller --onefile --name=BIVA_Main BIVA_Main.py
 pyinstaller --onefile --name=BMV_Main BMV_Main.py
-pyinstaller --onefile --name=BIVA_Main MAIN_Main.py
 pyinstaller --onefile --name=BOLSAS_Main BOLSAS_Main.py
+
+pyinstaller --onefile --clean --noupx BIVA_Main.py
+pyinstaller --onefile --clean --noupx BMV_Main.py
+pyinstaller --onefile --clean --noupx BOLSAS_Main.py
 
 
