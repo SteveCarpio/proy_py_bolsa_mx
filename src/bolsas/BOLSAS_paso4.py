@@ -83,27 +83,34 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
             
             <p>  </p><br><p></p>
             <i> ** Este email fue enviado desde un proceso automático desde TdA. Por favor, no responder a este email. ** </i>
-            <p><br><br>
+            
+            
+                <p>
+                    <br><br>
+                    <br><br>
+                    <br><br>
+                    <br><br>
 
-            <table style="border: none; padding: 10px; border-spacing: 2px; width: 600px; table-layout: fixed;">
-                <tr>
-                    <td style="width: 150px; padding-right: 10px; vertical-align: middle;">
-                        <img src="https://www.tda-sgft.com/TdaWeb/images/logotipo.gif" alt="Titulización de Activos S.G.F.T., S.A" style="vertical-align: middle;">
-                    </td>
-                    <td style="width: 450px; padding-right: 10px;">
-                        <pre>
-            e-mail: publicacionesbolsasmx@tda-sgft.com
-            Tel.: 91 702 08 08
-            Fax: 91 308 68 54
-            Titulización de Activos S.G.F.T., S.A.
-            C/Orense, 58 - 5ª Planta
-            28020 Madrid
-            http://www.tda-sgft.com
-                        </pre>
-                    </td>
-                </tr>
-            </table>
-            </p>
+                    <table style="border: none; padding: 10px; border-spacing: 2px; width: 600px; table-layout: fixed;">
+                        <tr>
+                            <td style="width: 150px; padding-right: 10px; vertical-align: middle; border: 1px solid white;">
+                                <img src="https://www.tda-sgft.com/TdaWeb/images/logotipo.gif" alt="Titulización de Activos S.G.F.T., S.A" style="vertical-align: middle;">
+                            </td>
+                            <td style="width: 450px; padding-left: 10px; vertical-align: middle; border: 1px solid white;">
+                                <pre>
+ Titulización de Activos S.G.F.T., S.A.
+ C/Orense, 58 - 5ª Planta
+ 28020 Madrid
+ Tel.: 91 702 08 08
+ Fax:  91 308 68 54             
+ e-mail: publicacionesbolsasmx@tda-sgft.com
+ http://www.tda-sgft.com       </pre>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+            
+            
         </div>
     </body>
     </html>
