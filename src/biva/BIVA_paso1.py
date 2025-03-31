@@ -16,11 +16,11 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
     driver.get(par_url)
 
     # Esperar que la página cargue completamente
-    time.sleep(8)
+    time.sleep(12)
     WebDriverWait(driver, 60).until(
         lambda driver: driver.execute_script('return document.readyState') == 'complete'
     )
-    time.sleep(5)
+    time.sleep(10)
        
     # Extraer el código HTML completo, tenemos 2 métodos para hacerlo
     #page_source = driver.find_element("xpath", "//*").get_attribute("outerHTML")   ## usarlo si la web tiene objetos dinámicos, usa el puntero de inicio de HTML

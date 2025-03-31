@@ -26,7 +26,7 @@ var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_NombreEmisores="BIVA_Filtro_Emisores"
+var_NombreEmisores="BIVA_Filtro_Emisores_DEV"
 var_WarningEmisores=""
 
 # ----------------------------------------------------------------------------------------
