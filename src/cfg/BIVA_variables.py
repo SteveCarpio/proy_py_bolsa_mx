@@ -22,6 +22,7 @@ var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
 var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES\\'
 var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
+var_Ruta_Log=f'{var_RutaRaiz}LOG\\'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO

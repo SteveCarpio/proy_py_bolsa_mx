@@ -9,15 +9,17 @@
 # ----------------------------------------------------------------------------------------
 var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\'
 var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
+var_Ruta_Log=f'{var_RutaRaiz}LOG\\'
 var_RutaInformeBiva=f'{var_RutaRaiz}BIVA\\INFORMES\\'
 var_RutaInformeBmv=f'{var_RutaRaiz}BMV\\INFORMES\\'
 var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
+
 var_RutaCompile='C:\\MisCompilados\\dist\\'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_NombreEmisores="BOLSAS_Filtro_Emisores"
+var_NombreEmisores="BOLSAS_Filtro_Emisores_DEV"
 var_NombreBMV="BMV_Main_v3.exe"
 var_NombreBIVA="BIVA_Main_v3.exe"
 

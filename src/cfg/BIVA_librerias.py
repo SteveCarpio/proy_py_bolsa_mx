@@ -7,6 +7,7 @@
 
 # CARGA DE LIBRERÍAS ---------------------------------------------------------------------
 #                                                                 # Ma P0 P1 P2 P3 P4 P5 #
+import io                                                         # ma -- -- -- -- -- -- #
 import os                                                         # ma p0 -- -- -- -- -- #
 import time                                                       # -- p0 -- -- -- -- -- #
 import glob                                                       # -- p0 -- -- -- -- -- #

@@ -7,6 +7,7 @@
 # ----------------------------------------------------------------------------------------
 
 from   cfg.BMV_librerias import *
+import cfg.BMV_variables as sTv
 from   bmv.BMV_paso0     import sTv_paso0
 from   bmv.BMV_paso1     import sTv_paso1
 from   bmv.BMV_paso2     import sTv_paso2
@@ -23,8 +24,8 @@ var_SendEmail= 'S'
 if len(sys.argv) > 1 :
     var_param1 = sys.argv[1]
  
-#tiempo_inicio = dt.now()  # 2025-03-04 00:00:00.000000
-tiempo_inicio = dt(2025, 3, 31)
+tiempo_inicio = dt.now()  # 2025-03-04 00:00:00.000000
+#tiempo_inicio = dt(2025, 3, 31)
 
 # Restar 1 día a la fecha actual
 fecha_reducida = tiempo_inicio - timedelta(days=1)
@@ -242,6 +243,14 @@ def ejecutar_menu(par_FechasSalida):
 
 # Evaluamos como ejecutamos el proceso
 if len(sys.argv) > 1 :
+
+    # Cambiar sys.stdout para que use UTF-8 en la consola
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    # Abrir el archivo de log en modo escritura (o append si quieres agregar contenido)
+    log_file = open(f'{sTv.var_Ruta_Log}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
+    # Redirigir sys.stdout a ese archivo de log
+    sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
+
     if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
     if "RUN" in var_param1:
