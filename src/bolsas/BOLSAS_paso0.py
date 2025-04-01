@@ -39,6 +39,7 @@ def sTv_paso0(var_Fechas3):
     # Valida carpetas
     valida_carpetas(sTv.var_RutaRaiz)
     valida_carpetas(sTv.var_RutaInforme)
+    valida_carpetas(sTv.var_RutaLog)
 
     # Borra todos los files 
     borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_M.xlsx')

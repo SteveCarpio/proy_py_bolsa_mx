@@ -88,6 +88,7 @@ def sTv_paso0(var_NombreSalida, var_Fechas3):
     valida_carpetas(sTv.var_RutaRaiz)
     valida_carpetas(sTv.var_RutaWebFiles)
     valida_carpetas(sTv.var_RutaInforme)
+    valida_carpetas(sTv.var_RutaLog)
 
     # Borra todos los files 
     borrar_archivos(sTv.var_RutaWebFiles, f'{var_NombreSalida}_paso1_*.html')
