@@ -119,6 +119,6 @@ def sTv_paso0(var_NombreSalida, var_FechasSalida, var_Fechas3):
         print(f"            c:\\MisCompilados\\cfg\\chromedriver-win32\\ ")
         print(f"   Para más ayuda contactar con: SteveCarpio (stv.madrid@gmail.com) ")
         time.sleep(4)
-        sys.exit()
+        #sys.exit()
 
     print(Fore.WHITE + "\nRequisitos previos ok\n")

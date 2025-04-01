@@ -48,42 +48,42 @@ sTv_paso0(var_NombreSalida, var_FechasSalida, var_Fechas3)
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} \n")
     sTv_paso1(var_NombreSalida, var_FechasSalida)
     print(Fore.YELLOW + "Paso 1 completado! \n")
 
 def paso2():
-    print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} \n")
     sTv_paso2(var_NombreSalida, var_FechasSalida)
     print(Fore.GREEN + "Paso 2 completado! \n")
 
 def paso3():
-    print(Fore.GREEN + f"\nEjecutando PASO_3........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_3........ {dt.now()} \n")
     sTv_paso3(var_NombreSalida, var_FechasSalida ) 
     print(Fore.GREEN + "Paso 3 completado! \n")
 
 def paso4():
-    print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} \n")
     sTv_paso4(var_NombreSalida, var_FechasSalida ) 
     print(Fore.GREEN + "Paso 4 completado! \n")
 
 def paso5():
-    print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} \n")
     sTv_paso5(var_NombreSalida, var_FechasSalida)
     print(Fore.YELLOW + "Paso 5 completado! \n")
 
 def paso6():
-    print(Fore.GREEN + f"\nEjecutando PASO_6........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_6........ {dt.now()} \n")
     sTv_paso6(var_NombreSalida, var_FechasSalida ) 
     print(Fore.GREEN + "\nPaso 6 completado! \n")
 
 def paso7():
-    print(Fore.GREEN + f"\nEjecutando PASO_7........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_7........ {dt.now()} \n")
     sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio)
     print(Fore.GREEN + "\nPaso 7 completado! \n")
 
 def paso8():
-    print(Fore.YELLOW + f"\nEjecutando PASO_8........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_8........ {dt.now()} \n")
     sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail)
     print(Fore.YELLOW + "\nPaso 8 completado! \n")
 
@@ -163,7 +163,7 @@ def pasoHelp():
     print(Fore.MAGENTA + "=" * 94)
 
 def todos():
-    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... 💪")
+    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... ")
     paso1()
     paso2()
     paso3()
@@ -172,7 +172,7 @@ def todos():
     paso6()
     paso7()
     paso8()
-    print(Fore.WHITE + "¡Todos los pasos completados exitosamente! 🎉 \n")
+    print(Fore.WHITE + "¡Todos los pasos completados exitosamente! \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
@@ -245,16 +245,19 @@ def ejecutar_menu(par_FechasSalida):
 if len(sys.argv) > 1 :
 
     # Cambiar sys.stdout para que use UTF-8 en la consola
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     # Abrir el archivo de log en modo escritura (o append si quieres agregar contenido)
-    log_file = open(f'{sTv.var_Ruta_Log}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
+    #log_file = open(f'{sTv.var_Ruta_Log}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
     # Redirigir sys.stdout a ese archivo de log
-    sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
+    #sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
 
     if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
     if "RUN" in var_param1:
         todos()
+
+    #log_file.close()
+    
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     

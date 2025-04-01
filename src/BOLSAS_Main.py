@@ -42,24 +42,24 @@ sTv_paso0(var_Fechas3)
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.YELLOW + f"\nEjecutando PASO_1 - BOLSA BIVA........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_1 - BOLSA BIVA........ {dt.now()} \n")
     print("AVISO: El PASO1 está planificado como un job independiente, ver DOC. ")
     #sTv_paso1()
     print(Fore.YELLOW + "\nPaso 1 completado - BOLSA BIVA! \n")
 
 def paso2():
-    print(Fore.YELLOW + f"\nEjecutando PASO_2 - BOLSA BMV........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_2 - BOLSA BMV........ {dt.now()} \n")
     print("AVISO: El PASO2 está planificado como un job independiente, ver DOC. ")
     #sTv_paso2()
     print(Fore.YELLOW + "\nPaso 2 completado - BOLSA BMV! \n")
 
 def paso3():
-    print(Fore.GREEN + f"\nEjecutando PASO_3 - Copiar Resultados BMV/BIVA........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_3 - Copiar Resultados BMV/BIVA........ {dt.now()} \n")
     sTv_paso3(var_Fechas3)
     print(Fore.GREEN + "\nPaso 3 completado - Copia de datos BOLSAS BIVA y BMV! \n")
 
 def paso4():
-    print(Fore.YELLOW + f"\nEjecutando PASO_4 - Mandar Email........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_4 - Mandar Email........ {dt.now()} \n")
     sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
     print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
 
@@ -129,12 +129,12 @@ def pasoHelp():
     print(Fore.MAGENTA + "=" * 94)
 
 def todos():
-    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... 💪")
+    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... ")
     paso1()
     paso2()
     paso3()
     paso4()
-    print(Fore.WHITE + "¡Todos los pasos completados exitosamente! 🎉 \n")
+    print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
@@ -181,7 +181,7 @@ def ejecutar_menu(par_FechasSalida):
         elif option == '?':
             pasoHelp()
         elif option.upper() == 'X':
-            print(Fore.RED + "\n¡Saliendo del programa! 👋\n")
+            print(Fore.RED + "\n¡Saliendo del programa! \n")
             break
         else:
             print(Fore.RED + "\n ❌ Opción no válida, por favor elige una opción válida ❌\n")
@@ -193,16 +193,19 @@ def ejecutar_menu(par_FechasSalida):
 if len(sys.argv) > 1 :
 
     # Cambiar sys.stdout para que use UTF-8 en la consola
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     # Abrir el archivo de log en modo escritura (o append si quieres agregar contenido)
-    log_file = open(f'{sTv.var_Ruta_Log}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
+    #log_file = open(f'{sTv.var_Ruta_Log}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
     # Redirigir sys.stdout a ese archivo de log
-    sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
-
+    #sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
+    
     if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
     if "RUN" in var_param1:
         todos()
+
+    #log_file.close()
+
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     ejecutar_menu(var_Fechas1)
