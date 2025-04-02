@@ -191,21 +191,11 @@ def ejecutar_menu(par_FechasSalida):
 
 # Evaluamos como ejecutamos el proceso
 if len(sys.argv) > 1 :
-
-    # Cambiar sys.stdout para que use UTF-8 en la consola
-    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    # Abrir el archivo de log en modo escritura (o append si quieres agregar contenido)
-    #log_file = open(f'{sTv.var_RutaLog}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
-    # Redirigir sys.stdout a ese archivo de log
-    #sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
     
     if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
     if "RUN" in var_param1:
         todos()
-
-    #log_file.close()
-
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     ejecutar_menu(var_Fechas1)

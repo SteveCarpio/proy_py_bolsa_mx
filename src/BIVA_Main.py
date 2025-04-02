@@ -43,27 +43,27 @@ sTv_paso0(var_NombreSalida, var_Fechas3)
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} \n")
     sTv_paso1(var_NombreSalida, var_Fechas1)
     print(Fore.YELLOW + "\nPaso 1 completado! \n")
 
 def paso2():
-    print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_2........ {dt.now()} \n")
     sTv_paso2(var_NombreSalida, var_Fechas1)
     print(Fore.GREEN + "\nPaso 2 completado! \n")
 
 def paso3():
-    print(Fore.GREEN + f"\nEjecutando PASO_3........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_3........ {dt.now()} \n")
     sTv_paso3(var_NombreSalida, var_Fechas1)
     print(Fore.GREEN + "\nPaso 3 completado! \n")
 
 def paso4():
-    print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} 👌\n")
+    print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} \n")
     sTv_paso4(var_NombreSalida, var_Fechas1)
     print(Fore.GREEN + "\nPaso 4 completado! \n")
 
 def paso5():
-    print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} 👌\n")
+    print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} \n")
     sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
     print(Fore.YELLOW + "\nPaso 5 completado! \n")
 
@@ -130,38 +130,16 @@ def pasoHelp():
     print(Fore.MAGENTA + "=" * 94)
 
 def todos():
-    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... 💪")
+    print(Fore.WHITE + "\nEjecutando TODOS los pasos.......................... ")
     paso1()
     paso2()
     paso3()
     paso4()
     paso5()
-    print(Fore.WHITE + "¡Todos los pasos completados exitosamente! 🎉 \n")
+    print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
-
-def todos2():
-    print("\nEjecutando TODOS los pasos.......................... ")
-    print(f"\nEjecutando PASO_1........ {dt.now()} \n")
-    sTv_paso1(var_NombreSalida, var_Fechas1)
-    print("\nPaso 1 completado! \n")
-    print(f"\nEjecutando PASO_2........ {dt.now()} \n")
-    sTv_paso2(var_NombreSalida, var_Fechas1)
-    print("\nPaso 2 completado! \n")
-    print(f"\nEjecutando PASO_3........ {dt.now()} \n")
-    sTv_paso3(var_NombreSalida, var_Fechas1)
-    print("\nPaso 3 completado! \n")
-    print(f"\nEjecutando PASO_4........ {dt.now()} \n")
-    sTv_paso4(var_NombreSalida, var_Fechas1)
-    print("\nPaso 4 completado! \n")
-    print(f"\nEjecutando PASO_5........ {dt.now()} \n")
-    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
-    print("\nPaso 5 completado! \n")
-    print("¡Todos los pasos completados exitosamente!  \n")
-    print(f"---------------------------------------------------------------------------------------")
-    print(f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
-    print(f"---------------------------------------------------------------------------------------")
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
@@ -219,20 +197,10 @@ def ejecutar_menu(par_FechasSalida):
 # Evaluamos como ejecutamos el proceso
 if len(sys.argv) > 1 :
 
-    # Cambiar sys.stdout para que use UTF-8 en la consola
-    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    # Abrir el archivo de log en modo escritura (o append si quieres agregar contenido)
-    #log_file = open(f'{sTv.var_RutaLog}{var_NombreSalida}_{tiempo_inicio.strftime('%Y%m%d')}.log', 'a', encoding='utf-8')
-    # Redirigir sys.stdout a ese archivo de log
-    #sys.stdout = io.TextIOWrapper(log_file.buffer, encoding='utf-8')
-
     if var_param1 == "RUN-NO-EMAIL":
         var_SendEmail = 'N'
     if "RUN" in var_param1:
-        todos2()
-
-    #log_file.close()
-
+        todos()
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     ejecutar_menu(var_Fechas1)
