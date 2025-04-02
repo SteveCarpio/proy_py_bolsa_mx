@@ -1,0 +1,31 @@
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe 
+
+-OLD----------------------------------------
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v3.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v3.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v3.exe RUN > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+
+-NEW-PC-STV--------------------------------------
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v3.exe RUN-NO-EMAIL | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding OEM
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v3.exe RUN-NO-EMAIL | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding OEM
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v3.exe RUN | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding OEM
+
+-NEW-PC-PYTHON-----------------------------------
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v3.exe RUN-NO-EMAIL | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding ascii
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v3.exe RUN-NO-EMAIL | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding ascii
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v3.exe RUN | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding ascii
+
+-----------------------------------------
+-Encoding OEM    <--- PC OFICINA DE STV
+-Encoding ASCII  <--- SERVER PYTHON -- pondrá el valor "?" en los caracteres que no reconoce.
+
+
+

@@ -1,5 +1,0 @@
-C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe $fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v3.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
-
-C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe $fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v3.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
-
-C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe $fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v3.exe RUN > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
