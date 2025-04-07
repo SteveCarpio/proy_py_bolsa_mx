@@ -24,8 +24,8 @@ var_SendEmail= 'S'
 if len(sys.argv) > 1 :
     var_param1 = sys.argv[1]
  
-tiempo_inicio = dt.now()  # 2025-03-04 00:00:00.000000
-#tiempo_inicio = dt(2025, 3, 31)
+tiempo_inicio = dt.now()          #   2025-03-04 00:00:00.000000
+tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
 
 # Restar 1 día a la fecha actual
 fecha_reducida = tiempo_inicio - timedelta(days=1)
