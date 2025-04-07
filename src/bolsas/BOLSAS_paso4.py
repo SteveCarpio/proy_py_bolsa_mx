@@ -27,9 +27,9 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
     # Combinar destinatarios principales y en copia
     todos_destinatarios = destinatarios_to + destinatarios_cc 
 
-    # Convertir el DataFrame a HTML
-    tabla_html1 = df1.to_html(index=True)  # con el índice
-    tabla_html2 = df2.to_html(index=True)  # con el índice
+    # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
+    tabla_html1 = df1.to_html(index=True, escape=False)  # con el índice
+    tabla_html2 = df2.to_html(index=True, escape=False)  # con el índice
 
     # Cuerpo del correo usando HTML y CSS
     cuerpo_html = f"""
@@ -151,6 +151,11 @@ def sTv_paso4_lee_DF(ruta, bolsa, var_Fechas2):
             # Si existe, leer el archivo Excel a un DataFrame
             df = pd.read_excel(ruta, index_col=0)
             print(f"- Archivo encontrado: {ruta}")
+            if bolsa == "BMV":
+                df['ARCHIVO'] = '<a href=" ' + df['ARCHIVO'] + ' " target="_blank" > Abrir Archivo </a>'
+
+            df['URL'] = '<a href=" ' + df['URL'] + ' " target="_blank" > Abrir URL </a>'
+
             return df
         except Exception as e:
             print(f"- Error al leer el archivo: {e} - {ruta} - {bolsa}")
