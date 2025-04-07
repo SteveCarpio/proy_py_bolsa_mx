@@ -32,7 +32,7 @@ def sTv_paso3(var_NombreSalida, var_FechasSalida):
     # Eliminar las columnas 'VALOR_A_A' y 'VALOR_A_B' que ya no necesitamos
     df_resultado = df_resultado[['CLAVE', 'CODIGO', 'FILTRO']]
 
-    # Concatenacición de ambas tablas para obtener solo las URL
+    # Concatenación de ambas tablas para obtener solo las URL
     df_paso3_concat = pd.concat([df_paso3_a, df_paso3_b],ignore_index=True )
     # Realizar el merge (left join) entre df_A y df_B usando 'CLAVE' y 'CODIGO'
     df_resultado2 = pd.merge(df_resultado, df_paso3_concat[['CLAVE', 'CODIGO', 'URL1', 'URL2', 'URL3']], 

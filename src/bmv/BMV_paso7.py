@@ -10,13 +10,13 @@ from   cfg.BMV_librerias import *
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio):
+def sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio, var_Entorno):
     
     # Leer el excel de entrada con las URLs filtadas de Deudas
     df_paso7 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso6_{var_FechasSalida}.xlsx')
 
     #Leer el excel de emisores para traernos las columnas: 'CODIGO','GRUPO','TO','CC'
-    df_emiso = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}.xlsx', sheet_name='FILTRO')
+    df_emiso = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}_{var_Entorno}.xlsx', sheet_name='FILTRO')
     df_emiso = df_emiso[['CODIGO','GRUPO','TO','CC']]  # me quedo solo con esas columnas
     
     # Convierto el campo FECHA en formato DATETIME

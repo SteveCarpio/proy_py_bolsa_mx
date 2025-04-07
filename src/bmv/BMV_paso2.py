@@ -25,7 +25,7 @@ def sTv_paso2_lee_html(var_NombreSalida, var_FechasSalida, var_ab):
     # Filtro solo las cadenas que necesito del HMTL
     filtered_lines = [line.strip() for line in html_content if "/es/emisoras/perfil/-" in line]
 
-    # Creo un df vacio
+    # Creo un df vació
     df_paso2 = pd.DataFrame(columns=['CLAVE', 'CODIGO', 'URL1', 'URL2', 'URL3'])
 
     # Customizo cada linea filtrada del HTML y le añado el resto de la URL al DataFrame

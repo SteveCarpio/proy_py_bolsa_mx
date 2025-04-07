@@ -92,7 +92,7 @@ def sTv_paso6(var_NombreSalida, var_FechasSalida):
     num_reg2 = len(files2)
     num_reg3 = len(files3)
 
-    # Creo un df vacio, su uso será GLOBAL
+    # Creo un df vació, su uso será GLOBAL
     global df_paso6_global
     df_paso6_global = pd.DataFrame(columns=['CLAVE', 'CODIGO', 'T', 'SECCION', 'FECHA', 'HORA', 'ASUNTO', 'ARCHIVO', 'URL'])
 

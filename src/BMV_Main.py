@@ -21,11 +21,28 @@ from   bmv.BMV_paso8     import sTv_paso8
 var_NombreSalida= 'BMV'
 var_SendEmail= 'S'
 
+# Parámetro1: RUN o RUN-NO-EMAIL
 if len(sys.argv) > 1 :
     var_param1 = sys.argv[1]
- 
-tiempo_inicio = dt.now()          #   2025-03-04 00:00:00.000000
-tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
+
+# Parámetro2: Producción o Desarrollo
+var_Entorno="DEV"
+if len(sys.argv) > 2 :
+    var_param2 = sys.argv[2]
+    if var_param2 == "PRO":
+        var_Entorno = var_param2
+
+# Parámetro3: Fecha (opcional)
+tiempo_inicio = dt.now()
+#tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
+if len(sys.argv) > 3 :
+    var_param3 = sys.argv[3]
+    if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
+        anio, mes, dia = map(int, var_param3.split('-'))
+        tiempo_inicio = dt(anio, mes, dia)
+    else:
+        print("El formato de fecha debe ser, ejemplo: 2025-07-28")
+        input(Fore.WHITE + f"Se ejecutará con el día {tiempo_inicio.strftime('%Y-%m-%d')}")
 
 # Restar 1 día a la fecha actual
 fecha_reducida = tiempo_inicio - timedelta(days=1)
@@ -64,7 +81,7 @@ def paso3():
 
 def paso4():
     print(Fore.GREEN + f"\nEjecutando PASO_4........ {dt.now()} \n")
-    sTv_paso4(var_NombreSalida, var_FechasSalida ) 
+    sTv_paso4(var_NombreSalida, var_FechasSalida, var_Entorno) 
     print(Fore.GREEN + "Paso 4 completado! \n")
 
 def paso5():
@@ -79,7 +96,7 @@ def paso6():
 
 def paso7():
     print(Fore.GREEN + f"\nEjecutando PASO_7........ {dt.now()} \n")
-    sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio)
+    sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio, var_Entorno)
     print(Fore.GREEN + "\nPaso 7 completado! \n")
 
 def paso8():
@@ -104,10 +121,12 @@ def pasoHelp():
     print(Fore.WHITE + "Ejecución:")
     print(Fore.WHITE + "    BMV_Main_v3.exe RUN-NO-EMAIL")
     print("")
-    print(Fore.WHITE + "Parámetros:")
+    print(Fore.WHITE + "Parámetros [RUN/RUN-NO-EMAIL] [DEV/PRO] AAAA-MM-DD(opcional):")
     print(Fore.WHITE + "    [vació]: Muestra el menú actual")
     print(Fore.WHITE + "    RUN: Ejecuta el proceso enviando el correo de la Bolsa correspondiente")
     print(Fore.WHITE + "    RUN-NO-EMAIL: Ejecuta el proceso sin enviar el correo")
+    print(Fore.WHITE + "    [DEV/PRO]: Ejecuta el proceso en modo desarrollo o producción")
+    print(Fore.WHITE + "    AAAA-MM-DD: Ejecuta el proceso como si estuviésemos ejecutando ese día")
     print("")
     print(Fore.WHITE + "Planificación:")
     print(Fore.WHITE + "    Lun, Mar, Mié, Jue y Vie: 08:50h")

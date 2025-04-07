@@ -48,13 +48,13 @@ def sTv_paso4_uno_DF(df_datos1, df_grupo1):
 # ----------------------------------------------------------------------------------------
 #                               INICIO PASO 4
 # ---------------------------------------------------------------------------------------- 
-def sTv_paso4(var_NombreSalida, var_Fechas1):
+def sTv_paso4(var_NombreSalida, var_Fechas1, var_Entorno):
  
     # Leemos los datos de entrada
     df_datos = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso3.xlsx', sheet_name="PASO3")
 
     # Leemos los filtros y emails
-    df_grupo = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}.xlsx', sheet_name="FILTRO")
+    df_grupo = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}_{var_Entorno}.xlsx', sheet_name="FILTRO")
 
     print(f'- Creo excel los datos Finales ')
     df_paso4 = sTv_paso4_uno_DF(df_datos, df_grupo)
