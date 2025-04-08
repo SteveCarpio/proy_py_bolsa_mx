@@ -174,7 +174,7 @@ def sTv_paso4_lee_DF(ruta, bolsa, var_Fechas2):
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
+def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Entorno):
     
     # Ruta del archivo Excel
     ruta_excel1 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_M.xlsx"
@@ -187,12 +187,6 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     df_BIVA_P = sTv_paso4_lee_DF(ruta_excel2, "BIVA", var_Fechas2)
     df_BMV_M = sTv_paso4_lee_DF(ruta_excel3,  "BMV",  var_Fechas2)
     df_BMV_P = sTv_paso4_lee_DF(ruta_excel4,  "BMV",  var_Fechas2)
-
-    # Mostrar el DataFrame resultante
-    print(f'\n- Datos de BIVA para el grupo (M)\n\n{df_BIVA_M}')
-    print(f'\n- Datos de BIVA para el grupo (P)\n\n{df_BIVA_P}')
-    print(f'\n- Datos de BMV para el grupo (M)\n\n{df_BMV_M}')
-    print(f'\n- Datos de BMV para el grupo (P)\n\n{df_BMV_P}') 
 
     # Lista de emisores distintos
     lst_emisores_m1 = ', '.join(df_BIVA_M['CLAVE'].unique())
@@ -233,8 +227,13 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         num_emisores_p2 = len(df_BMV_P['CLAVE'].unique())
         num_eventos_p2 = len(df_BMV_P)
 
+    print(f"\n- Lista de lst_emisores_m1: {lst_emisores_m1}")
+    print(f"- Lista de lst_emisores_m2: {lst_emisores_m2}")
+    print(f"- Lista de lst_emisores_p1: {lst_emisores_p1}")
+    print(f"- Lista de lst_emisores_p2: {lst_emisores_p2}")
+
     # Extraer los destinatarios de correo del excel
-    df_email = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}.xlsx')
+    df_email = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}_{var_Entorno}.xlsx')
     # to
     valor_to_m1 = df_email.loc[df_email['GRUPO'] == 'M', 'TO'].iloc[0]
     valor_to_m = str(valor_to_m1)
@@ -245,6 +244,11 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     valor_cc_m = str(valor_cc_m1)
     valor_cc_p1 = df_email.loc[df_email['GRUPO'] == 'P', 'CC'].iloc[0]
     valor_cc_p = str(valor_cc_p1)
+
+    print(f"\n- Email valor_to_m: {valor_to_m}")
+    print(f"- Email valor_to_p: {valor_to_p}")
+    print(f"- Email valor_cc_p: {valor_cc_p}")
+    print(f"- Email valor_cc_p: {valor_cc_p}")
 
     # Mandar Email ------------------------------------------------------
     destinatarios_cc_m = [elemento.strip("'") for elemento in valor_cc_m.split(",")]
@@ -259,5 +263,30 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     cuerpo_m2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_m2}</b><br>Lista de Emisores: <b>{lst_emisores_m2}</b>'
     cuerpo_p1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p1}</b><br>Lista de Emisores: <b>{lst_emisores_p1}</b>' 
     cuerpo_p2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p2}</b><br>Lista de Emisores: <b>{lst_emisores_p2}</b>'
+
+    print(f"\n- Cuerpo final del Email\n")
+    print(f"  Email M: ")
+    print(f"  Destinatarios TO:    {destinatarios_to_m}")
+    print(f"  Destinatarios CC:    {destinatarios_cc_m}")
+    print(f"  Asunto:              {asunto}")
+    print(f"  Ruta:                {ruta}")
+    print(f"  Nombre Archivo:      {nombre_archivo_m}")
+    print(f"\n  Cuerpo BIVA Resumen: {cuerpo_m1}")
+    print(f'  Cuerpo BIVA Datos: \n{df_BIVA_M}')
+    print(f"\n  Cuerpo BMV Resumen:  {cuerpo_m2}")
+    print(f'  Cuerpo BMV Datos:\n{df_BMV_M}')
+
+    print(f" \n\n Email P: ")
+    print(f"  Destinatarios TO:    {destinatarios_to_p}")
+    print(f"  Destinatarios CC:    {destinatarios_cc_p}")
+    print(f"  Asunto:              {asunto}")
+    print(f"  Ruta:                {ruta}")
+    print(f"  Nombre Archivo:      {nombre_archivo_p}")
+    print(f"\n  Cuerpo BIVA Resumen: {cuerpo_p1}")
+    print(f'  Cuerpo BIVA Datos: \n{df_BIVA_P}')
+    print(f"\n  Cuerpo BMW Resumen:  {cuerpo_p2}")
+    print(f'  Cuerpo BMV Datos:\n{df_BMV_P}') 
+
+    # Envío del email
     enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto, cuerpo_m1, cuerpo_m2, ruta, nombre_archivo_m, df_BIVA_M, df_BMV_M)
     enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto, cuerpo_p1, cuerpo_p2, ruta, nombre_archivo_p, df_BIVA_P, df_BMV_P)

@@ -77,7 +77,7 @@ def paso3():
 
 def paso4():
     print(Fore.YELLOW + f"\nEjecutando PASO_4 - Mandar Email........ {dt.now()} \n")
-    sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
+    sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Entorno)
     print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
 
 def pasoHelp():
