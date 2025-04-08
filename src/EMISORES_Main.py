@@ -1,8 +1,16 @@
+# ----------------------------------------------------------------------------------------
+#                                  Validar Las lista de Emisores 
+# 
+# Programa que comprueba si hay nuevos emisores en BIVA o BMV que se deben agregar
+# Autor: SteveCarpio
+# Versión: V1 2025
+# ----------------------------------------------------------------------------------------
+
 import pandas as pd
 import smtplib
+import sys
 from email.mime.multipart import MIMEMultipart                    
-from email.mime.text import MIMEText                              
-#from email.mime.application import MIMEApplication  
+from email.mime.text import MIMEText                                
 
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
@@ -58,7 +66,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
                 border: 1px solid #ddd;
             }}
             th {{
-                background-color: #96C60F;
+                background-color: red;
                 color: white;
             }}
             tr:nth-child(even) {{
@@ -69,17 +77,20 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
     <body>
         <div class="content">
             
-            <h2>EVENTOS RELEVANTES Y COMUNICADOS - BIVA</h2>
-            <p>{cuerpo}</p>
+            Lista de los nuevos emisores que deben ser revisados.
+            <br><br>
+            
             {tabla_html}  <!-- Aquí se inserta el DF convertido a HTML  -->
-            <p></p><br><p></p>
 
+            <br>
+            <p>"Es necesario agregar el/los {len(df)} emisores en los archivos de configuración en el servidor Python para que se tengan en cuenta en la próxima ejecución.". 
+            </p><br>
+            Bolsa BIVA: C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\CONFIG\\BIVA_Filtro_Emisores_PRO.xlsx <br>
+            Bolsa BMV:  C:\\MisCompilados\\PROY_BOLSA_MX\\BMV\\CONFIG\\BMV_Filtro_Emisores_PRO.xlsx <br><br>
+            <p></p>
 
-            
             <p>  </p><br><p></p>
-            <i> ** Este email fue enviado desde un proceso automático desde TdA. Por favor, no responder a este email. ** </i>
-            
-            
+            <i> ** Para más ayuda consultar con SteveCarpio. <br><br> ** Este email fue enviado desde un proceso automático desde TdA. Por favor, no responder a este email. ** </i>
                 <p>
                     <br><br>
                     <br><br>
@@ -103,9 +114,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
                             </td>
                         </tr>
                     </table>
-                </p>
-            
-            
+                </p> 
         </div>
     </body>
     </html>
@@ -140,7 +149,15 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 # ----------------------------------------------------------------------------------------
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
-Entorno = "PRO"
+
+# Parámetro: Producción o Desarrollo
+Entorno = "DEV"
+if len(sys.argv) > 1 :
+    var_param = sys.argv[1]
+    if var_param == "PRO":
+        Entorno = var_param
+
+
 RutaRaiz = "C:\\MisCompilados\\PROY_BOLSA_MX\\"
 RutaBIVA = f"{RutaRaiz}BIVA\\"
 RutaBMV  = f"{RutaRaiz}BMV\\"
@@ -176,10 +193,17 @@ df_final.index = df_final.index + 1
 if len(df_final) > 0:
     print(f"- Ok se manda correo, existen {len(df_final)} registro/s a tener en cuenta")
     print(df_final)
-    destinatarios_to = ['carpios@tda-sgft.com']
-    destinatarios_cc = ['carpios@tda-sgft.com']
-    asunto = "asunto"
-    cuerpo = "cuerpo"
+    if Entorno == "PRO":
+        print("- Ejecución en modo: PRO")
+        destinatarios_to = ['carpios@tda-sgft.com']
+        destinatarios_cc = ['carpios@tda-sgft.com']
+    else:
+        print("- Ejecución en modo: DEV")
+        destinatarios_to = ['carpios@tda-sgft.com']
+        destinatarios_cc = ['carpios@tda-sgft.com']
+
+    asunto = f"[ATENCIÓN] Nuevos emisores pendientes de revisión ({len(df_final)}) | TDA Update"
+    cuerpo = ""
     enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo, df_final)
 
 else:
