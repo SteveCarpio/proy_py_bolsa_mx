@@ -5,6 +5,7 @@ env/
 __pycache__/
 *.pyc
 *.pyo
+*.spec
 build/
 dist/
 
