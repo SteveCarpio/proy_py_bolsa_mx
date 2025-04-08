@@ -1,45 +1,55 @@
+--------------------------------------------------------- BINARIO
+
 C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe 
 
--OLD----------------------------------------
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+--------------------------------------------------------- PC-STV (-Encoding OEM)
 
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+-------------- UN-DIA-PUNTUAL
+----- ok 
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405_dev.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405_dev.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405_dev.log" 2>&1
 
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+----- ok 
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405_dev.log" -Encoding OEM
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405_dev.log" -Encoding OEM
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405_dev.log" -Encoding OEM
 
+-------------- DIARIAMENTE
+----- ok 
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
 
--------------------------------------------- NEW ------------------------------------------------------------
-
--NEW-PC-STV-----------UN-DIA-PUNTUAL-------------------------------------
-
-C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405.log" -Encoding OEM
-
-C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405.log" -Encoding OEM
-
-C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405.log" -Encoding OEM
-
-
--NEW-PC-STV-------Encoding OEM-------------------------------------------
-
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding OEM
-
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding OEM
-
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding OEM
+----- ok 
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding OEM
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding OEM
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding OEM
 
 
--NEW-PC-PYTHON---Encoding ascii-------------------------------------------
+--------------------------------------------------------- SERVER PYTHON (-Encoding ascii)
 
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding ascii
+-------------- UN-DIA-PUNTUAL
+----- ok 
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV 2025-04-05 > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405_puntual.log" 2>&1
 
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding ascii
+----- no-funciona
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405.log" -Encoding ascii
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405.log" -Encoding ascii
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405.log" -Encoding ascii
 
-$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding ascii
 
+-------------- DIARIAMENTE
+----- ok
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV  > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
 
------------------------------------------------------------
--Encoding OEM    <--- PC OFICINA DE STV
--Encoding ASCII  <--- SERVER PYTHON -- pondrá el valor "?" en los caracteres que no reconoce.
-
+----- no-funciona
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main_v4.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding ascii
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main_v4.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding ascii
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main_v4.exe RUN DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding ascii
 
 
