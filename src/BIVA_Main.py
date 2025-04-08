@@ -17,6 +17,7 @@ from   biva.BIVA_paso5     import sTv_paso5
 
 var_NombreSalida = 'BIVA'
 var_SendEmail= 'S'
+tiempo_inicio2 = dt.now()
 
 # Parámetro1: RUN o RUN-NO-EMAIL
 if len(sys.argv) > 1 :
@@ -30,7 +31,7 @@ if len(sys.argv) > 2 :
         var_Entorno = var_param2
 
 # Parámetro3: Fecha (opcional)
-tiempo_inicio = dt.now()
+tiempo_inicio = tiempo_inicio2
 #tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
 if len(sys.argv) > 3 :
     var_param3 = sys.argv[3]
@@ -157,7 +158,7 @@ def todos():
     paso5()
     print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
-    print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio} - FIN: {dt.now()}")
+    print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio2} - FIN: {dt.now()}")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
