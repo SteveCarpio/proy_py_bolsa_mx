@@ -32,10 +32,14 @@ def sTv_paso3(var_Fechas3):
     ruta_destino = f"{sTv.var_RutaInforme}"
     ruta_origen1 = f"{sTv.var_RutaInformeBiva}BIVA_{var_Fechas3}_M.xlsx"
     ruta_origen2 = f"{sTv.var_RutaInformeBiva}BIVA_{var_Fechas3}_P.xlsx"
+    ruta_origen5 = f"{sTv.var_RutaInformeBiva}BIVA_{var_Fechas3}_X.xlsx"
     ruta_origen3 = f"{sTv.var_RutaInformeBmv}BMV_{var_Fechas3}_M.xlsx"
     ruta_origen4 = f"{sTv.var_RutaInformeBmv}BMV_{var_Fechas3}_P.xlsx"
+    ruta_origen6 = f"{sTv.var_RutaInformeBmv}BMV_{var_Fechas3}_X.xlsx"
     
     copiar_archivo(ruta_origen1, ruta_destino)
     copiar_archivo(ruta_origen2, ruta_destino)
     copiar_archivo(ruta_origen3, ruta_destino)
     copiar_archivo(ruta_origen4, ruta_destino)
+    copiar_archivo(ruta_origen5, ruta_destino)
+    copiar_archivo(ruta_origen6, ruta_destino)

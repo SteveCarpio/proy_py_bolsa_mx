@@ -179,22 +179,29 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     # Ruta del archivo Excel
     ruta_excel1 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_M.xlsx"
     ruta_excel2 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_P.xlsx"
+    ruta_excel5 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_X.xlsx"
     ruta_excel3 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_M.xlsx"
     ruta_excel4 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_P.xlsx"
+    ruta_excel6 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_X.xlsx"
+    
 
     # Leer el archivo o crear el DataFrame por defecto
     df_BIVA_M = sTv_paso4_lee_DF(ruta_excel1, "BIVA", var_Fechas2)
     df_BIVA_P = sTv_paso4_lee_DF(ruta_excel2, "BIVA", var_Fechas2)
+    df_BIVA_X = sTv_paso4_lee_DF(ruta_excel5, "BIVA", var_Fechas2)
     df_BMV_M = sTv_paso4_lee_DF(ruta_excel3,  "BMV",  var_Fechas2)
     df_BMV_P = sTv_paso4_lee_DF(ruta_excel4,  "BMV",  var_Fechas2)
+    df_BMV_X = sTv_paso4_lee_DF(ruta_excel6,  "BMV",  var_Fechas2)
 
     # Lista de emisores distintos
     lst_emisores_m1 = ', '.join(df_BIVA_M['CLAVE'].unique())
     lst_emisores_m2 = ', '.join(df_BMV_M['CLAVE'].unique())
     lst_emisores_p1 = ', '.join(df_BIVA_P['CLAVE'].unique())
     lst_emisores_p2 = ', '.join(df_BMV_P['CLAVE'].unique())
+    lst_emisores_x1 = ', '.join(df_BIVA_X['CLAVE'].unique())
+    lst_emisores_x2 = ', '.join(df_BMV_X['CLAVE'].unique())
 
-    # Numero de emisores y eventos distintos
+    # BIVA: Numero de emisores y eventos distintos
     if lst_emisores_m1 == "none":
         num_emisores_m1 = 0
         num_eventos_m1 = 0
@@ -211,6 +218,7 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
         num_emisores_m2 = len(df_BMV_M['CLAVE'].unique())
         num_eventos_m2 = len(df_BMV_M)
 
+    # BMV: Numero de emisores y eventos distintos
     if lst_emisores_p1 == "none":
         num_emisores_p1 = 0
         num_eventos_p1 = 0
@@ -227,10 +235,29 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
         num_emisores_p2 = len(df_BMV_P['CLAVE'].unique())
         num_eventos_p2 = len(df_BMV_P)
 
+    # EXCLUIDOS: Numero de emisores y eventos distintos
+    if lst_emisores_x1 == "none":
+        num_emisores_x1 = 0
+        num_eventos_x1 = 0
+        lst_emisores_x1 = ""
+    else:
+        num_emisores_x1 = len(df_BIVA_X['CLAVE'].unique())
+        num_eventos_x1 = len(df_BIVA_X)
+        
+    if lst_emisores_x2 == "none":
+        num_emisores_x2 = 0
+        num_eventos_x2 = 0
+        lst_emisores_x2 = ""
+    else:
+        num_emisores_x2 = len(df_BMV_X['CLAVE'].unique())
+        num_eventos_x2 = len(df_BMV_X)
+
     print(f"\n- Lista de lst_emisores_m1: {lst_emisores_m1}")
     print(f"- Lista de lst_emisores_m2: {lst_emisores_m2}")
     print(f"- Lista de lst_emisores_p1: {lst_emisores_p1}")
     print(f"- Lista de lst_emisores_p2: {lst_emisores_p2}")
+    print(f"- Lista de lst_emisores_x1: {lst_emisores_x1}")
+    print(f"- Lista de lst_emisores_x2: {lst_emisores_x2}")
 
     # Extraer los destinatarios de correo del excel
     df_email = pd.read_excel(f'{sTv.var_RutaConfig}{sTv.var_NombreEmisores}_{var_Entorno}.xlsx')
@@ -247,7 +274,7 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
 
     print(f"\n- Email valor_to_m: {valor_to_m}")
     print(f"- Email valor_to_p: {valor_to_p}")
-    print(f"- Email valor_cc_p: {valor_cc_p}")
+    print(f"- Email valor_cc_m: {valor_cc_m}")
     print(f"- Email valor_cc_p: {valor_cc_p}")
 
     # Mandar Email ------------------------------------------------------
@@ -255,14 +282,20 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p.split(",")]
     destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m.split(",")]
     destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p.split(",")]
-    asunto = f'EVENTOS RELEVANTES Y COMUNICADOS BOLSAS_{var_Fechas2}_tda update '
+    destinatarios_cc_x = ['carpios@tda-sgft.com']
+    destinatarios_to_x = ['talavanf@tda-sgft.com']
+    asunto = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Update '
+    asunto_x = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Excluidos '
     ruta = f'{sTv.var_RutaInforme}'
     nombre_archivo_m = "none" # f'BIVA_{var_Fechas3}_M.zip' : sTv se mandaría un zip con los 2 excel  
     nombre_archivo_p = "none" # f'BMV_{var_Fechas3}_M.zip'  : sTv se mandaría un zip con los 2 excel
+    nombre_archivo_x = "none"
     cuerpo_m1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_m1}</b><br>Lista de Emisores: <b>{lst_emisores_m1}</b>' 
     cuerpo_m2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_m2}</b><br>Lista de Emisores: <b>{lst_emisores_m2}</b>'
     cuerpo_p1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p1}</b><br>Lista de Emisores: <b>{lst_emisores_p1}</b>' 
     cuerpo_p2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_p2}</b><br>Lista de Emisores: <b>{lst_emisores_p2}</b>'
+    cuerpo_x1=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_x1}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_x1}</b><br>Lista de Emisores: <b>{lst_emisores_x1}</b>' 
+    cuerpo_x2=f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_x2}</b><br>Número de Eventos/Comunicados: <b>{num_eventos_x2}</b><br>Lista de Emisores: <b>{lst_emisores_x2}</b>'
 
     print(f"\n- Cuerpo final del Email\n")
     print(f"  Email M: ")
@@ -290,3 +323,10 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     # Envío del email
     enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto, cuerpo_m1, cuerpo_m2, ruta, nombre_archivo_m, df_BIVA_M, df_BMV_M)
     enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto, cuerpo_p1, cuerpo_p2, ruta, nombre_archivo_p, df_BIVA_P, df_BMV_P)
+
+    conteo_BIVA_X = (df_BIVA_X['CLAVE'] == 'none').sum()
+    conteo_BMV_X  = (df_BMV_X['CLAVE']  == 'none').sum()
+    conteo_X = conteo_BIVA_X + conteo_BMV_X
+    if conteo_X != 2:  # Mandará un email en caso de que existan registros.
+        print("- Se manda email con datos excluidos")
+        enviar_email_con_adjunto(destinatarios_to_x, destinatarios_cc_x, asunto_x, cuerpo_x1, cuerpo_x2, ruta, nombre_archivo_x, df_BIVA_X, df_BMV_X)
