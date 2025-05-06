@@ -247,7 +247,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         #destinatarios_to_m=['carpios@tda-sgft.com']
         #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
 
-        # Envio a la función enviar_email los datos necesarios
+        # Envió a la función enviar_email los datos necesarios
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
