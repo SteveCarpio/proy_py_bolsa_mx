@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-#  PASO8: ENVIO DE EMAIL
+#  PASO8: ENVIÓ DE EMAIL
 #  Autor: SteveCarpio-2025
 # ----------------------------------------------------------------------------------------
 
@@ -151,9 +151,35 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
     df_paso8_P_ = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
     df_paso8_M_ = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL','ARCHIVO']]
 
+    # Crea el filtro True - False de los registros que cumplen la condición
+    filtro_df_P = df_paso8_P_['ASUNTO'].str.contains('asamblea', case=False, na=False) & \
+                ~df_paso8_P_['ASUNTO'].str.contains('tenedores', case=False, na=False)   #   'tenedores|otros1|otros2|etc..'
+    filtro_df_M = df_paso8_M_['ASUNTO'].str.contains('asamblea', case=False, na=False) & \
+                ~df_paso8_M_['ASUNTO'].str.contains('tenedores', case=False, na=False)   #   'tenedores|otros1|otros2|etc..'
+    # Crear los DF con los datos a enviar y los excluidos
+    df_paso8_P_F = df_paso8_P_[~filtro_df_P]
+    df_exclu_P_F = df_paso8_P_[filtro_df_P]
+    df_paso8_M_F = df_paso8_M_[~filtro_df_M]   # Se ha decidido que a Monica se le manda todo.
+    df_exclu_M_F = df_paso8_M_[filtro_df_M]
+    # Crea un nuevo campo para diferenciar
+    df_exclu_P_F = df_exclu_P_F.copy()  # copy = para que salga mensaje de warning
+    df_exclu_P_F["EMAIL"] = "P"
+    df_exclu_M_F = df_exclu_M_F.copy()  # copy = para que salga mensaje de warning
+    df_exclu_M_F["EMAIL"] = "M"
+    # Concatenamos las dos tabla de datos excluidos
+    df_excluidos = pd.concat([df_exclu_P_F, df_exclu_M_F], ignore_index=True)
+    # Excel de salida de datos excluidos
+    nombre_archivo_x = f'{var_NombreSalida}_{fecha_formateada}_X.xlsx' 
+
     # Ordenar el DataFrame
-    df_paso8_P = df_paso8_P_.sort_values(by='CLAVE')
-    df_paso8_M = df_paso8_M_.sort_values(by='CLAVE')
+    df_paso8_P = df_paso8_P_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_P_F"
+    df_paso8_M = df_paso8_M_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_M_F"
+
+    if len(df_excluidos) > 0:
+        df_excluidos.index = df_excluidos.index + 1 # Que empiece por el registro 1
+        df_excluidos.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_x}',sheet_name='EMISORES', index=True)
+        print("- Existen datos EXCLUIDOS en los DataFrames de envió")
+        print(df_excluidos)
 
     if len(df_paso8_P) > 0:
 
@@ -198,7 +224,7 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
         #destinatarios_to_p=['carpios@tda-sgft.com']
         #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
 
-        # Envio a la función enviar_email los datos necesarios
+        # Envió a la función enviar_email los datos necesarios
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
     else:
@@ -248,7 +274,7 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
         #destinatarios_to_m=['carpios@tda-sgft.com']
         #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
 
-        # Envio a la función enviar_email los datos necesarios
+        # Envió a la función enviar_email los datos necesarios
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:

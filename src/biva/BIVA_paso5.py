@@ -173,16 +173,18 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     df_exclu_M_F["EMAIL"] = "M"
     # Concatenamos las dos tabla de datos excluidos
     df_excluidos = pd.concat([df_exclu_P_F, df_exclu_M_F], ignore_index=True)
-    df_excluidos.index = df_excluidos.index + 1
     # Excel de salida de datos excluidos
     nombre_archivo_x = f'{var_NombreSalida}_{fecha_formateada}_X.xlsx' 
 
     # Ordenar el DataFrame
     df_paso8_P = df_paso8_P_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_P_F"
-    df_paso8_M = df_paso8_M_F.sort_values(by='CLAVE')   # Para Monica mandamos todos los datos y no "df_paso8_M_F" o "df_paso8_M_"
+    df_paso8_M = df_paso8_M_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_M_F"
 
     if len(df_excluidos) > 0:
+        df_excluidos.index = df_excluidos.index + 1 # Que empiece por el registro 1
         df_excluidos.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_x}',sheet_name='EMISORES', index=True)
+        print("- Existen datos EXCLUIDOS en los DataFrames de envió")
+        print(df_excluidos)
 
     if len(df_paso8_P) > 0:
 
