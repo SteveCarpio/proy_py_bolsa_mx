@@ -156,9 +156,33 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
     df_paso8_P_ = df_paso8[df_paso8['GRUPO'] == 'P'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL']]
     df_paso8_M_ = df_paso8[df_paso8['GRUPO'] == 'M'][['CLAVE', 'SECCION', 'FECHA','ASUNTO','URL']]
 
+    # Crea el filtro True - False de los registros que cumplen la condición
+    filtro_df_P = df_paso8_P_['ASUNTO'].str.contains('asamblea', case=False, na=False) & \
+                ~df_paso8_P_['ASUNTO'].str.contains('tenedores', case=False, na=False)   #   'tenedores|otros1|otros2|etc..'
+    filtro_df_M = df_paso8_M_['ASUNTO'].str.contains('asamblea', case=False, na=False) & \
+                ~df_paso8_M_['ASUNTO'].str.contains('tenedores', case=False, na=False)   #   'tenedores|otros1|otros2|etc..'
+    # Crear los DF con los datos a enviar y los excluidos
+    df_paso8_P_F = df_paso8_P_[~filtro_df_P]
+    df_exclu_P_F = df_paso8_P_[filtro_df_P]
+    df_paso8_M_F = df_paso8_M_[~filtro_df_M]   # Se ha decidido que a Monica se le manda todo.
+    df_exclu_M_F = df_paso8_M_[filtro_df_M]
+    # Crea un nuevo campo para diferenciar
+    df_exclu_P_F = df_exclu_P_F.copy()  # copy = para que salga mensaje de warning
+    df_exclu_P_F["EMAIL"] = "P"
+    df_exclu_M_F = df_exclu_M_F.copy()  # copy = para que salga mensaje de warning
+    df_exclu_M_F["EMAIL"] = "M"
+    # Concatenamos las dos tabla de datos excluidos
+    df_excluidos = pd.concat([df_exclu_P_F, df_exclu_M_F], ignore_index=True)
+    df_excluidos.index = df_excluidos.index + 1
+    # Excel de salida de datos excluidos
+    nombre_archivo_x = f'{var_NombreSalida}_{fecha_formateada}_X.xlsx' 
+
     # Ordenar el DataFrame
-    df_paso8_P = df_paso8_P_.sort_values(by='CLAVE')
-    df_paso8_M = df_paso8_M_.sort_values(by='CLAVE')
+    df_paso8_P = df_paso8_P_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_P_F"
+    df_paso8_M = df_paso8_M_F.sort_values(by='CLAVE')   # Para Monica mandamos todos los datos y no "df_paso8_M_F" o "df_paso8_M_"
+
+    if len(df_excluidos) > 0:
+        df_excluidos.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_x}',sheet_name='EMISORES', index=True)
 
     if len(df_paso8_P) > 0:
 
