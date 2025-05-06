@@ -12,3 +12,6 @@ dist/
 # Ignorar dependencias si usas pipenv o poetry
 Pipfile
 Pipfile.lock
+
+# Ignorar la carpeta  de visualcode
+.vscode
