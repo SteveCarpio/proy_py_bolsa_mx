@@ -9,6 +9,18 @@ from   cfg.BOLSAS_librerias import *
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
+
+
+# Función para cambiar los colores en las etiquetas TR HTML
+def aplicar_colores_alternos(tabla_html):
+    soup = BeautifulSoup(tabla_html, "html.parser")
+    filas = soup.find_all("tr")
+    for i, fila in enumerate(filas[1:]):  # saltamos la cabecera (filas[0])
+        color = "#f2f2f2" if i % 2 == 0 else "#ffffff"
+        estilo_existente = fila.get("style", "")
+        fila["style"] = f"{estilo_existente} background-color: {color};"
+    return str(soup)
+
 # Función envió de Email
 def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1, cuerpo2, ruta, nombre_archivo, df1, df2):
     # Configuración del servidor SMTP (Zimbra)
@@ -28,8 +40,11 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
     todos_destinatarios = destinatarios_to + destinatarios_cc 
 
     # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
-    tabla_html1 = df1.to_html(index=True, escape=False)  # con el índice
-    tabla_html2 = df2.to_html(index=True, escape=False)  # con el índice
+    #tabla_html1 = df1.to_html(index=True, escape=False)  # con el índice
+    #tabla_html2 = df2.to_html(index=True, escape=False)  # con el índice
+
+    tabla_html1 = aplicar_colores_alternos(df1.to_html(index=True, escape=False))
+    tabla_html2 = aplicar_colores_alternos(df2.to_html(index=True, escape=False))
 
     # Cuerpo del correo usando HTML y CSS
     cuerpo_html = f"""
@@ -287,6 +302,14 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p.split(",")]
     destinatarios_cc_x = ['carpios@tda-sgft.com']
     destinatarios_to_x = ['talavanf@tda-sgft.com']
+    #------------------
+    destinatarios_cc_m = ['carpios@tda-sgft.com']
+    destinatarios_cc_p = ['carpios@tda-sgft.com']
+    destinatarios_to_m = ['talavanf@tda-sgft.com']
+    destinatarios_to_p = ['talavanf@tda-sgft.com']
+    destinatarios_cc_x = ['carpios@tda-sgft.com']
+    destinatarios_to_x = ['talavanf@tda-sgft.com']
+    #------------------
     asunto = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Update '
     asunto_x = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Excluidos '
     ruta = f'{sTv.var_RutaInforme}'

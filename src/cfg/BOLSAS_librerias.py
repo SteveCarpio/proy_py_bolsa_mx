@@ -22,4 +22,5 @@ from datetime import timedelta                                    # ma -- -- -- 
 from email.mime.multipart import MIMEMultipart                    # -- -- -- -- -- p4 #
 from email.mime.text import MIMEText                              # -- -- -- -- -- p4 #
 from email.mime.application import MIMEApplication                # -- -- -- -- -- p4 #
+from bs4 import BeautifulSoup                                     # -- -- -- -- -- p4 #
 # -------------------------------------------------------------------------------------
