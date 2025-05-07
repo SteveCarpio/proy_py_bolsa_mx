@@ -60,8 +60,11 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
                 color: white;
             }}
             tr:nth-child(even) {{
-                background-color: #f9f9f9;
-            }}
+				background-color: #f2f2f2;
+			}}
+			tr:nth-child(odd) {{
+				background-color: #ffffff;
+			}}
         </style>
     </head>
     <body>
