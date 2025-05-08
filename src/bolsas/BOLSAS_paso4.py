@@ -16,7 +16,7 @@ def aplicar_colores_alternos(tabla_html):
     soup = BeautifulSoup(tabla_html, "html.parser")
     filas = soup.find_all("tr")
     for i, fila in enumerate(filas[1:]):  # saltamos la cabecera (filas[0])
-        color = "#f2fff3" if i % 2 == 0 else "#ffffff"  # (gris=f2f2f2)
+        color = "#f2f2f2" if i % 2 == 0 else "#ffffff"  # (gris=f2f2f2 verdeAgua=f2fff3)
         estilo_existente = fila.get("style", "")
         fila["style"] = f"{estilo_existente} background-color: {color};"
     return str(soup)
@@ -40,8 +40,8 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
     todos_destinatarios = destinatarios_to + destinatarios_cc 
 
     # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
-    #tabla_html1 = df1.to_html(index=True, escape=False)  # con el índice
-    #tabla_html2 = df2.to_html(index=True, escape=False)  # con el índice
+    #tabla_html1 = df1.to_html(index=True, escape=False)  # index=True, con el índice
+    #tabla_html2 = df2.to_html(index=True, escape=False)  # index=True, con el índice
 
     tabla_html1 = aplicar_colores_alternos(df1.to_html(index=True, escape=False))
     tabla_html2 = aplicar_colores_alternos(df2.to_html(index=True, escape=False))
@@ -75,7 +75,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
                 border: 1px solid #ddd;
             }}
             th {{
-                background-color: #96C60F;
+                background-color: #59a62c;
                 color: white;
             }}
             tr:nth-child(even) {{
