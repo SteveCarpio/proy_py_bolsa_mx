@@ -29,8 +29,10 @@ def sTv_paso7(var_NombreSalida, var_FechasSalida, tiempo_inicio, var_Entorno):
     # FILTRA las filas que cumplan las condiciones:
     # - SECCION es "Resumen de Acuerdos de Asamblea" o "Convocatorias de Asambleas"
     # - ASUNTO "NO" contiene la palabra "TENEDORES"
-    df_filtro2 = df_filtro1[~((df_filtro1['SECCION'].isin(['Resumen de Acuerdos de Asamblea', 'Convocatorias de Asambleas'])) & 
-                    (~df_filtro1['ASUNTO'].str.contains('TENEDORES', case=False)))]
+    # 2025-05-13 * Hemos quitado el filtro, para que se filtre en el email de excluidos
+    # df_filtro2 = df_filtro1[~((df_filtro1['SECCION'].isin(['Resumen de Acuerdos de Asamblea', 'Convocatorias de Asambleas'])) & 
+    #                (~df_filtro1['ASUNTO'].str.contains('TENEDORES', case=False)))]
+    df_filtro2 = df_filtro1
     
     # Elimino el campo FECHA2 de apoyo
     df_filtro3 = df_filtro2.drop('FECHA2', axis=1)
