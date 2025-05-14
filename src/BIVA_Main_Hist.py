@@ -48,6 +48,10 @@ fecha_reducida = tiempo_inicio - timedelta(days=1)
 var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')    # Formato "2025-03-04"
 var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')    # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')      # Formato "20250304"
+var_Fechas4 = fecha_reducida.strftime('2025-04-01')  # Formato "2025-03-04" Para proceso Histórico 
+#var_Fechas4 = var_Fechas1                           # Comentar está línea  Para proceso Histórico
+var_NumPag = 100                                     # Inf Diario Valor 20  para proceso Histórico "analizar" 
+var_Emisor = "1678"
 
 os.system("cls")
 
@@ -62,7 +66,7 @@ sTv_paso0(var_NombreSalida, var_Fechas3)
 # Funciones para los pasos
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} \n")
-    sTv_paso1(var_NombreSalida, var_Fechas1)
+    sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag)
     print(Fore.YELLOW + "\nPaso 1 completado! \n")
 
 def paso2():
