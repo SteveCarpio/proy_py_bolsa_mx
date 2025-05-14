@@ -32,7 +32,7 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
         salidaHtml=f'{sTv.var_RutaWebFiles}{var_NombreSalida}_paso1_pag{par_i}.html'
         with open(salidaHtml, "w", encoding="utf-8") as file:
             file.write(page_source)
-        print(f"- HTML creado correctamente: {var_NombreSalida}_paso1_pag{par_i}.html")
+        print(f"- HTML creado correctamente: {var_NombreSalida}_paso1_pag{par_i}.html\n")
         driver.quit()
         return 1 # Si tiene datos envía este valor
 
@@ -45,16 +45,17 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
 # ----------------------------------------------------------------------------------------
 #                               INICIO PASO 1
 # ----------------------------------------------------------------------------------------    
-def sTv_paso1(var_NombreSalida, var_Fechas1):
+def sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag):
 
     # Declaración de fechas de entrada
-    var_fecha_ini = var_Fechas1
+    var_fecha_ini = var_Fechas4
     var_fecha_fin = var_Fechas1
 
     # Bucle para leer todas las Paginas de la WEB
-    for i in range(10):
+    for i in range(var_NumPag):
         var_pagina = f'{i+1}'
         var_url = f'{sTv.var_WEBSCRAPING1}?fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&page={var_pagina}'
+        print(f'Filtro a Analizar: {var_url}')
         var_i = i + 1
 
         # Si no existe más páginas llegará el valor 0 de lo contrario llegará 1
