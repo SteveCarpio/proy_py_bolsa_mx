@@ -8,12 +8,12 @@
 
 from   cfg.BIVA_librerias import *
 import cfg.BIVA_variables as sTv
-from   biva.BIVA_paso0     import sTv_paso0
-from   biva.BIVA_paso1     import sTv_paso1
-from   biva.BIVA_paso2     import sTv_paso2
-from   biva.BIVA_paso3     import sTv_paso3
-from   biva.BIVA_paso4     import sTv_paso4
-from   biva.BIVA_paso5     import sTv_paso5
+from   biva.BIVA_paso0      import sTv_paso0
+from   biva.BIVA_paso1_Hist import sTv_paso1
+from   biva.BIVA_paso2      import sTv_paso2
+from   biva.BIVA_paso3      import sTv_paso3
+from   biva.BIVA_paso4      import sTv_paso4
+from   biva.BIVA_paso5      import sTv_paso5
 
 var_NombreSalida = 'BIVA'
 var_SendEmail= 'S'
@@ -50,8 +50,8 @@ var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')    # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')      # Formato "20250304"
 var_Fechas4 = fecha_reducida.strftime('2025-04-01')  # Formato "2025-03-04" Para proceso Histórico 
 #var_Fechas4 = var_Fechas1                           # Comentar está línea  Para proceso Histórico
-var_NumPag = 100                                     # Inf Diario Valor 20  para proceso Histórico "analizar" 
-var_Emisor = "1678"
+var_NumPag = 50                                      # Inf Diario Valor 20  para proceso Histórico "analizar" 
+var_Emisor = "1647"
 
 os.system("cls")
 
@@ -66,7 +66,7 @@ sTv_paso0(var_NombreSalida, var_Fechas3)
 # Funciones para los pasos
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO_1........ {dt.now()} \n")
-    sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag)
+    sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag, var_Emisor)
     print(Fore.YELLOW + "\nPaso 1 completado! \n")
 
 def paso2():
