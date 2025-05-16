@@ -33,7 +33,7 @@ if len(sys.argv) > 2 :
 
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
-tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
+#tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
 #if len(sys.argv) > 3 :
 #    var_param3 = sys.argv[3]
 #    if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):

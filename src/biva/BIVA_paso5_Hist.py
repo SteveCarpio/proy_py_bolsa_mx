@@ -178,7 +178,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emi
     # Concatenamos las dos tabla de datos excluidos
     df_excluidos = pd.concat([df_exclu_P_F, df_exclu_M_F], ignore_index=True)
     # Excel de salida de datos excluidos
-    nombre_archivo_x = f'{var_NombreSalida}_{fecha_formateada}_X.xlsx' 
+    nombre_archivo_x = f'{var_NombreSalida}_{fecha_formateada}_X_{var_Emisor}.xlsx' 
 
     # Ordenar el DataFrame
     df_paso8_P = df_paso8_P_F.sort_values(by='CLAVE')  # Datos filtrados "df_paso8_P_F"
@@ -205,7 +205,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emi
         df_paso8_P.index = df_paso8_P.index + 1
 
         # Excel de salida
-        nombre_archivo_p = f'{var_NombreSalida}_{fecha_formateada}_P.xlsx' #  
+        nombre_archivo_p = f'{var_NombreSalida}_{fecha_formateada}_P_{var_Emisor}.xlsx' #  
 
         # Creo un excel con el resultado del DataFrame
         df_paso8_P.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_p}',sheet_name='EMISORES', index=True)
@@ -252,7 +252,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emi
         df_paso8_M.index = df_paso8_M.index + 1
 
         # Excel de salida
-        nombre_archivo_m = f'{var_NombreSalida}_{fecha_formateada}_M.xlsx' #  
+        nombre_archivo_m = f'{var_NombreSalida}_{fecha_formateada}_M_{var_Emisor}.xlsx' #  
 
         # Creo un excel con el resultado del DataFrame
         df_paso8_M.to_excel(f'{sTv.var_RutaInforme}{nombre_archivo_m}',sheet_name='EMISORES', index=True)
