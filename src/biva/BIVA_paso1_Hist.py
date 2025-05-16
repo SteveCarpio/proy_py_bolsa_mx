@@ -16,11 +16,11 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
     driver.get(par_url)
 
     # Esperar que la página cargue completamente
-    time.sleep(12)
+    time.sleep(15)
     WebDriverWait(driver, 60).until(
         lambda driver: driver.execute_script('return document.readyState') == 'complete'
     )
-    time.sleep(10)
+    time.sleep(12)
        
     # Extraer el código HTML completo, tenemos 2 métodos para hacerlo
     #page_source = driver.find_element("xpath", "//*").get_attribute("outerHTML")   ## usarlo si la web tiene objetos dinámicos, usa el puntero de inicio de HTML
@@ -54,7 +54,8 @@ def sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag, var_Emisor
     # Bucle para leer todas las Paginas de la WEB
     for i in range(var_NumPag):
         var_pagina = f'{i+1}'
-        var_url = f'{sTv.var_WEBSCRAPING1}?fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&emisora_id={var_Emisor}&page={var_pagina}'
+        var_url = f'{sTv.var_WEBSCRAPING1}?&emisora_id={var_Emisor}&fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&page={var_pagina}'
+        #var_url = f'{sTv.var_WEBSCRAPING1}?emisora_id={var_Emisor}&page={var_pagina}'  # Todo el hist del emisor
         print(f'Filtro a Analizar: {var_url}')
         var_i = i + 1
 

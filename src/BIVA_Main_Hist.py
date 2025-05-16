@@ -13,7 +13,7 @@ from   biva.BIVA_paso1_Hist import sTv_paso1
 from   biva.BIVA_paso2      import sTv_paso2
 from   biva.BIVA_paso3      import sTv_paso3
 from   biva.BIVA_paso4      import sTv_paso4
-from   biva.BIVA_paso5      import sTv_paso5
+from   biva.BIVA_paso5_Hist import sTv_paso5
 
 var_NombreSalida = 'BIVA'
 var_SendEmail= 'S'
@@ -30,28 +30,30 @@ if len(sys.argv) > 2 :
     if var_param2 == "PRO":
         var_Entorno = var_param2
 
+
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
-#tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
-if len(sys.argv) > 3 :
-    var_param3 = sys.argv[3]
-    if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
-        anio, mes, dia = map(int, var_param3.split('-'))
-        tiempo_inicio = dt(anio, mes, dia)
-    else:
-        print("El formato de fecha debe ser, ejemplo: 2025-07-28")
-        input(Fore.WHITE + f"Se ejecutará con el día {tiempo_inicio.strftime('%Y-%m-%d')}")
+tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
+#if len(sys.argv) > 3 :
+#    var_param3 = sys.argv[3]
+#    if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
+#        anio, mes, dia = map(int, var_param3.split('-'))
+#        tiempo_inicio = dt(anio, mes, dia)
+#    else:
+#        print("El formato de fecha debe ser, ejemplo: 2025-07-28")
+#        input(Fore.WHITE + f"Se ejecutará con el día {tiempo_inicio.strftime('%Y-%m-%d')}")
 
 # Restar 1 día a la fecha actual
 fecha_reducida = tiempo_inicio - timedelta(days=1)
 # Crear variables con los formatos que necesitamos
-var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')    # Formato "2025-03-04"
+var_Fechas1 = fecha_reducida.strftime('2025-05-15')  # Formato "2025-03-04"
 var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')    # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')      # Formato "20250304"
-var_Fechas4 = fecha_reducida.strftime('2025-04-01')  # Formato "2025-03-04" Para proceso Histórico 
+var_Fechas4 = fecha_reducida.strftime('2020-01-01')  # Formato "2025-03-04" Para proceso Histórico 
 #var_Fechas4 = var_Fechas1                           # Comentar está línea  Para proceso Histórico
-var_NumPag = 50                                      # Inf Diario Valor 20  para proceso Histórico "analizar" 
-var_Emisor = "1647"
+var_NumPag = 50 
+                                     # Inf Diario Valor 20  para proceso Histórico "analizar" 
+var_Emisor = sys.argv[3]
 
 os.system("cls")
 
@@ -86,7 +88,7 @@ def paso4():
 
 def paso5():
     print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} \n")
-    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
+    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emisor)
     print(Fore.YELLOW + "\nPaso 5 completado! \n")
 
 def pasoHelp():
