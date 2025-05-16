@@ -51,7 +51,7 @@ var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')    # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')      # Formato "20250304"
 var_Fechas4 = fecha_reducida.strftime('2020-01-01')  # Formato "2025-03-04" Para proceso Histórico 
 #var_Fechas4 = var_Fechas1                           # Comentar está línea  Para proceso Histórico
-var_NumPag = 50 
+var_NumPag = 400 
                                      # Inf Diario Valor 20  para proceso Histórico "analizar" 
 var_Emisor = sys.argv[3]
 
