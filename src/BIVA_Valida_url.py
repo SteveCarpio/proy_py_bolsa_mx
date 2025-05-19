@@ -13,7 +13,7 @@ def sTv_paso1_WebScraping(par_URL, par_i, par_ASUNTO):
         driver.quit()
         return 0
     else:
-        print(f"- URL {par_i} se debe analizar : {par_ASUNTO}")
+        print(f"{par_i} - {par_ASUNTO}")
         print(f'{par_URL}')
         driver.quit()
         return 1
@@ -24,15 +24,15 @@ def inicio_valida():
     resultados = []
     i = 0
     for index, fila in df.iterrows():
+        i = i + 1
         var_N = fila['N']
         var_CLAVE =  fila['CLAVE']
         var_SECCION = fila['SECCION']
         var_FECHA = fila['FECHA']
         var_ASUNTO = fila['ASUNTO']
         var_URL = fila['URL']
-        i = i + 1
-        inicio=15
-        fin=100
+        inicio=101 # stv
+        fin=500    # stv
         if (i >= inicio) and (i <= fin):
             retorno = sTv_paso1_WebScraping(var_URL, i, var_ASUNTO)
             resultado = {'N':var_N,
