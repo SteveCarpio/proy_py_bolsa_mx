@@ -19,7 +19,7 @@ def sTv_paso1_WebScraping(par_URL, par_i, par_ASUNTO, par_fin):
         return 1
   
 def inicio_valida(inicio, fin):
-    ruta_salida = "C:\\Users\\scarpio\\Documents\\GitHub\\proy_py_bolsa_mx\\excel\\"
+    ruta_salida = "C:\\Users\\TdA\\Documents\\GitHub\\proy_py_bolsa_mx\\excel\\"
     df = pd.read_excel(f"{ruta_salida}VALIDAR_URL.xlsx", sheet_name="datos")
     resultados = []
     i = 0
