@@ -4,9 +4,9 @@ from   cfg.BIVA_librerias import *
 def sTv_paso1_WebScraping(par_URL, par_i, par_ASUNTO, par_fin):
     driver = webdriver.Chrome(service=Service(sTv.var_CHROMEDRIVER), options=chrome_options)
     driver.get(par_URL)
-    time.sleep(2)
+    time.sleep(4)
     WebDriverWait(driver, 60).until(lambda driver: driver.execute_script('return document.readyState') == 'complete')
-    time.sleep(2)
+    time.sleep(3)
     page_source = driver.page_source
     if par_ASUNTO in page_source:
         print(f"{par_i}/{par_fin} - OK")
@@ -19,7 +19,7 @@ def sTv_paso1_WebScraping(par_URL, par_i, par_ASUNTO, par_fin):
         return 1
   
 def inicio_valida(inicio, fin):
-    ruta_salida = "C:\\Users\\TdA\\Documents\\GitHub\\proy_py_bolsa_mx\\excel\\"
+    ruta_salida = "C:\\Users\\scarpio\\Documents\\GitHub\\proy_py_bolsa_mx\\excel\\"
     df = pd.read_excel(f"{ruta_salida}VALIDAR_URL.xlsx", sheet_name="datos")
     resultados = []
     i = 0
@@ -43,7 +43,7 @@ def inicio_valida(inicio, fin):
                 }
             resultados.append(resultado)
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_I{inicio}_F{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------
