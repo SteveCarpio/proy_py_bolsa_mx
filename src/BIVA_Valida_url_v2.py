@@ -1,29 +1,23 @@
-import cfg.BIVA_variables as sTv
-from   cfg.BIVA_librerias import *
+import sys
+import pandas as pd
+from playwright.sync_api import sync_playwright
 
-def sTv_paso1_WebScraping(driver, par_URL, par_i, par_ASUNTO, par_fin):
-    #driver = webdriver.Chrome(service=Service(sTv.var_CHROMEDRIVER), options=chrome_options)
-    driver.get(par_URL)
-    #time.sleep(1)
-    WebDriverWait(driver, 60).until(lambda driver: driver.execute_script('return document.readyState') == 'complete')
-    #time.sleep(1)
-    page_source = driver.page_source
-    # if par_ASUNTO in page_source:
-    if "No existen resultados" in page_source:
-        print(f"{par_i}/{par_fin} - {par_ASUNTO}")
-        print(f'{par_URL}')
-        # driver.quit()
-        return 1
-    else:
-        print(f"{par_i}/{par_fin} - OK")
-        # driver.quit()
-        return 0
-  
+
+def verificar_texto(url, texto_a_buscar):
+    with sync_playwright() as p:
+        navegador = p.chromium.launch(headless=True)
+        pagina = navegador.new_page()
+        #pagina.goto(url)
+        pagina.goto(url, wait_until="domcontentloaded", timeout=60000)
+        contenido = pagina.content()
+        navegador.close()
+        return 1 if texto_a_buscar in contenido else 0
+
 def inicio_valida(inicio, fin):
     ruta_salida = "C:\\Users\\scarpio\\Documents\\GitHub\\proy_py_bolsa_mx\\excel\\"
-    df = pd.read_excel(f"{ruta_salida}VALIDAR_URL.xlsx", sheet_name="datos")
+    df = pd.read_excel(f"{ruta_salida}VALIDAR_URL_XX.xlsx", sheet_name="datos")
     resultados = []
-    driver = webdriver.Chrome(service=Service(sTv.var_CHROMEDRIVER), options=chrome_options)
+    
     i = 0
     for index, fila in df.iterrows():
         i = i + 1
@@ -34,7 +28,10 @@ def inicio_valida(inicio, fin):
         var_ASUNTO = fila['ASUNTO']
         var_URL = fila['URL']
         if (i >= inicio) and (i <= fin):
-            retorno = sTv_paso1_WebScraping(driver, var_URL, i, var_ASUNTO, fin)
+            
+            retorno = verificar_texto(var_URL, var_ASUNTO)
+            print(f'Analizado: {i}/{fin} - {retorno}:{var_URL}')
+            
             resultado = {'N':var_N,
                         'CLAVE':var_CLAVE,
                         'SECCION':var_SECCION,
@@ -45,9 +42,8 @@ def inicio_valida(inicio, fin):
                 }
             resultados.append(resultado)
 
-    driver.quit()
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_I{inicio}_F{fin}.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_XX_I{inicio}_F{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------
@@ -59,4 +55,3 @@ if len(sys.argv) > 2:
     inicio_valida(inicio, fin)
 else:
     print(f"Hace falta 2 argumentos: inicio y fin")
-
