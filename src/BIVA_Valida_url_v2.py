@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright
 
 
 def verificar_texto(url, texto_a_buscar):
+    texto_a_buscar="No existen resultados."
     with sync_playwright() as p:
         navegador = p.chromium.launch(headless=True)
         pagina = navegador.new_page()
@@ -30,8 +31,13 @@ def inicio_valida(inicio, fin):
         if (i >= inicio) and (i <= fin):
             
             retorno = verificar_texto(var_URL, var_ASUNTO)
-            print(f'Analizado: {i}/{fin} - {retorno}:{var_URL}')
-            
+
+            if retorno == "1":
+                print(f"{i}/{fin} - {var_ASUNTO}")
+                print(f'{var_URL}')
+            else:
+                print(f"{i}/{fin} - OK")
+
             resultado = {'N':var_N,
                         'CLAVE':var_CLAVE,
                         'SECCION':var_SECCION,
@@ -43,7 +49,7 @@ def inicio_valida(inicio, fin):
             resultados.append(resultado)
 
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v2_I{inicio}_F{fin}.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v2_i{inicio}_f{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------

@@ -12,11 +12,9 @@ def sTv_paso1_WebScraping(driver, par_URL, par_i, par_ASUNTO, par_fin):
     if "No existen resultados" in page_source:
         print(f"{par_i}/{par_fin} - {par_ASUNTO}")
         print(f'{par_URL}')
-        # driver.quit()
         return 1
     else:
         print(f"{par_i}/{par_fin} - OK")
-        # driver.quit()
         return 0
   
 def inicio_valida(inicio, fin):
@@ -47,7 +45,7 @@ def inicio_valida(inicio, fin):
 
     driver.quit()
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v1_I{inicio}_F{fin}.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v1_i{inicio}_f{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------
