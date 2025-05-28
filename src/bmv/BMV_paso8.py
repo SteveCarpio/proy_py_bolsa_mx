@@ -77,7 +77,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
             <p></p><br><p></p>
             
             <p>  </p><br><p></p>
-            <i> ** Este email fue enviado desde un proceso automático desde TdA. Por favor, no responder a este email. ** </i>
+            <i> ** Este correo electrónico fue enviado desde TdA mediante un proceso automático. Por favor, no responda a este mensaje  ** </i>
             <p>
                 <br><br>
 
