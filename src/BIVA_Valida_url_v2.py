@@ -43,7 +43,7 @@ def inicio_valida(inicio, fin):
             resultados.append(resultado)
 
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_XX_I{inicio}_F{fin}.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v2_I{inicio}_F{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------

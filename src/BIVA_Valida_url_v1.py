@@ -47,7 +47,7 @@ def inicio_valida(inicio, fin):
 
     driver.quit()
     df_resultado = pd.DataFrame(resultados)
-    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_I{inicio}_F{fin}.xlsx", index=False)
+    df_resultado.to_excel(f"{ruta_salida}VALIDAR_URL_RESULTADO_v1_I{inicio}_F{fin}.xlsx", index=False)
 
 # -------------------------------------------------------------------------------
 # ------------------------------- INICIO PROGRAMA -------------------------------
