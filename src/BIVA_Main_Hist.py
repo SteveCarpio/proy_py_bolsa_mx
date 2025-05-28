@@ -53,7 +53,12 @@ var_Fechas4 = fecha_reducida.strftime('2020-01-01')  # Formato "2025-03-04" Para
 #var_Fechas4 = var_Fechas1                           # Comentar está línea  Para proceso Histórico
 var_NumPag = 400 
                                      # Inf Diario Valor 20  para proceso Histórico "analizar" 
-var_Emisor = sys.argv[3]
+
+if len(sys.argv) < 3:
+    print("Falta parámetros, ejemplo: \nBIVA_Main_Hist.py RUN-NO-EMAIL PRO 1678")
+    sys.exit(0)
+
+var_Emisor = sys.argv[3]  # AGREGAR LOS EMISORES
 
 os.system("cls")
 

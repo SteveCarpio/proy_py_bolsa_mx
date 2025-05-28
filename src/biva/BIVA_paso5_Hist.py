@@ -227,8 +227,8 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emi
         # Datos compartidos
         cuerpo_p = f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_p}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_P)}</b><br>Lista de Emisores: <b>{lst_emisores_p}</b>'
         
-        #destinatarios_to_p=['carpios@tda-sgft.com']
-        #destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
+        destinatarios_to_p=['carpios@tda-sgft.com']
+        destinatarios_cc_p=['carpios@tda-sgft.com']  # repcomun
 
         # Envió a la función enviar_email los datos necesarios
         if var_SendEmail == "S":
@@ -274,8 +274,8 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emi
         # Datos compartidos
         cuerpo_m = f'Fecha Datos: <b>{var_Fechas2}</b><br>Número de Emisores: <b>{num_emisores_m}</b><br>Número de Eventos/Comunicados: <b>{len(df_paso8_M)}</b><br>Lista de Emisores: <b>{lst_emisores_m}</b>'
         
-        #destinatarios_to_m=['carpios@tda-sgft.com']
-        #destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
+        destinatarios_to_m=['carpios@tda-sgft.com']
+        destinatarios_cc_m=['carpios@tda-sgft.com']  # repcomun
 
         # Envió a la función enviar_email los datos necesarios
         if var_SendEmail == "S":
