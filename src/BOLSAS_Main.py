@@ -83,7 +83,6 @@ def paso4():
     print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
 
 def paso5():
-    paso3()
     print(Fore.YELLOW + f"\nEjecutando PASO_5 - Adjuntar Datos Oracle........ {dt.now()} \n")
     sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3)
     print(Fore.YELLOW + "\nPaso 5 completado - Envió de datos Oracle! \n")
@@ -107,7 +106,7 @@ def pasoHelp():
     print(Fore.WHITE + "    BMV_Main_v3.exe RUN-NO-EMAIL")
     print(Fore.WHITE + "    BOLSAS_Main_v3.exe RUN")
     print("")
-    print(Fore.WHITE + "Parámetros [RUN/RUN-NO-EMAIL] [DEV/PRO] AAAA-MM-DD(opcional):")
+    print(Fore.WHITE + "Parámetros:  [RUN / RUN-NO-EMAIL]  [DEV / PRO]  AAAA-MM-DD(opcional):")
     print(Fore.WHITE + "    [vació]: Muestra el menú actual")
     print(Fore.WHITE + "    RUN: Ejecuta el proceso enviando el correo de la Bolsa correspondiente")
     print(Fore.WHITE + "    RUN-NO-EMAIL: Ejecuta el proceso sin enviar el correo")
