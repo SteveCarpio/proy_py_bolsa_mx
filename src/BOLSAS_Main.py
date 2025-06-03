@@ -13,6 +13,7 @@ from   bolsas.BOLSAS_paso1  import sTv_paso1
 from   bolsas.BOLSAS_paso2  import sTv_paso2
 from   bolsas.BOLSAS_paso3  import sTv_paso3
 from   bolsas.BOLSAS_paso4  import sTv_paso4
+from   bolsas.BOLSAS_paso5  import sTv_paso5
 
 var_NombreSalida = 'BOLSAS'
 var_SendEmail= 'S'
@@ -81,6 +82,12 @@ def paso4():
     sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Entorno)
     print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
 
+def paso5():
+    paso3()
+    print(Fore.YELLOW + f"\nEjecutando PASO_5 - Adjuntar Datos Oracle........ {dt.now()} \n")
+    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3)
+    print(Fore.YELLOW + "\nPaso 5 completado - Envió de datos Oracle! \n")
+
 def pasoHelp():
     os.system("cls")
     print(Fore.MAGENTA + "=" * 94)
@@ -129,19 +136,26 @@ def pasoHelp():
     print(Fore.WHITE + "        Envía el contenido de los informes por correo electrónico. Si no hay datos disponibles,")
     print(Fore.WHITE + "        se enviará un correo indicando que no hay información para reportar.")
     print("")
+    print(Fore.WHITE + "    5) Enviar Datos Oracle:")
+    print(Fore.WHITE + "        Envía el contenido de los informes al servidor Oracle de Python.")
+    print("")
     print(Fore.WHITE + "Dependencias importantes:")
     print("")
-    print(Fore.WHITE + "    - Google Chrome:")
+    print(Fore.WHITE + "    1) Google Chrome:")
     print(Fore.WHITE + "        Es fundamental tener instalada una versión estable (no Beta).")
     print("")
-    print(Fore.WHITE + "    - ChromeDriver:")
+    print(Fore.WHITE + "    2) ChromeDriver:")
     print(Fore.WHITE + "        Debe coincidir con la versión de Google Chrome instalada.")
     print(Fore.WHITE + "        Ruta del binario: C:\\MisCompilados\\cfg\\chromedriver-win32\\chromedriver.exe")
     print(Fore.WHITE + "        Para otras versiones: C:\\MisCompilados\\cfg\\chromedriver-win32\\1??\\")
     print("")
-    print(Fore.WHITE + "    - Acceso a las URL:")
+    print(Fore.WHITE + "    3) Acceso a las URL:")
     print(Fore.WHITE + "        https://www.biva.mx/")
     print(Fore.WHITE + "        https://www.bmv.com.mx/")
+    print("")
+    print(Fore.WHITE + "    4) Acceso a la BBDD Oracle _________:")
+    print(Fore.WHITE + "        ______")
+    print(Fore.WHITE + "        ______")
     print("")
     print(Fore.MAGENTA + "=" * 94)
     print(Fore.WHITE + "Para más ayuda, contactar con: SteveCarpio 'carpios@tda-sgft.com' (stv.madrid@gmail.com) ")
@@ -154,6 +168,7 @@ def todos():
     paso2()
     paso3()
     paso4()
+    paso5()
     print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio2} - FIN: {dt.now()}")
@@ -173,10 +188,11 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE   + "0) ⚪ Ejecutar TODOS los pasos   ")
     print("")
-    print(Fore.YELLOW  + "1) 🟡 Ejecutar BOLSA BIVA     ")
-    print(Fore.YELLOW  + "2) 🟡 Ejecutar BOLSA BMV      ")
+    print(Fore.YELLOW  + "1) 🟡 Ejecutar BOLSA BIVA        ")
+    print(Fore.YELLOW  + "2) 🟡 Ejecutar BOLSA BMV         ")
     print(Fore.GREEN   + "3) 🟢 Copiar Resultados BMV/BIVA ")
     print(Fore.BLUE    + "4) 🔵 Mandar Email               ")
+    print(Fore.BLUE    + "5) 🔵 Mandar Datos Oracle        ")
     print("")
     print(Fore.MAGENTA + "?) 🟣 Ayuda                      ")
     print(Fore.RED     + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v3)")
@@ -198,6 +214,8 @@ def ejecutar_menu(par_FechasSalida):
             paso3()
         elif option == '4':
             paso4()
+        elif option == '5':
+            paso5()
         elif option == '?':
             pasoHelp()
         elif option.upper() == 'X':
