@@ -1,3 +1,8 @@
+#####################################################
+##### Modo de ejecución:
+#####   streamlit run .\Grafico_Interactivo1.py
+#####################################################
+
 import streamlit as st
 import pandas as pd
 import io
