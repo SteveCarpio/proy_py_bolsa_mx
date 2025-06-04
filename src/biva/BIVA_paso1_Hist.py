@@ -53,7 +53,8 @@ def sTv_paso1(var_NombreSalida, var_Fechas1, var_Fechas4, var_NumPag, var_Emisor
 
     # Bucle para leer todas las Paginas de la WEB
     for i in range(var_NumPag):
-        var_pagina = f'{i+1}'
+        
+        var_pagina = f'{i+1+53}'
         var_url = f'{sTv.var_WEBSCRAPING1}?&emisora_id={var_Emisor}&fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&page={var_pagina}'
         #var_url = f'{sTv.var_WEBSCRAPING1}?emisora_id={var_Emisor}&page={var_pagina}'  # Todo el hist del emisor
         print(f'Filtro a Analizar: {var_url}')
