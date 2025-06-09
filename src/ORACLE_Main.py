@@ -65,7 +65,6 @@ def paso1():
     print("Importamos los datos de BMV y BIVA a un DataFrame ")
     sTv_paso1(var_Fechas3)
     print(Fore.YELLOW + "\nPaso 1 completado - Importación de Datos! \n")
-    print(sTv.df_Total)
 
 def paso2():
  

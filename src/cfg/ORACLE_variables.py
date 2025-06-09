@@ -21,8 +21,7 @@ var_Ora_SDI="COMUN"
 var_Ora_USER="PYDATA"
 var_Ora_PASS="PYDATA"
 var_Files_IN="BOLSAS"
-
-df_Total = pd.DataFrame()
+df_Global = pd.DataFrame()
 # ----------------------------------------------------------------------------------------
 #                          AUTOR
 # ----------------------------------------------------------------------------------------

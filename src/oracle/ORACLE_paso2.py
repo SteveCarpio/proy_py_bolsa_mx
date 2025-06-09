@@ -18,4 +18,4 @@ from   cfg.ORACLE_librerias import *
 
 def sTv_paso2():
 
-    print(len(sTv.df_Total))
+    print(len(sTv.df_Global))
