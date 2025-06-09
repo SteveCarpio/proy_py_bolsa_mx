@@ -11,7 +11,7 @@ from   cfg.ORACLE_librerias import *
 #                                  FUNCIONES
 # ----------------------------------------------------------------------------------------
 
-# 1 - def Oracle_Establece_Conexión(par_dsn , par_uid , par_pwd) 
+# Establece una conexión a Oracle 
 def Oracle_Establece_Conexion(par_dsn, par_uid,par_pwd):
     try:
         # Cadena de conexión a la base de datos Oracle
@@ -25,7 +25,7 @@ def Oracle_Establece_Conexion(par_dsn, par_uid,par_pwd):
         print(Fore.RED + f'{dt.now().time()} - Error al conectar con Oracle \n{e}')
         return None, None 
 
-# 2 - def Oracle_Cerrar_Conexion(conexion , cursor)
+# Cierra una conexión a Oracle
 def Oracle_Cerrar_Conexion(conexion, cursor):
     try:
         if cursor:
@@ -38,6 +38,15 @@ def Oracle_Cerrar_Conexion(conexion, cursor):
 
     ### -------------------------------- Inicio del programa ----------------------------
 
+# Valida si existe una tabla en concreto en oracle
+def existe_tabla(cursor, nombre_tabla):
+    query = f"""
+    SELECT table_name FROM user_tables 
+    WHERE table_name = UPPER('{nombre_tabla}')
+    """
+    cursor.execute(query)
+    resultado = cursor.fetchone()
+    return resultado is not None
   
 
         
@@ -47,67 +56,57 @@ def Oracle_Cerrar_Conexion(conexion, cursor):
 
 def sTv_paso2():
 
-    # Oracle, Parámetros de conexión:
-    oracle_dns=sTv.var_Ora_DNS
-    oracle_uid=sTv.var_Ora_UID
-    oracle_pwd=sTv.var_Ora_PWD
+    if len(sTv.df_Global) == 0:
+        print(Fore.RED + "No hay datos en el DataFrame, probar a ejecutar el paso1")
+    else:
 
-    # Oracle, Establecer Conexión Oracle:
-    conexion, cursor=Oracle_Establece_Conexion(oracle_dns, oracle_uid, oracle_pwd)
+        # Oracle, Parámetros de conexión:
+        oracle_dns=sTv.var_Ora_DNS
+        oracle_uid=sTv.var_Ora_UID
+        oracle_pwd=sTv.var_Ora_PWD
 
-    print(conexion)
-    print(cursor)
+        # Oracle, Establecer Conexión Oracle:
+        conexion, cursor=Oracle_Establece_Conexion(oracle_dns, oracle_uid, oracle_pwd)
 
-    '''
+        # Validamos si existe o no una tabla Oracle    
+        if cursor:
+            if existe_tabla(cursor, sTv.var_Ora_TAB1):
+                print(f"La tabla {sTv.var_Ora_TAB1} existe.")
+            else:
+                print(Fore.RED + f"La tabla {sTv.var_Ora_TAB1} NO existe.")
+                sys.exit(0)
 
-    if (conexion != None) or (cursor != None):
-        # Parámetros otros, file 'txt' y variables de apoyo:
-        var_periodo = PAR7    # var_periodo = int(f'{dt.now().year}{dt.now().month}')
-        var_fecha_proceso = dt.now().date()
-        files_csv = PAR2
-        file_path = f"C:\\MisCompilados\\PROY_BIACTIVOS\\file_in\\{files_csv}.txt"
-
-        # Importación del fichero "FileN.txt" en un DataFrame:
-        df = pd.read_csv(file_path, sep='\t', header=None,
-            names=['NUMERO_DE_OPERACION', 'NUMERO_DE_CUOTA', 'FECHA_DE_VENCIMIENTO', 'CAPITAL', 'INTERES', 'IVA',
-                'TOTAL_CUOTA','TOTAL_RECAUDADO', 'FECHA_DE_PAGO', 'FECHA_DESCUENTO_DE_NOMINA', 'ESTADO_DEL_PAGO'],
-            dtype={'NUMERO_DE_OPERACION': str, 'NUMERO_DE_CUOTA': int, 'CAPITAL': float, 'INTERES': float, 'IVA': float, 
-                'TOTAL_CUOTA':float, 'TOTAL_RECAUDADO':float,'ESTADO_DEL_PAGO':str ,'ESTADO_DEL_PAGO':str},
-            parse_dates=['FECHA_DE_VENCIMIENTO','FECHA_DE_PAGO','FECHA_DESCUENTO_DE_NOMINA'],
-            dayfirst=True
-        )
-
-        # Imprime log del estado del Hilo
-        print(f'    Hilo[{PAR11}] - {dt.now().time()} - Insert Into Oracle {PAR3} {len(df):,} records From {PAR2}.txt'.replace(",","."))
-
-        ### -------------------------------------- Oracle -----------------------------------
-        # Parámetros necesarios para Exportación del DataFrame al Oracle de TdA:
-        table_name = PAR3
-
-        # Oracle, Recorro el DataFrame registro por registro
-        for index, row in df.iterrows():
-            # Tratamiento de valores NaT a None
-            tmpFECHA1=row['FECHA_DE_PAGO']
-            tmpFECHA2=row['FECHA_DESCUENTO_DE_NOMINA']
-            if pd.isna(tmpFECHA1):
-                tmpFECHA1=None
-            if pd.isna(tmpFECHA2):
-                tmpFECHA2=None    
-            # Ejecución del INSERT SQL
-            cursor.execute(
-                f"""INSERT INTO {table_name} (NUMERO_DE_OPERACION, NUMERO_DE_CUOTA, FECHA_DE_VENCIMIENTO, CAPITAL, INTERES, IVA,
-                TOTAL_CUOTA, TOTAL_RECAUDADO, FECHA_DE_PAGO, FECHA_DESCUENTO_DE_NOMINA, ESTADO_DEL_PAGO, PERIODO, FECHA_PROCESO) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-                row['NUMERO_DE_OPERACION'], row['NUMERO_DE_CUOTA'], row['FECHA_DE_VENCIMIENTO'], row['CAPITAL'], row['INTERES'], 
-                row['IVA'], row['TOTAL_CUOTA'], row['TOTAL_RECAUDADO'], tmpFECHA1, tmpFECHA2, 
-                row['ESTADO_DEL_PAGO'], var_periodo, var_fecha_proceso
-            )
-
-        # Oracle, Confirma los cambios
-        conexion.commit()
-        print(f'    Hilo[{PAR11}] - {dt.now().time()} - Commit OK')
-
+        if (conexion != None) or (cursor != None):
         
-    '''
-    # Oracle, Cierre de conexiones y liberación de memoria:
-    Oracle_Cerrar_Conexion(conexion, cursor)
+            # Importación del fichero "FileN.txt" en un DataFrame:
+            df = sTv.df_Global
+            
+            # Recorro el DataFrame registro por registro
+            for index, row in df.iterrows():
+                # Tratamiento de valores NaT a None
+                v_CLAVE=row['CLAVE']
+                v_SECCION=row['SECCION']
+                v_FECHA=row['FECHA']
+                v_ASUNTO=row['ASUNTO']
+                v_URL=row['URL']
+                v_ARCHIVO=row['ARCHIVO']
+                v_ORIGEN=row['ORIGEN']
+                v_T=row['T']
+                v_FILTRO=row['FILTRO']
+                print(row)
+                
+                if pd.isna(v_ARCHIVO):
+                    v_ARCHIVO=None    
+
+                # Ejecución del INSERT SQL
+                cursor.execute(
+                    f"""INSERT INTO {sTv.var_Ora_TAB1} (CLAVE, SECCION, FECHA, ASUNTO, URL, ARCHIVO, ORIGEN, T, FILTRO) 
+                    VALUES (?,?,?,?,?,?,?,?,?)""",
+                    v_CLAVE, v_SECCION, v_FECHA, v_ASUNTO, v_URL, v_ARCHIVO, v_ORIGEN, v_T, v_FILTRO
+                )
+
+            # Oracle, Confirma los cambios
+            conexion.commit()
+        
+        # Oracle, Cierre de conexiones y liberación de memoria:
+        Oracle_Cerrar_Conexion(conexion, cursor)
