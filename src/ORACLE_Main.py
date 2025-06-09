@@ -62,20 +62,17 @@ sTv_paso0(var_Fechas3)
 # Funciones para los pasos
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO1: Importar Datos de entrada....... {dt.now()} \n")
-    print("Importamos los datos de BMV y BIVA a un DataFrame ")
     sTv_paso1(var_Fechas3)
     print(Fore.YELLOW + "\nPaso 1 completado - Importación de Datos! \n")
 
 def paso2():
  
     print(Fore.GREEN + f"\nEjecutando PASO2: Valida Datos de entrada (Local vs Oracle)....... {dt.now()} \n")
-    print("Validamos la estructura del DataFrame, si existe y no en Producción Oracle")
     sTv_paso2()
     print(Fore.GREEN + "\nPaso 2 completado - Validación de Datos! \n")
 
 def paso3():
     print(Fore.BLUE + f"\nEjecutando PASO3: Subir Datos Validados al Servidor Oracle....... {dt.now()} \n")
-    print("Subimos los datos validados al servidor Oracle")
     sTv_paso3()
     print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
 

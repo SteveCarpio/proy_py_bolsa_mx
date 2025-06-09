@@ -17,7 +17,7 @@ var_RutaIN='C:\\MisCompilados\\PROY_BOLSA_MX\\INFORMES\\'
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_Ora_DNS="COMUN"
+var_Ora_DNS="PYTHON_DATA"
 var_Ora_UID="PYDATA"
 var_Ora_PWD="PYDATA"
 var_Ora_TAB1="T_BOLSAS_EVENTOS_RELEVANTES"

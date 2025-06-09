@@ -34,7 +34,7 @@ def sTv_paso1(var_Fechas3):
             columnas_requeridas=['CLAVE','SECCION','FECHA','ASUNTO','URL','ARCHIVO','ORIGEN','T','FILTRO']
             if all(col in sTv.df_Global.columns for col in columnas_requeridas):
                 print("El DataFrame tiene todas las columnas requeridas.")
-                print(Fore.BLUE + f'{columnas_requeridas}')
+                print(Fore.CYAN + f'{columnas_requeridas}')
             else:
                 faltantes = [col for col in columnas_requeridas if col not in sTv.df_Global.columns]
                 print(Fore.RED + f"Faltan las siguientes columnas: {faltantes}")

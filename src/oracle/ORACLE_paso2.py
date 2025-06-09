@@ -19,10 +19,10 @@ def Oracle_Establece_Conexion(par_dsn, par_uid,par_pwd):
         # Establecer la conexión y un cursor a la base de datos Oracle
         conexion = pyodbc.connect(connection_string)
         cursor = conexion.cursor()
-        print(f"{dt.now().time()} - Conexión establecida.")
+        print(Fore.CYAN + f"{dt.now().time()} - Conexión establecida.")
         return conexion, cursor
     except pyodbc.Error as e:
-        print(f'{dt.now().time()} - Error al conectar con Oracle \n{e}')
+        print(Fore.RED + f'{dt.now().time()} - Error al conectar con Oracle \n{e}')
         return None, None 
 
 # 2 - def Oracle_Cerrar_Conexion(conexion , cursor)
@@ -32,9 +32,9 @@ def Oracle_Cerrar_Conexion(conexion, cursor):
             cursor.close()
         if conexion:
             conexion.close()
-        print(f"{dt.now().time()} - Conexión cerrada. ")
+        print(Fore.CYAN + f"{dt.now().time()} - Conexión cerrada. ")
     except pyodbc.Error as e:
-        print(f'{dt.now().time()} - Error al cerrar la conexión \n{e}')
+        print(Fore.RED + f'{dt.now().time()} - Error al cerrar la conexión \n{e}')
 
     ### -------------------------------- Inicio del programa ----------------------------
 
