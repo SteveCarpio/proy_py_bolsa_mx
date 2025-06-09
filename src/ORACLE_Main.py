@@ -10,10 +10,9 @@
 from   cfg.ORACLE_librerias import *
 import cfg.ORACLE_variables as sTv
 from   oracle.ORACLE_paso0  import sTv_paso0
-#from   oracle.ORACLE_paso1  import sTv_paso1
-#from   oracle.ORACLE_paso2  import sTv_paso2
-#from   oracle.ORACLE_paso3  import sTv_paso3
-
+from   oracle.ORACLE_paso1  import sTv_paso1
+from   oracle.ORACLE_paso2  import sTv_paso2
+from   oracle.ORACLE_paso3  import sTv_paso3
 
 var_NombreSalida = 'ORACLE'
 tiempo_inicio2 = dt.now()
@@ -60,36 +59,26 @@ sTv_paso0(var_Fechas3)
 
 # Funciones para los pasos
 def paso1():
-    print(Fore.YELLOW + f"\nEjecutando PASO_1 - BOLSA BIVA........ {dt.now()} \n")
-    print("AVISO: El PASO1 está planificado como un job independiente, ver DOC. ")
-    #sTv_paso1()
-    print(Fore.YELLOW + "\nPaso 1 completado - BOLSA BIVA! \n")
+    print(Fore.YELLOW + f"\nEjecutando PASO1: Importar Datos de las Bolsas....... {dt.now()} \n")
+    print("Importamos los datos de BMV yh BIVA en un DataFrame ")
+    sTv_paso1()
+    print(Fore.YELLOW + "\nPaso 1 completado - Importación de Datos! \n")
 
 def paso2():
-    print(Fore.YELLOW + f"\nEjecutando PASO_2 - BOLSA BMV........ {dt.now()} \n")
+    print(Fore.GREEN + f"\nEjecutando PASO2: Valida Datos de entrada Local vs Oracle....... {dt.now()} \n")
     print("AVISO: El PASO2 está planificado como un job independiente, ver DOC. ")
-    #sTv_paso2()
-    print(Fore.YELLOW + "\nPaso 2 completado - BOLSA BMV! \n")
+    sTv_paso2()
+    print(Fore.GREEN + "\nPaso 2 completado - Validación de Datos! \n")
 
 def paso3():
-    print(Fore.GREEN + f"\nEjecutando PASO_3 - Copiar Resultados BMV/BIVA........ {dt.now()} \n")
+    print(Fore.BLUE + f"\nEjecutando PASO3: Subir Datos Validados al Servidor Oracle....... {dt.now()} \n")
     sTv_paso3(var_Fechas3)
-    print(Fore.GREEN + "\nPaso 3 completado - Copia de datos BOLSAS BIVA y BMV! \n")
-
-def paso4():
-    print(Fore.YELLOW + f"\nEjecutando PASO_4 - Mandar Email........ {dt.now()} \n")
-    sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Entorno)
-    print(Fore.YELLOW + "\nPaso 4 completado - Envió del Email! \n")
-
-def paso5():
-    print(Fore.YELLOW + f"\nEjecutando PASO_5 - Adjuntar Datos Oracle........ {dt.now()} \n")
-    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3)
-    print(Fore.YELLOW + "\nPaso 5 completado - Envió de datos Oracle! \n")
+    print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
 
 def pasoHelp():
     os.system("cls")
     print(Fore.MAGENTA + "=" * 94)
-    print(Fore.MAGENTA + "                         Proceso WebScraping Bolsas BIVA y BMV")
+    print(Fore.MAGENTA + "                         Proceso WebScraping Oracle BIVA y BMV")
     print(Fore.MAGENTA + "=" * 94)
     print("")
     print(Fore.WHITE + "Servidor:")
@@ -101,14 +90,11 @@ def pasoHelp():
     print(Fore.WHITE + "    C:\\MisCompilados\\PROY_BOLSA_MX\\")
     print("")
     print(Fore.WHITE + "Ejecución:")
-    print(Fore.WHITE + "    BIVA_Main_v3.exe RUN-NO-EMAIL")
-    print(Fore.WHITE + "    BMV_Main_v3.exe RUN-NO-EMAIL")
-    print(Fore.WHITE + "    BOLSAS_Main_v3.exe RUN")
+    print(Fore.WHITE + "    ORACLE_Main.exe RUN")
     print("")
-    print(Fore.WHITE + "Parámetros:  [RUN / RUN-NO-EMAIL]  [DEV / PRO]  AAAA-MM-DD(opcional):")
+    print(Fore.WHITE + "Parámetros:  [RUN]  [DEV/PRO]  AAAA-MM-DD(opcional):")
     print(Fore.WHITE + "    [vació]: Muestra el menú actual")
     print(Fore.WHITE + "    RUN: Ejecuta el proceso enviando el correo de la Bolsa correspondiente")
-    print(Fore.WHITE + "    RUN-NO-EMAIL: Ejecuta el proceso sin enviar el correo")
     print(Fore.WHITE + "    [DEV/PRO]: Ejecuta el proceso en modo desarrollo o producción")
     print(Fore.WHITE + "    AAAA-MM-DD: Ejecuta el proceso como si estuviésemos ejecutando ese día")
     print("")
@@ -118,24 +104,17 @@ def pasoHelp():
     print("")
     print(Fore.WHITE + "Pasos de ejecución:")
     print("")
-    print(Fore.WHITE + "    1) Ejecutar BOLSA BIVA:")
+    print(Fore.WHITE + "    1) Importar Datos de las Bolsas:")
     print(Fore.WHITE + "        Este paso se ejecuta de forma independiente en un trabajo programado")
     print(Fore.WHITE + "        con el nombre del trabajo 'BIVA_Main_v3.exe'.")
     print("")
-    print(Fore.WHITE + "    2) Ejecutar BOLSA BMV:")
+    print(Fore.WHITE + "    2) Valida Datos de entrada Local vs Oracle:")
     print(Fore.WHITE + "        Este paso también se ejecuta de manera independiente en un trabajo programado")
     print(Fore.WHITE + "        con el nombre del trabajo 'BMV_Main_v3.exe'.")
     print("")
-    print(Fore.WHITE + "    3) Copiar Resultados BMV/BIVA:")
+    print(Fore.WHITE + "    3) Subir Datos Validados al Servidor Oracle:")
     print(Fore.WHITE + "        Copia los resultados de los informes de BIVA y BMV en la carpeta de trabajo")
     print(Fore.WHITE + "        C:\\MisCompilados\\PROY_BOLSA_MX\\INFORMES.")
-    print("")
-    print(Fore.WHITE + "    4) Enviar Email:")
-    print(Fore.WHITE + "        Envía el contenido de los informes por correo electrónico. Si no hay datos disponibles,")
-    print(Fore.WHITE + "        se enviará un correo indicando que no hay información para reportar.")
-    print("")
-    print(Fore.WHITE + "    5) Enviar Datos Oracle:")
-    print(Fore.WHITE + "        Envía el contenido de los informes al servidor Oracle de Python.")
     print("")
     print(Fore.WHITE + "Dependencias importantes:")
     print("")
@@ -157,7 +136,7 @@ def pasoHelp():
     print("")
     print(Fore.MAGENTA + "=" * 94)
     print(Fore.WHITE + "Para más ayuda, contactar con: SteveCarpio 'carpios@tda-sgft.com' (stv.madrid@gmail.com) ")
-    print(Fore.WHITE + "Versión 3 - 2025")
+    print(Fore.WHITE + "Versión 1 - 2025")
     print(Fore.MAGENTA + "=" * 94)
 
 def todos():
@@ -165,8 +144,6 @@ def todos():
     paso1()
     paso2()
     paso3()
-    paso4()
-    paso5()
     print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio2} - FIN: {dt.now()}")
@@ -180,20 +157,18 @@ def limpiar_pantalla():
 def mostrar_menu(par_FechasSalida):
     limpiar_pantalla()
     print(Fore.MAGENTA + "=" * 37)
-    print(Fore.WHITE + "   Bolsa BIVA/BMV (MX): " + par_FechasSalida)
+    print(Fore.WHITE + "   Oracle Bolsas (MX): " + par_FechasSalida)
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE + "        🖥️   MENÚ PRINCIPAL 🖥️")
     print(Fore.MAGENTA + "=" * 37)
     print(Fore.WHITE   + "0) ⚪ Ejecutar TODOS los pasos   ")
     print("")
-    print(Fore.YELLOW  + "1) 🟡 Ejecutar BOLSA BIVA        ")
-    print(Fore.YELLOW  + "2) 🟡 Ejecutar BOLSA BMV         ")
-    print(Fore.GREEN   + "3) 🟢 Copiar Resultados BMV/BIVA ")
-    print(Fore.BLUE    + "4) 🔵 Mandar Email               ")
-    print(Fore.BLUE    + "5) 🔵 Mandar Datos Oracle        ")
+    print(Fore.YELLOW  + "1) 🟡 Importar Datos de entrada                ")
+    print(Fore.GREEN   + "2) 🟢 Validar Datos Locales vs Oracle          ")
+    print(Fore.BLUE    + "3) 🔵 Subir Datos Validados al Servidor Oracle ")
     print("")
     print(Fore.MAGENTA + "?) 🟣 Ayuda                      ")
-    print(Fore.RED     + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v3)")
+    print(Fore.RED     + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v1)")
     print(Fore.MAGENTA + "=" * 37)
 
 # Función principal para gestionar el menú
@@ -210,10 +185,7 @@ def ejecutar_menu(par_FechasSalida):
             paso2()
         elif option == '3':
             paso3()
-        elif option == '4':
-            paso4()
-        elif option == '5':
-            paso5()
+        
         elif option == '?':
             pasoHelp()
         elif option.upper() == 'X':
@@ -227,9 +199,6 @@ def ejecutar_menu(par_FechasSalida):
 
 # Evaluamos como ejecutamos el proceso
 if len(sys.argv) > 1 :
-    
-    if var_param1 == "RUN-NO-EMAIL":
-        var_SendEmail = 'N'
     if "RUN" in var_param1:
         todos()
 else:

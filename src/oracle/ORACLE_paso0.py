@@ -3,8 +3,8 @@
 #  Autor: SteveCarpio-2025
 # ----------------------------------------------------------------------------------------
 
-import cfg.BOLSAS_variables as sTv
-from   cfg.BOLSAS_librerias import *
+import cfg.ORACLE_variables as sTv
+from   cfg.ORACLE_librerias import *
 
 # ----------------------------------------------------------------------------------------
 #                                  FUNCIONES
