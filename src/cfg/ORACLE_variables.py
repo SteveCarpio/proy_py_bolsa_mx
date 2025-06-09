@@ -3,6 +3,7 @@
 # Descripción: Variables necesarias para la ejecución del proceso.
 # Autor: SteveCarpio-2025
 # ----------------------------------------------------------------------------------------
+import pandas as pd
 
 #-----------------------------------------------------------------------------------------
 #                          RUTAS DE APOYO
@@ -19,7 +20,9 @@ var_RutaIN='C:\\MisCompilados\\PROY_BOLSA_MX\\INFORMES\\'
 var_Ora_SDI="COMUN"
 var_Ora_USER="PYDATA"
 var_Ora_PASS="PYDATA"
-var_Files_IN="BOLSAS_"
+var_Files_IN="BOLSAS"
+
+df_Total = pd.DataFrame()
 # ----------------------------------------------------------------------------------------
 #                          AUTOR
 # ----------------------------------------------------------------------------------------

@@ -30,7 +30,7 @@ if len(sys.argv) > 2 :
 
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
-#tiempo_inicio = dt(2025, 4, 5)    #   dt(2025, 3, 31)
+tiempo_inicio = dt(2025, 6, 6)    #   dt(2025, 3, 31)
 if len(sys.argv) > 3 :
     var_param3 = sys.argv[3]
     if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
@@ -55,16 +55,20 @@ init(autoreset=True)
 # Inicializar carpetas y borrado de files
 sTv_paso0(var_Fechas3)
 
+# Inicializo un DF vació
+#df_Total = pd.DataFrame()
 # ------------------------------- MENU -----------------------------------
 
 # Funciones para los pasos
 def paso1():
     print(Fore.YELLOW + f"\nEjecutando PASO1: Importar Datos de entrada....... {dt.now()} \n")
     print("Importamos los datos de BMV y BIVA a un DataFrame ")
-    sTv_paso1()
+    sTv_paso1(var_Fechas3)
     print(Fore.YELLOW + "\nPaso 1 completado - Importación de Datos! \n")
+    print(sTv.df_Total)
 
 def paso2():
+ 
     print(Fore.GREEN + f"\nEjecutando PASO2: Valida Datos de entrada (Local vs Oracle)....... {dt.now()} \n")
     print("Validamos la estructura del DataFrame, si existe y no en Producción Oracle")
     sTv_paso2()
