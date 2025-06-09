@@ -40,11 +40,12 @@ def sTv_paso0(var_Fechas3):
     valida_carpetas(sTv.var_RutaRaiz)
     valida_carpetas(sTv.var_RutaInforme)
     valida_carpetas(sTv.var_RutaLog)
+    valida_carpetas(sTv.var_RutaIN)
 
     # Borra todos los files 
-    borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_M.xlsx')
-    borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_P.xlsx')
-    borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_M.xlsx')
-    borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_P.xlsx')
+    #borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_M.xlsx')
+    #borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_P.xlsx')
+    #borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_M.xlsx')
+    #borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_P.xlsx')
   
     print(Fore.WHITE + "\nRequisitos previos ok\n")
