@@ -17,11 +17,14 @@ var_RutaIN='C:\\MisCompilados\\PROY_BOLSA_MX\\INFORMES\\'
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
 # ----------------------------------------------------------------------------------------
-var_Ora_SDI="COMUN"
-var_Ora_USER="PYDATA"
-var_Ora_PASS="PYDATA"
+var_Ora_DNS="COMUN"
+var_Ora_UID="PYDATA"
+var_Ora_PWD="PYDATA"
+var_Ora_TAB1="T_BOLSAS_EVENTOS_RELEVANTES"
+var_Ora_TAB2="T_CNBV_ESTADOS_FINANCIEROS"
 var_Files_IN="BOLSAS"
 df_Global = pd.DataFrame()
+
 # ----------------------------------------------------------------------------------------
 #                          AUTOR
 # ----------------------------------------------------------------------------------------
