@@ -39,7 +39,7 @@ def Oracle_Cerrar_Conexion(conexion, cursor):
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso3():
+def sTv_paso3(var_Fechas3):
 
     if len(sTv.df_Global) == 0:
         print(Fore.RED + "No hay datos en el DataFrame, probar a ejecutar el paso1")
@@ -89,6 +89,7 @@ def sTv_paso3():
                     print(Fore.CYAN + f"Registro {index + 1} insertado en el servidor PYTHON ORACLE ({v_FPROCESO})")
                     print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
                     print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} - {v_NOTA}\n")
+
                 except Exception as e:
                     print(Fore.RED + f"Registro {index + 1} duplicado en el servidor PYTHON ORACLE, no se insertó.")
                     print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
@@ -97,5 +98,10 @@ def sTv_paso3():
             # Oracle, Confirma los cambios
             conexion.commit()
         
+        # Renombro el file de entrada para que conste como leído
+        fileOld = os.path.join(sTv.var_RutaIN, f'{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
+        fileNew = os.path.join(sTv.var_RutaIN, f'ora_{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
+        os.rename(fileOld, fileNew)
+
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)

@@ -30,7 +30,7 @@ if len(sys.argv) > 2 :
 
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
-tiempo_inicio = dt(2025, 6, 3)    #   dt(2025, 3, 31)
+tiempo_inicio = dt(2025, 6, 7)    #   dt(2025, 3, 31)
 if len(sys.argv) > 3 :
     var_param3 = sys.argv[3]
     if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
@@ -68,12 +68,12 @@ def paso1():
 def paso2():
  
     print(Fore.GREEN + f"\nEjecutando PASO2: Valida Datos de entrada (Local vs Oracle)....... {dt.now()} \n")
-    sTv_paso2()
+    sTv_paso2(var_Fechas3)
     print(Fore.GREEN + "\nPaso 2 completado - Validación de Datos! \n")
 
 def paso3():
     print(Fore.BLUE + f"\nEjecutando PASO3: Carga de Datos al Servidor Oracle....... {dt.now()} \n")
-    sTv_paso3()
+    sTv_paso3(var_Fechas3)
     print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
 
 def pasoHelp():

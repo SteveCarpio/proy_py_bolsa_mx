@@ -50,7 +50,7 @@ def existe_tabla(cursor, nombre_tabla):
   
 # Validamos si el registro existe en ORACLE
 def existe_en_oracle(cursor, row):
-    query = """
+    condiciones = """
     SELECT 1 FROM P_BOLSAS_EVENTOS_RELEVANTES
     WHERE FECHA = ?
       AND N = ?
@@ -58,23 +58,35 @@ def existe_en_oracle(cursor, row):
       AND SECCION = ?
       AND ASUNTO = ?
       AND URL = ?
-      AND ARCHIVO IS ?
-      AND ORIGEN = ?
-      AND T = ?
-      AND FILTRO = ?
     """
-    cursor.execute(query, (
+    params = [
         row['FECHA'],
         row['N'],
         row['CLAVE'],
         row['SECCION'],
         row['ASUNTO'],
         row['URL'],
-        row['ARCHIVO'],  # Comparación con IS para aceptar NULL correctamente
+    ]
+
+    # Verificamos si ARCHIVO es None (NULL)
+    if row['ARCHIVO'] is None:
+        condiciones += " AND ARCHIVO IS NULL"
+    else:
+        condiciones += " AND ARCHIVO = ?"
+        params.append(row['ARCHIVO'])
+
+    condiciones += """
+      AND ORIGEN = ?
+      AND T = ?
+      AND FILTRO = ?
+    """
+    params.extend([
         row['ORIGEN'],
         row['T'],
         row['FILTRO']
-    ))
+    ])
+
+    cursor.execute(condiciones, params)
     return cursor.fetchone() is not None
 
         
@@ -82,11 +94,12 @@ def existe_en_oracle(cursor, row):
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso2():
+def sTv_paso2(var_Fechas3):
 
     if len(sTv.df_Global) == 0:
         print(Fore.RED + "No hay datos en el DataFrame, probar a ejecutar el paso1")
     else:
+        print(f"OK: Existen {len(sTv.df_Global)} registros en el DataFrame para analizar")
 
         # Oracle, Parámetros de conexión:
         oracle_dns=sTv.var_Ora_DNS
@@ -99,25 +112,26 @@ def sTv_paso2():
         # Validamos si existe o no una tabla Oracle    
         if cursor:
             if existe_tabla(cursor, sTv.var_Ora_TAB1):
-                print(f"La tabla {sTv.var_Ora_TAB1} existe.")
+                print(f"OK: La tabla de ORACLE {sTv.var_Ora_TAB1} Existe.")
             else:
                 print(Fore.RED + f"La tabla {sTv.var_Ora_TAB1} NO existe.")
                 sys.exit(0)
 
-        # Validamos si el registro existe en ORACLE
-        duplicados = []
-
         # Validar duplicados
         for idx, row in sTv.df_Global.iterrows():
+
             if existe_en_oracle(cursor, row):
-                print(Fore.RED + f"\nDuplicado detectado (no se subirá): fila {idx}")
-                print(row)
-                duplicados.append(row)
-      
+                rutaEntrada=f'{sTv.var_RutaIN}{sTv.var_Files_IN}_{var_Fechas3}.xlsx'
+                print(Fore.RED + f"Duplicado(s) detectado, revisar el file: {rutaEntrada}")
+                Oracle_Cerrar_Conexion(conexion, cursor)
+                print("Cerramos el programa en el paso2")
+                sys.exit(0)
+
+        print(f"OK: No existen duplicados, se podrán subir los {len(sTv.df_Global)} registros")
+
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)
 
-        # Mostrar total
-        if len(duplicados > 0):
-            print(Fore.RED + f"\nTotal duplicados detectados: {len(duplicados)}")
-            sys.exit(0)
+        
+        
+        
