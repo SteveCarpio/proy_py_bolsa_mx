@@ -28,6 +28,10 @@ if len(sys.argv) > 2 :
     if var_param2 == "PRO":
         var_Entorno = var_param2
 
+if var_Entorno != "PRO":
+    print("El programa está preparado para ejecutarse sobre tablas de PRODUCCIÓN el resto de modos no están preparados")
+    sys.exit(0)
+
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
 #tiempo_inicio = dt(2025, 6, 7)    #   dt(2025, 3, 31)
@@ -91,13 +95,13 @@ def pasoHelp():
     print(Fore.WHITE + "    C:\\MisCompilados\\PROY_BOLSA_MX\\ORACLE\\")
     print("")
     print(Fore.WHITE + "Ejecución:")
-    print(Fore.WHITE + "    ORACLE_Main.exe RUN")
+    print(Fore.WHITE + "    ORACLE_Main.exe RUN PRO")
     print("")
     print(Fore.WHITE + "Parámetros:  [RUN]  [DEV/PRO]  AAAA-MM-DD(opcional):")
     print(Fore.WHITE + "    [vació]: Muestra el menú actual")
     print(Fore.WHITE + "    RUN: Ejecuta el proceso enviando el correo de la Bolsa correspondiente")
     print(Fore.WHITE + "    [DEV/PRO]: Ejecuta el proceso en modo desarrollo o producción")
-    print(Fore.WHITE + "    AAAA-MM-DD: Ejecuta el proceso como si estuviésemos ejecutando ese día")
+    print(Fore.WHITE + "    AAAA-MM-DD: Ejecución puntual corresponde al día de ejecución")
     print("")
     print(Fore.WHITE + "Planificación:")
     print(Fore.WHITE + "    Lun, Mar, Mié, Jue y Vie: 08:50h")
@@ -202,6 +206,13 @@ def ejecutar_menu(par_FechasSalida):
 if len(sys.argv) > 1 :
     if "RUN" in var_param1:
         todos()
+
+    if "?" in var_param1:
+        pasoHelp()
+
+    if "help" in var_param1:
+        pasoHelp()
+
 else:
     input(Fore.WHITE + "Presiona Enter para continuar...")
     ejecutar_menu(var_Fechas1)
