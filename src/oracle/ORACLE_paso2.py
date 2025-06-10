@@ -129,6 +129,12 @@ def sTv_paso2(var_Fechas3):
 
         print(f"OK: No existen duplicados, se podrán subir los {len(sTv.df_Global)} registros")
 
+        # Crea una copia de seguridad
+        cursor.execute(f"CREATE TABLE {sTv.var_Ora_TAB1}_{var_Fechas3} AS SELECT * FROM {sTv.var_Ora_TAB1} WHERE 1=0")
+        cursor.execute(f"INSERT INTO {sTv.var_Ora_TAB1}_{var_Fechas3} SELECT * FROM {sTv.var_Ora_TAB1}")
+        print("OK: Se creó una copia de respaldo en oracle: {sTv.var_Ora_TAB1}_{var_Fechas3}")
+        conexion.commit()
+
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)
 
