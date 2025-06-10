@@ -48,6 +48,34 @@ def existe_tabla(cursor, nombre_tabla):
     resultado = cursor.fetchone()
     return resultado is not None
   
+# Validamos si el registro existe en ORACLE
+def existe_en_oracle(cursor, row):
+    query = """
+    SELECT 1 FROM P_BOLSAS_EVENTOS_RELEVANTES
+    WHERE FECHA = ?
+      AND N = ?
+      AND CLAVE = ?
+      AND SECCION = ?
+      AND ASUNTO = ?
+      AND URL = ?
+      AND ARCHIVO IS ?
+      AND ORIGEN = ?
+      AND T = ?
+      AND FILTRO = ?
+    """
+    cursor.execute(query, (
+        row['FECHA'],
+        row['N'],
+        row['CLAVE'],
+        row['SECCION'],
+        row['ASUNTO'],
+        row['URL'],
+        row['ARCHIVO'],  # Comparación con IS para aceptar NULL correctamente
+        row['ORIGEN'],
+        row['T'],
+        row['FILTRO']
+    ))
+    return cursor.fetchone() is not None
 
         
 # ----------------------------------------------------------------------------------------
@@ -76,11 +104,20 @@ def sTv_paso2():
                 print(Fore.RED + f"La tabla {sTv.var_Ora_TAB1} NO existe.")
                 sys.exit(0)
 
-        if (conexion != None) or (cursor != None):
-        
+        # Validamos si el registro existe en ORACLE
+        duplicados = []
 
-            # Oracle, Confirma los cambios
-            conexion.commit()
-        
+        # Validar duplicados
+        for idx, row in sTv.df_Global.iterrows():
+            if existe_en_oracle(cursor, row):
+                print(Fore.RED + f"\nDuplicado detectado (no se subirá): fila {idx}")
+                print(row)
+                duplicados.append(row)
+      
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)
+
+        # Mostrar total
+        if len(duplicados > 0):
+            print(Fore.RED + f"\nTotal duplicados detectados: {len(duplicados)}")
+            sys.exit(0)
