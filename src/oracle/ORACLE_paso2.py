@@ -98,7 +98,7 @@ def sTv_paso2():
                 v_T=row['T']
                 v_FILTRO=row['FILTRO']
                 v_FPROCESO=row['FPROCESO']
-                #print(row)
+                v_NOTA="CARGA_HISTORICO" #  CARGA_HISTORICO | CARGA_DIARIO | CARGA_PUNTUAL
                 
                 if pd.isna(v_ARCHIVO):
                     v_ARCHIVO=None    
@@ -106,17 +106,17 @@ def sTv_paso2():
                 try:
                     # Ejecución del INSERT SQL
                     cursor.execute(
-                        f"""INSERT INTO {sTv.var_Ora_TAB1} (FECHA, N, CLAVE, SECCION, ASUNTO, URL, ARCHIVO, ORIGEN, T, FILTRO, FPROCESO) 
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
-                        v_FECHA, v_N, v_CLAVE, v_SECCION, v_ASUNTO, v_URL, v_ARCHIVO, v_ORIGEN, v_T, v_FILTRO, v_FPROCESO
+                        f"""INSERT INTO {sTv.var_Ora_TAB1} (FECHA, N, CLAVE, SECCION, ASUNTO, URL, ARCHIVO, ORIGEN, T, FILTRO, FPROCESO, NOTA) 
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+                        v_FECHA, v_N, v_CLAVE, v_SECCION, v_ASUNTO, v_URL, v_ARCHIVO, v_ORIGEN, v_T, v_FILTRO, v_FPROCESO, v_NOTA
                     )
                     #print(Fore.CYAN + f"Registro {index + 1} insertado en el servidor PYTHON ORACLE ({v_FPROCESO})")
                     #print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
-                    #print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} \n")
+                    #print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} - {v_NOTA}\n")
                 except Exception as e:
                     print(Fore.RED + f"Registro {index + 1} duplicado en el servidor PYTHON ORACLE, no se insertó.")
                     print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
-                    print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO}\n")
+                    print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} - {v_NOTA}\n")
 
             # Oracle, Confirma los cambios
             conexion.commit()
