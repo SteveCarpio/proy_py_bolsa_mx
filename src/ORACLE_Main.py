@@ -72,7 +72,7 @@ def paso2():
     print(Fore.GREEN + "\nPaso 2 completado - Validación de Datos! \n")
 
 def paso3():
-    print(Fore.BLUE + f"\nEjecutando PASO3: Subir Datos Validados al Servidor Oracle....... {dt.now()} \n")
+    print(Fore.BLUE + f"\nEjecutando PASO3: Carga de Datos al Servidor Oracle....... {dt.now()} \n")
     sTv_paso3()
     print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
 
@@ -111,7 +111,7 @@ def pasoHelp():
     print(Fore.WHITE + "    2) Valida Datos de entrada Local vs Oracle:")
     print(Fore.WHITE + "       Validamos la estructura del DataFrame, si existe y no en Producción Oracle")
     print("")
-    print(Fore.WHITE + "    3) Subir Datos Validados al Servidor Oracle:")
+    print(Fore.WHITE + "    3) Carga de Datos al Servidor Oracle:")
     print(Fore.WHITE + "       Subimos los datos validados al servidor Oracle")
     print("")
     print(Fore.WHITE + "Dependencias importantes:")
@@ -166,7 +166,7 @@ def mostrar_menu(par_FechasSalida):
     print("")
     print(Fore.YELLOW  + "1) 🟡 Importar Datos de Entrada                ")
     print(Fore.GREEN   + "2) 🟢 Validar Datos Locales vs Oracle          ")
-    print(Fore.BLUE    + "3) 🔵 Subir Datos Validados al Servidor Oracle ")
+    print(Fore.BLUE    + "3) 🔵 Carga de Datos al Servidor Oracle        ")
     print("")
     print(Fore.MAGENTA + "?) 🟣 Ayuda                      ")
     print(Fore.RED     + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v1)")
