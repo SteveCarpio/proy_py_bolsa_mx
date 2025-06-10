@@ -78,12 +78,16 @@ def sTv_paso2():
 
         if (conexion != None) or (cursor != None):
         
-            # Importación del fichero "FileN.txt" en un DataFrame:
+            # Importación del DataFrame
             df = sTv.df_Global
+            df['FPROCESO'] = dt.now()
+            #print(df)
             
             # Recorro el DataFrame registro por registro
             for index, row in df.iterrows():
+            
                 # Tratamiento de valores NaT a None
+                v_N=row['N']
                 v_CLAVE=row['CLAVE']
                 v_SECCION=row['SECCION']
                 v_FECHA=row['FECHA']
@@ -93,17 +97,26 @@ def sTv_paso2():
                 v_ORIGEN=row['ORIGEN']
                 v_T=row['T']
                 v_FILTRO=row['FILTRO']
-                print(row)
+                v_FPROCESO=row['FPROCESO']
+                #print(row)
                 
                 if pd.isna(v_ARCHIVO):
                     v_ARCHIVO=None    
 
-                # Ejecución del INSERT SQL
-                cursor.execute(
-                    f"""INSERT INTO {sTv.var_Ora_TAB1} (CLAVE, SECCION, FECHA, ASUNTO, URL, ARCHIVO, ORIGEN, T, FILTRO) 
-                    VALUES (?,?,?,?,?,?,?,?,?)""",
-                    v_CLAVE, v_SECCION, v_FECHA, v_ASUNTO, v_URL, v_ARCHIVO, v_ORIGEN, v_T, v_FILTRO
-                )
+                try:
+                    # Ejecución del INSERT SQL
+                    cursor.execute(
+                        f"""INSERT INTO {sTv.var_Ora_TAB1} (FECHA, N, CLAVE, SECCION, ASUNTO, URL, ARCHIVO, ORIGEN, T, FILTRO, FPROCESO) 
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
+                        v_FECHA, v_N, v_CLAVE, v_SECCION, v_ASUNTO, v_URL, v_ARCHIVO, v_ORIGEN, v_T, v_FILTRO, v_FPROCESO
+                    )
+                    #print(Fore.CYAN + f"Registro {index + 1} insertado en el servidor PYTHON ORACLE ({v_FPROCESO})")
+                    #print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
+                    #print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} \n")
+                except Exception as e:
+                    print(Fore.RED + f"Registro {index + 1} duplicado en el servidor PYTHON ORACLE, no se insertó.")
+                    print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
+                    print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO}\n")
 
             # Oracle, Confirma los cambios
             conexion.commit()

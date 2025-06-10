@@ -24,6 +24,7 @@ def sTv_paso1(var_Fechas3):
         if os.path.exists(rutaEntrada):
             print(f'OK Existe el fichero: {rutaEntrada}')
             sTv.df_Global = pd.read_excel(f'{sTv.var_RutaIN}{sTv.var_Files_IN}_{var_Fechas3}.xlsx',sheet_name='DATOS')
+            print(f'Se han leído {len(sTv.df_Global)} registros')
 
             # Valida que tenga registros el DataFrame
             if len(sTv.df_Global) == 0:
