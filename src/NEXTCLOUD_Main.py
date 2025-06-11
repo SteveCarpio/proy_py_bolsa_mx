@@ -12,6 +12,7 @@ import os
 import time
 import requests
 import shutil
+import datetime as dt
 
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
@@ -23,6 +24,7 @@ def Actualiza_Excel(ruta1, file):
     print("Procesando:", ruta_excel)
 
     if not os.path.exists(ruta_excel):
+        print(dt.now())
         print(f"ERROR: El archivo no existe: {ruta_excel}")
         return
 
@@ -31,7 +33,7 @@ def Actualiza_Excel(ruta1, file):
         excel.Visible = False
         libro = excel.Workbooks.Open(ruta_excel)
 
-        print("Actualizando conexiones y consultas...")
+        print("   Actualizando conexiones y consultas...")
         libro.RefreshAll()
         excel.CalculateUntilAsyncQueriesDone()
         time.sleep(10) # Espera extra en caso de conexiones lentas
@@ -39,10 +41,11 @@ def Actualiza_Excel(ruta1, file):
         libro.Save()
         libro.Close(False)
         excel.Quit()
-        print(f"Actualización completada: {file}")
+        print(f"   Actualización completada: {file}")
 
     except Exception as e:
-        print(f"Error al actualizar {file}: {e}")
+        print(dt.now())
+        print(f"   Error al actualizar {file}: {e}")
 
     finally:
         # Es para asegurarse de cerrar Excel aunque haya errores
@@ -57,6 +60,12 @@ def Copy_To_NextCloud(ruta1, file2):
     password = "2lL%*laRc#gXm$"  
     archivo_local = os.path.join(ruta1, file2)
     webdav_url = "https://repo.titulizaciondeactivos.com/remote.php/dav/files/usrtda/Rep_Comun/Eventos_Relevantes.xlsx"
+    print(f"Ruta Origen: {ruta1}")
+    print(f"File Origen: {file2}")
+    print(f"Ruta Destino: https://repo.titulizaciondeactivos.com/remote.php/dav/files/usrtda/Rep_Comun/")
+    print(f"File Destino: Eventos_Relevantes.xlsx")
+    print(f"Usuario: {usuario}")
+    print(f"Password: {password}")
 
     with open(archivo_local, "rb") as f:
         response = requests.put(webdav_url, data=f, auth=(usuario, password))
@@ -64,22 +73,29 @@ def Copy_To_NextCloud(ruta1, file2):
     if response.status_code in [200, 201, 204]:
         print("Archivo subido con éxito")
     else:
+        print(dt.now())
         print(f"Error al subir el archivo: {response.status_code}\n{response.text}")
 
-# Copia los 3 excels actualizados en la Ruta de Red
+# Copia los 3 excels actualizados a la Ruta de Red
 def Copy_Ruta_Red(ruta1, file, ruta2):
-    # Rutas de ejemplo (ajusta según tus carpetas)
-    origen = os.path.join(ruta1, file)
-    destino = os.path.join(ruta2, file)
+    try:
+        # Rutas de ejemplo (ajusta según tus carpetas)
+        origen = os.path.join(ruta1, file)
+        destino = os.path.join(ruta2, file)
 
-    # Copiar el archivo
-    shutil.copy2(origen, destino)  # copy2 conserva la fecha de modificación
+        # Copiar el archivo
+        shutil.copy2(origen, destino)  # copy2 conserva la fecha de modificación
 
-    print("Archivo copiado con éxito.")
+        print(f"Archivo ({ruta1}\{file}) copiado con éxito a: {ruta2}")
+    except Exception as e:
+        print(dt.now())
+        print(f"Error al copiar el archivo: ({ruta1}\{file}) \n{e}")
 
 # ----------------------------------------------------------------------------------------
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
+
+print(dt.now())
 
 # Defino parámetros de entrada
 ruta1 = r"C:\MisCompilados\PROY_BOLSA_MX\INFORMES"
@@ -97,10 +113,12 @@ for f in files:
     Actualiza_Excel(ruta1, f)
 
 # Copio el excel de Patricia actualizado en Nextcloud
-print("\nPASO2: Copio el excel de Patricia actualizado en Nextcloud")
+print("\nPASO2: Copio el Excel de Patricia actualizado a Nextcloud")
 Copy_To_NextCloud(ruta1, file2)
 
-# Copia los 3 excels actualizados en la Ruta de Red
-print("\nPASO3: Copia los 3 excels actualizados en la Ruta de Red")
+# Copia los 3 excels actualizados a la Ruta de Red
+print("\nPASO3: Copia los 3 excels actualizados a la Ruta de Red")
 for f in files:
     Copy_Ruta_Red(ruta1, f, ruta2)
+
+print(dt.now())
