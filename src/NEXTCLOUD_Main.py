@@ -12,7 +12,7 @@ import os
 import time
 import requests
 import shutil
-import datetime as dt
+from datetime import datetime as dt
 
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
@@ -86,16 +86,16 @@ def Copy_Ruta_Red(ruta1, file, ruta2):
         # Copiar el archivo
         shutil.copy2(origen, destino)  # copy2 conserva la fecha de modificación
 
-        print(f"Archivo ({ruta1}\{file}) copiado con éxito a: {ruta2}")
+        print(f"Archivo ({ruta1}\\{file}) copiado con éxito a: {ruta2}")
     except Exception as e:
         print(dt.now())
-        print(f"Error al copiar el archivo: ({ruta1}\{file}) \n{e}")
+        print(f"Error al copiar el archivo: ({ruta1}\\{file}) \n{e}")
 
 # ----------------------------------------------------------------------------------------
 #                               INICIO PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-print(dt.now())
+print(f"\nInicio del Proceso: {dt.now()}")
 
 # Defino parámetros de entrada
 ruta1 = r"C:\MisCompilados\PROY_BOLSA_MX\INFORMES"
@@ -108,17 +108,17 @@ file3="Eventos_Relevantes_Monica.xlsx"
 files = [file1, file2, file3]
 
 # Actualizo las conexiones de los 3 excels
-print("\nPASO1: Actualizo las conexiones de los 3 excels")
+print("\nPASO1: Actualizo las conexiones de los 3 archivos Excel\n")
 for f in files:
     Actualiza_Excel(ruta1, f)
 
 # Copio el excel de Patricia actualizado en Nextcloud
-print("\nPASO2: Copio el Excel de Patricia actualizado a Nextcloud")
+print("\nPASO2: Copio el Excel de Patricia actualizado a Nextcloud\n")
 Copy_To_NextCloud(ruta1, file2)
 
 # Copia los 3 excels actualizados a la Ruta de Red
-print("\nPASO3: Copia los 3 excels actualizados a la Ruta de Red")
+print("\nPASO3: Copia los 3 archivos Excel actualizados a la Ruta de Red\n")
 for f in files:
     Copy_Ruta_Red(ruta1, f, ruta2)
 
-print(dt.now())
+print(f"\nProceso Finalizado: {dt.now()}")
