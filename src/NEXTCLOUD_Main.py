@@ -17,7 +17,7 @@ import shutil
 #                               FUNCIONES DE APOYO
 # ----------------------------------------------------------------------------------------
 
-# ----------------
+# Actualizo las conexiones de los 3 excels 
 def Actualiza_Excel(ruta1, file):
     ruta_excel = os.path.join(ruta1, file)
     print("Procesando:", ruta_excel)
@@ -34,7 +34,7 @@ def Actualiza_Excel(ruta1, file):
         print("Actualizando conexiones y consultas...")
         libro.RefreshAll()
         excel.CalculateUntilAsyncQueriesDone()
-        time.sleep(5) # Espera extra en caso de conexiones lentas
+        time.sleep(10) # Espera extra en caso de conexiones lentas
 
         libro.Save()
         libro.Close(False)
@@ -51,7 +51,7 @@ def Actualiza_Excel(ruta1, file):
         except:
             pass
 
-# ----------------
+# Copio el excel de Patricia actualizado en Nextcloud
 def Copy_To_NextCloud(ruta1, file2):
     usuario = "usrtda"  
     password = "2lL%*laRc#gXm$"  
@@ -66,7 +66,7 @@ def Copy_To_NextCloud(ruta1, file2):
     else:
         print(f"Error al subir el archivo: {response.status_code}\n{response.text}")
 
-# ----------------
+# Copia los 3 excels actualizados en la Ruta de Red
 def Copy_Ruta_Red(ruta1, file, ruta2):
     # Rutas de ejemplo (ajusta según tus carpetas)
     origen = os.path.join(ruta1, file)
@@ -92,12 +92,15 @@ file3="Eventos_Relevantes_Monica.xlsx"
 files = [file1, file2, file3]
 
 # Actualizo las conexiones de los 3 excels
+print("\nPASO1: Actualizo las conexiones de los 3 excels")
 for f in files:
     Actualiza_Excel(ruta1, f)
 
 # Copio el excel de Patricia actualizado en Nextcloud
+print("\nPASO2: Copio el excel de Patricia actualizado en Nextcloud")
 Copy_To_NextCloud(ruta1, file2)
 
 # Copia los 3 excels actualizados en la Ruta de Red
+print("\nPASO3: Copia los 3 excels actualizados en la Ruta de Red")
 for f in files:
     Copy_Ruta_Red(ruta1, f, ruta2)
