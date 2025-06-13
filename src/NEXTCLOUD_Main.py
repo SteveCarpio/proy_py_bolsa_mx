@@ -13,6 +13,8 @@ import time
 import requests
 import shutil
 from datetime import datetime as dt
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ----------------------------------------------------------------------------------------
 #                               FUNCIONES DE APOYO
