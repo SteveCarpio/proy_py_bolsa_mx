@@ -68,7 +68,8 @@ def Copy_To_NextCloud(ruta1, file2):
     print(f"Password: {password}")
 
     with open(archivo_local, "rb") as f:
-        response = requests.put(webdav_url, data=f, auth=(usuario, password))
+        response = requests.put(webdav_url, data=f, auth=(usuario, password), verify=False)
+
 
     if response.status_code in [200, 201, 204]:
         print("Archivo subido con éxito")
