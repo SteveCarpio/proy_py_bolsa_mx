@@ -1,0 +1,48 @@
+Planificación de procesos de las Bolsas
+---------------------------------------
+
+----------------------------------------------------------
+PROYECTO - BOLSA - (Lun, Mar, Mie, Jue, Vie y Dom)
+----------------------------------------------------------
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BIVA.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BMV.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BOLSAS.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\ORACLE.bat
+
+----------------------------------------------------------
+PROYECTO - BOLSA - (Sab)
+----------------------------------------------------------
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BIVA_sabado.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BMV_sabado.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_sabado.bat
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\ORACLE_sabado.bat
+
+----------------------------------------------------------
+PROYECTO - BOLSA - Diario (Lun, Mar, Mie, Jue, Vie) - EMISORES 
+----------------------------------------------------------
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\EMISORES.bat
+
+----------------------------------------------------------
+PROYECTO - BOLSA - Diario (Lun, Mar, Mie, Jue, Vir y Dom)
+----------------------------------------------------------
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD.bat
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+-------------------- OLD ------------------------------------------
+
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN PRO  > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\ORACLE_Main.exe RUN PRO > "C:\MisCompilados\PROY_BOLSA_MX\ORACLE\LOG\ORACLE_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD_Main.exe > "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD\LOG\NEXTCLOUD_Main_$fecha.log" 2>&1

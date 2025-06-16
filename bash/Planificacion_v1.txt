@@ -1,0 +1,70 @@
+--------------------------------------------------------- BINARIO
+
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe
+
+--------------------------------------------------------- PC-STV (-Encoding OEM)
+
+-------------- UN-DIA-PUNTUAL
+----- ok 
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250607_puntual.log" 2>&1
+
+----- ok 
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250405_dev.log" -Encoding OEM
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250405_dev.log" -Encoding OEM
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN PRO 2025-04-05| Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250405_dev.log" -Encoding OEM
+
+-------------- DIARIAMENTE
+----- ok 
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+
+----- ok 
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" -Encoding OEM
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" -Encoding OEM
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN DEV | Out-File -FilePath "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" -Encoding OEM
+
+
+--------------------------------------------------------- SERVER PYTHON (-Encoding ascii)
+
+-------------- UN-DIA-PUNTUAL
+----- ok 
+
+C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\ORACLE_Main.exe RUN PRO 2025-06-07 > "C:\MisCompilados\PROY_BOLSA_MX\ORACLE\LOG\ORACLE_20250607_puntual.log" 2>&1
+C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD_Main.exe > "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD\LOG\NEXTCLOUD_puntual.log" 2>&1
+
+
+
+
+
+-------------- DIARIAMENTE
+----- ok
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN PRO  > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\ORACLE_Main.exe RUN PRO > "C:\MisCompilados\PROY_BOLSA_MX\ORACLE\LOG\ORACLE_$fecha.log" 2>&1
+$fecha = Get-Date -Format "yyyyMMdd"; C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD_Main.exe > "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD\LOG\NEXTCLOUD_Main_$fecha.log" 2>&1
+
+
+----- para los viernes
+
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\BIVA_Main.exe RUN-NO-EMAIL PRO $fecha > "C:\MisCompilados\PROY_BOLSA_MX\BIVA\LOG\BIVA_$fecha.log" 2>&1
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\BMV_Main.exe RUN-NO-EMAIL PRO $fecha > "C:\MisCompilados\PROY_BOLSA_MX\BMV\LOG\BMV_$fecha.log" 2>&1
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\BOLSAS_Main.exe RUN DEV $fecha > "C:\MisCompilados\PROY_BOLSA_MX\LOG\BOLSAS_$fecha.log" 2>&1
+
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\ORACLE_Main.exe RUN PRO $fecha > "C:\MisCompilados\PROY_BOLSA_MX\ORACLE\LOG\ORACLE_$fecha.log" 2>&1
+
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD_Main.exe > "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD\LOG\NEXTCLOUD_Main_$fecha.log" 2>&1
+
+
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File "C:\MisCompilados\PROY_BOLSA_MX\BIVA.ps1"
+
+
+
+$fechaBase = (Get-Date).AddDays(-2); $fecha = $fechaBase.ToString("yyyy-MM-dd"); C:\MisCompilados\PROY_BOLSA_MX\ORACLE_Main.exe RUN PRO $fecha > "C:\MisCompilados\PROY_BOLSA_MX\ORACLE_$fecha.log" 2>&1
+
