@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-#  PASO5: ENVIÓ DE EMAIL
+#  PASO5: CREO EXCEL BOLSAS PARA SUBIRLO A ORACLE
 #  Autor: SteveCarpio-2025
 #
 #  BOLSAS: Excel con los datos finales, datos preparados para que sean subidos a Oracle

@@ -23,142 +23,159 @@ def aplicar_colores_alternos(tabla_html):
 
 # Función envió de Email
 def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1, cuerpo2, ruta, nombre_archivo, df1, df2):
-    # Configuración del servidor SMTP (Zimbra)
-    smtp_server = 'zimbra.tda-sgft.com'
-    smtp_port = 25  
-    correo_remitente = 'publicacionesbolsasmx@tda-sgft.com'  
-    contrasenia = 'tu_contraseña'  # no procede
 
-    # Crear el mensaje
-    mensaje = MIMEMultipart()
-    mensaje['From'] = correo_remitente
-    mensaje['To'] = ", ".join(destinatarios_to)
-    mensaje['Cc'] = ", ".join(destinatarios_cc)
-    mensaje['Subject'] = asunto
-    
-    # Combinar destinatarios principales y en copia
-    todos_destinatarios = destinatarios_to + destinatarios_cc 
+    # Compruebo si hay valores de las bolsas
+    if df1.iloc[0]['CLAVE'] == 'none':
+        v_df1 = 0
+    else:
+        v_df1 = 1
+    if df2.iloc[0]['CLAVE'] == 'none':
+        v_df2 = 0
+    else:
+        v_df2 = 1
+    v_df = v_df1 + v_df2
 
-    # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
-    #tabla_html1 = df1.to_html(index=True, escape=False)  # index=True, con el índice
-    #tabla_html2 = df2.to_html(index=True, escape=False)  # index=True, con el índice
+    # Si no hay registros de la bolsa no se manda email, creado por los fines de semana que manda email vacíos
+    if v_df == 0:
+        print("No se enviará un email, parece que no hay registros de las bolsas de BIVA y BMV")
+    else:
 
-    tabla_html1 = aplicar_colores_alternos(df1.to_html(index=True, escape=False))
-    tabla_html2 = aplicar_colores_alternos(df2.to_html(index=True, escape=False))
+        # Configuración del servidor SMTP (Zimbra)
+        smtp_server = 'zimbra.tda-sgft.com'
+        smtp_port = 25  
+        correo_remitente = 'publicacionesbolsasmx@tda-sgft.com'  
+        contrasenia = 'tu_contraseña'  # no procede
 
-    # Cuerpo del correo usando HTML y CSS
-    cuerpo_html = f"""
-    <html>
-    <head>
-        <style>
-            body {{
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f9;
-                color: #333;
-            }}
-            .content {{
-                background-color: #ffffff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }}
-            h2 {{
-                color: #70B692;
-            }}
-            table {{
-                width: 100%;
-                border-collapse: collapse;
-            }}
-            th, td {{
-                padding: 8px 12px;
-                text-align: left;
-                border: 1px solid #ddd;
-            }}
-            th {{
-                background-color: #59a62c;
-                color: white;
-            }}
-            tr:nth-child(even) {{
-				background-color: #f2f2f2;
-			}}
-			tr:nth-child(odd) {{
-				background-color: #ffffff;
-			}}
-        </style>
-    </head>
-    <body>
-        <div class="content">
-            
-            <h2>EVENTOS RELEVANTES Y COMUNICADOS - BIVA</h2>
-            <p>{cuerpo1}</p>
-            {tabla_html1}  <!-- Aquí se inserta el DF convertido a HTML  -->
-            <p></p><br><p></p>
+        # Crear el mensaje
+        mensaje = MIMEMultipart()
+        mensaje['From'] = correo_remitente
+        mensaje['To'] = ", ".join(destinatarios_to)
+        mensaje['Cc'] = ", ".join(destinatarios_cc)
+        mensaje['Subject'] = asunto
+        
+        # Combinar destinatarios principales y en copia
+        todos_destinatarios = destinatarios_to + destinatarios_cc 
 
-            <h2>EVENTOS RELEVANTES Y COMUNICADOS - BMV</h2>
-            <p>{cuerpo2}</p> 
-            {tabla_html2}  <!-- Aquí se inserta el DF convertido a HTML  -->
-            <p></p><br><p></p>
-            
-            <p>  </p><br><p></p>
-            <i> ** Este correo electrónico fue enviado desde TdA mediante un proceso automático. Por favor, no responda a este mensaje  ** </i>
-            
-            
-                <p>
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    <br><br>
+        # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
+        #tabla_html1 = df1.to_html(index=True, escape=False)  # index=True, con el índice
+        #tabla_html2 = df2.to_html(index=True, escape=False)  # index=True, con el índice
 
-                    <table style="border: none; padding: 10px; border-spacing: 2px; width: 600px; table-layout: fixed;">
-                        <tr>
-                            <td style="width: 150px; padding-right: 10px; vertical-align: middle; border: 1px solid white;">
-                                <img src="https://www.tda-sgft.com/TdaWeb/images/logotipo.gif" alt="Titulización de Activos S.G.F.T., S.A" style="vertical-align: middle;">
-                            </td>
-                            <td style="width: 450px; padding-left: 10px; vertical-align: middle; border: 1px solid white;">
-                                <pre>
- Titulización de Activos S.G.F.T., S.A.
- C/Orense, 58 - 5ª Planta
- 28020 Madrid
- Tel.: 91 702 08 08
- Fax:  91 308 68 54             
- e-mail: publicacionesbolsasmx@tda-sgft.com
- http://www.tda-sgft.com       </pre>
-                            </td>
-                        </tr>
-                    </table>
-                </p>
-            
-            
-        </div>
-    </body>
-    </html>
-    """
-    # El cuerpo del mensaje en formato: html
-    mensaje.attach(MIMEText(cuerpo_html, 'html'))
+        tabla_html1 = aplicar_colores_alternos(df1.to_html(index=True, escape=False))
+        tabla_html2 = aplicar_colores_alternos(df2.to_html(index=True, escape=False))
 
-    # El cuerpo del mensaje en formato: TXT
-    #mensaje.attach(MIMEText(cuerpo, 'plain'))
+        # Cuerpo del correo usando HTML y CSS
+        cuerpo_html = f"""
+        <html>
+        <head>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f9;
+                    color: #333;
+                }}
+                .content {{
+                    background-color: #ffffff;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }}
+                h2 {{
+                    color: #70B692;
+                }}
+                table {{
+                    width: 100%;
+                    border-collapse: collapse;
+                }}
+                th, td {{
+                    padding: 8px 12px;
+                    text-align: left;
+                    border: 1px solid #ddd;
+                }}
+                th {{
+                    background-color: #59a62c;
+                    color: white;
+                }}
+                tr:nth-child(even) {{
+                    background-color: #f2f2f2;
+                }}
+                tr:nth-child(odd) {{
+                    background-color: #ffffff;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="content">
+                
+                <h2>EVENTOS RELEVANTES Y COMUNICADOS - BIVA</h2>
+                <p>{cuerpo1}</p>
+                {tabla_html1}  <!-- Aquí se inserta el DF convertido a HTML  -->
+                <p></p><br><p></p>
 
-    # Combinar la ruta con el nombre del archivo
-    # archivo_completo = os.path.join(ruta, nombre_archivo)
+                <h2>EVENTOS RELEVANTES Y COMUNICADOS - BMV</h2>
+                <p>{cuerpo2}</p> 
+                {tabla_html2}  <!-- Aquí se inserta el DF convertido a HTML  -->
+                <p></p><br><p></p>
+                
+                <p>  </p><br><p></p>
+                <i> ** Este correo electrónico fue enviado desde TdA mediante un proceso automático. Por favor, no responda a este mensaje  ** </i>
+                
+                
+                    <p>
+                        <br><br>
+                        <br><br>
+                        <br><br>
+                        <br><br>
 
-    # Adjuntar el archivo Excel  --- HEMOS DECIDIDO NO MANDAR EL EXCEL
-    #try:
-    #    with open(archivo_completo, 'rb') as archivo:
-    #        # Crear el objeto MIME para el archivo adjunto
-    #        adjunto = MIMEApplication(archivo.read(), _subtype='xlsx')
-    #        adjunto.add_header('Content-Disposition', 'attachment', filename=nombre_archivo)
-    #        mensaje.attach(adjunto)
-    #except Exception as e:
-    #    print(f"Error al adjuntar el archivo: {e}")
+                        <table style="border: none; padding: 10px; border-spacing: 2px; width: 600px; table-layout: fixed;">
+                            <tr>
+                                <td style="width: 150px; padding-right: 10px; vertical-align: middle; border: 1px solid white;">
+                                    <img src="https://www.tda-sgft.com/TdaWeb/images/logotipo.gif" alt="Titulización de Activos S.G.F.T., S.A" style="vertical-align: middle;">
+                                </td>
+                                <td style="width: 450px; padding-left: 10px; vertical-align: middle; border: 1px solid white;">
+                                    <pre>
+    Titulización de Activos S.G.F.T., S.A.
+    C/Orense, 58 - 5ª Planta
+    28020 Madrid
+    Tel.: 91 702 08 08
+    Fax:  91 308 68 54             
+    e-mail: publicacionesbolsasmx@tda-sgft.com
+    http://www.tda-sgft.com       </pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </p>
+                
+                
+            </div>
+        </body>
+        </html>
+        """
+        # El cuerpo del mensaje en formato: html
+        mensaje.attach(MIMEText(cuerpo_html, 'html'))
 
-    # Enviar el correo
-    try:
-        with smtplib.SMTP(smtp_server, smtp_port) as servidor:
-            servidor.sendmail(correo_remitente, todos_destinatarios, mensaje.as_string())
-        print(f"- Correo enviado exitosamente a: {', '.join(todos_destinatarios)}")
-    except Exception as e:
-        print(f"- Error al enviar el correo: {e}")
+        # El cuerpo del mensaje en formato: TXT
+        #mensaje.attach(MIMEText(cuerpo, 'plain'))
+
+        # Combinar la ruta con el nombre del archivo
+        # archivo_completo = os.path.join(ruta, nombre_archivo)
+
+        # Adjuntar el archivo Excel  --- HEMOS DECIDIDO NO MANDAR EL EXCEL
+        #try:
+        #    with open(archivo_completo, 'rb') as archivo:
+        #        # Crear el objeto MIME para el archivo adjunto
+        #        adjunto = MIMEApplication(archivo.read(), _subtype='xlsx')
+        #        adjunto.add_header('Content-Disposition', 'attachment', filename=nombre_archivo)
+        #        mensaje.attach(adjunto)
+        #except Exception as e:
+        #    print(f"Error al adjuntar el archivo: {e}")
+
+        # Enviar el correo
+        try:
+            with smtplib.SMTP(smtp_server, smtp_port) as servidor:
+                servidor.sendmail(correo_remitente, todos_destinatarios, mensaje.as_string())
+            print(f"- Correo enviado exitosamente a: {', '.join(todos_destinatarios)}")
+        except Exception as e:
+            print(f"- Error al enviar el correo: {e}")
 
 # Función Leer excel y convertirlos en DataFrame
 def sTv_paso4_lee_DF(ruta, bolsa, var_Fechas2):
