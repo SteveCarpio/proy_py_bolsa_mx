@@ -112,7 +112,7 @@ files = [file1, file2, file3]
 
 # Actualizo las conexiones de los 3 excels
 print("\nPASO1: Actualizo las conexiones de los 3 archivos Excel\n")
-print(" Este paso realizará desde un scrip *.ps1 invocado desde un .bat")
+print("Este paso se realizará desde un script .bat, se script se invocará desde otro script .vbs")
 #for f in files:
 #    Actualiza_Excel(ruta1, f)
 
