@@ -101,7 +101,7 @@ def Copy_Ruta_Red(ruta1, file, ruta2):
 print(f"\nInicio del Proceso: {dt.now()}")
 
 # Defino parámetros de entrada
-ruta1 = r"C:\MisCompilados\PROY_BOLSA_MX\INFORMES"
+ruta1 = r"C:\MisCompilados\PROY_BOLSA_MX\INFORMES\EVENTOS_RELEVANTES"
 ruta2 = r"\\newton\comun$\Proyectos\Python\MisCompilados\PROY_BOLSA_MX\INFORMES"
 file1="Eventos_Relevantes_Completo.xlsx"
 file2="Eventos_Relevantes_Patricia.xlsx"
@@ -112,8 +112,9 @@ files = [file1, file2, file3]
 
 # Actualizo las conexiones de los 3 excels
 print("\nPASO1: Actualizo las conexiones de los 3 archivos Excel\n")
-for f in files:
-    Actualiza_Excel(ruta1, f)
+print(" Este paso realizará desde un scrip *.ps1 invocado desde un .bat")
+#for f in files:
+#    Actualiza_Excel(ruta1, f)
 
 # Copio el excel de Patricia actualizado en Nextcloud
 print("\nPASO2: Copio el Excel de Patricia actualizado a Nextcloud\n")
