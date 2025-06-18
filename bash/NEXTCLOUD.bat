@@ -1,4 +1,8 @@
 @echo off
+REM == ACTUALIZA CONEXIONES DE FORMA DESATENDIDA
+REM PowerShell.exe -ExecutionPolicy Bypass -File "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD.ps1"
+wscript.exe "C:\MisCompilados\PROY_BOLSA_MX\NEXTCLOUD.vbs"
+
 REM === CONFIGURACIÓN GENERAL ===
 set NOMBRE_JOB=NEXTCLOUD_Main.exe
 set RUTA_JOB=C:\MisCompilados\PROY_BOLSA_MX

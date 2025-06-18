@@ -1,0 +1,315 @@
+HIPOPROD=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod3.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=HIPOPROD)
+    )
+  )
+
+FACTPROD=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod3.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVICE_NAME=HIPOPROD)
+    )
+  )
+
+SIMULACION_PU=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oradesa1.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=DESA)
+    )
+  )
+  
+TDA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=TDA.rac.tda)
+    )
+  )
+
+TDA1=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod1-vip.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=TDA.rac.tda)
+      (SID=TDA1)
+    )
+  )
+
+TDA2=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod2-vip.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=TDA.rac.tda)
+      (SID=TDA2)
+    )
+  )
+
+TDA3=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod8.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=TDA3)
+    )
+  )
+ 
+DESA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oradesa1.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=DESA)
+    )
+  )
+  
+BITDA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod4.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=BITDA)
+    )
+  )
+
+HIPOXE=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=165.168.160.140)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=XE)
+    )
+  )
+  
+CITDA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod5.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=CITDA)
+    )
+  )
+ 
+HIDI=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod6.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=HIDI)
+    )
+  ) 
+  
+COMUN=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod9.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=COMUN)
+    )
+  ) 
+
+SANTDA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod7.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=SANTDA)
+    )
+  )
+
+  
+
+MIG_CITDA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprod5.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=CITDA)
+    )
+  )
+  
+OXEDESA=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=10.20.30.105)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=XE)
+    )
+  )
+
+DESA2=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oradesa2.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=DESA2)
+    )
+  )
+  
+DESA3=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oradesa3.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=DESA3)
+    )
+  )
+
+PREPRO2=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro2.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO2)
+    )
+  )
+  
+PREPRO3=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro3.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO3)
+    )
+  )
+  
+PREPRO4=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro4.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO4)
+    )
+  )
+
+PREPRO5=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro5.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO5)
+    )
+  )
+  
+PREPRO6=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro6.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO6)
+    )
+  )
+  
+PREPRO7=
+  (DESCRIPTION=
+    (ADDRESS=
+      (PROTOCOL=TCP)
+      (HOST=oraprepro7.tda)
+      (PORT=1521)
+    )
+    (CONNECT_DATA=
+      (SERVER=dedicated)
+      (SERVICE_NAME=PREPRO7)
+    )
+  )
+
