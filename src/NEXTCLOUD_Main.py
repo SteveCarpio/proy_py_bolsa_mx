@@ -102,7 +102,7 @@ print(f"\nInicio del Proceso: {dt.now()}")
 
 # Defino parámetros de entrada
 ruta1 = r"C:\MisCompilados\PROY_BOLSA_MX\INFORMES\EVENTOS_RELEVANTES"
-ruta2 = r"\\newton\comun$\Proyectos\Python\MisCompilados\PROY_BOLSA_MX\INFORMES"
+ruta2 = r"\\newton\comun$\Proyectos\Python\MisCompilados\PROY_BOLSA_MX\INFORMES\EVENTOS_RELEVANTES"
 file1="Eventos_Relevantes_Completo.xlsx"
 file2="Eventos_Relevantes_Patricia.xlsx"
 file3="Eventos_Relevantes_Monica.xlsx"
