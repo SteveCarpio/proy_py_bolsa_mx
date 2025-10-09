@@ -80,7 +80,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 }}
                 h2 {{
-                    color: #70B692;
+                    color: #ff7518;
                 }}
                 table {{
                     width: 100%;
@@ -92,7 +92,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
                     border: 1px solid #ddd;
                 }}
                 th {{
-                    background-color: #59a62c;
+                    background-color: #ff7518;
                     color: white;
                 }}
                 tr:nth-child(even) {{
