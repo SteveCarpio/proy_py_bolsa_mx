@@ -2,7 +2,7 @@
 #                                  WebScraping BOLSAS Comunicados
 # 
 # Programa que extraerá información contable de la Bolsa de BIVA Mexico
-# Autor: SteveCarpio
+# Autor: Steve Carpio
 # Versión: V3 2025
 # ----------------------------------------------------------------------------------------
 
