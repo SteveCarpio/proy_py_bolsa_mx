@@ -6,6 +6,7 @@ Este proyecto es una herramienta para analizar datos de la bolsa de valores de M
 
 - Python 3.6 o superior
 - Librerías especificadas en `requirements.txt`
+- https://github.com/dreamshao/chromedriver
 
 ## Instalación
 
