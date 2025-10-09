@@ -229,12 +229,12 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     df_BMV_X = sTv_paso4_lee_DF(ruta_excel6,  "BMV",  var_Fechas2)
 
     # Lista de emisores distintos
-    lst_emisores_m1 = ', '.join(df_BIVA_M['CLAVE'].unique())
-    lst_emisores_m2 = ', '.join(df_BMV_M['CLAVE'].unique())
-    lst_emisores_p1 = ', '.join(df_BIVA_P['CLAVE'].unique())
-    lst_emisores_p2 = ', '.join(df_BMV_P['CLAVE'].unique())
-    lst_emisores_x1 = ', '.join(df_BIVA_X['CLAVE'].unique())
-    lst_emisores_x2 = ', '.join(df_BMV_X['CLAVE'].unique())
+    lst_emisores_m1 = ', '.join(df_BIVA_M['CLAVE'].unique())  # type: ignore
+    lst_emisores_m2 = ', '.join(df_BMV_M['CLAVE'].unique())   # type: ignore
+    lst_emisores_p1 = ', '.join(df_BIVA_P['CLAVE'].unique())  # type: ignore
+    lst_emisores_p2 = ', '.join(df_BMV_P['CLAVE'].unique())   # type: ignore
+    lst_emisores_x1 = ', '.join(df_BIVA_X['CLAVE'].unique())  # type: ignore
+    lst_emisores_x2 = ', '.join(df_BMV_X['CLAVE'].unique())   # type: ignore
 
     # BIVA: Numero de emisores y eventos distintos
     if lst_emisores_m1 == "none":
@@ -242,16 +242,16 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
         num_eventos_m1 = 0
         lst_emisores_m1 = ""
     else:
-        num_emisores_m1 = len(df_BIVA_M['CLAVE'].unique())
-        num_eventos_m1 = len(df_BIVA_M)
+        num_emisores_m1 = len(df_BIVA_M['CLAVE'].unique())   # type: ignore 
+        num_eventos_m1 = len(df_BIVA_M)                      # type: ignore
 
     if lst_emisores_m2 == "none":
         num_emisores_m2 = 0
         num_eventos_m2 = 0
         lst_emisores_m2 = ""
     else:
-        num_emisores_m2 = len(df_BMV_M['CLAVE'].unique())
-        num_eventos_m2 = len(df_BMV_M)
+        num_emisores_m2 = len(df_BMV_M['CLAVE'].unique())   # type: ignore
+        num_eventos_m2 = len(df_BMV_M)                      # type: ignore
 
     # BMV: Numero de emisores y eventos distintos
     if lst_emisores_p1 == "none":
@@ -259,16 +259,16 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
         num_eventos_p1 = 0
         lst_emisores_p1 = ""
     else:
-        num_emisores_p1 = len(df_BIVA_P['CLAVE'].unique())
-        num_eventos_p1 = len(df_BIVA_P)
+        num_emisores_p1 = len(df_BIVA_P['CLAVE'].unique())  # type: ignore
+        num_eventos_p1 = len(df_BIVA_P)                     # type: ignore
         
     if lst_emisores_p2 == "none":
         num_emisores_p2 = 0
         num_eventos_p2 = 0
         lst_emisores_p2 = ""
     else:
-        num_emisores_p2 = len(df_BMV_P['CLAVE'].unique())
-        num_eventos_p2 = len(df_BMV_P)
+        num_emisores_p2 = len(df_BMV_P['CLAVE'].unique())  # type: ignore
+        num_eventos_p2 = len(df_BMV_P)                     # type: ignore
 
     # EXCLUIDOS: Numero de emisores y eventos distintos
     if lst_emisores_x1 == "none":
@@ -276,16 +276,16 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
         num_eventos_x1 = 0
         lst_emisores_x1 = ""
     else:
-        num_emisores_x1 = len(df_BIVA_X['CLAVE'].unique())
-        num_eventos_x1 = len(df_BIVA_X)
+        num_emisores_x1 = len(df_BIVA_X['CLAVE'].unique()) # type: ignore
+        num_eventos_x1 = len(df_BIVA_X)                    # type: ignore
         
     if lst_emisores_x2 == "none":
         num_emisores_x2 = 0
         num_eventos_x2 = 0
         lst_emisores_x2 = ""
     else:
-        num_emisores_x2 = len(df_BMV_X['CLAVE'].unique())
-        num_eventos_x2 = len(df_BMV_X)
+        num_emisores_x2 = len(df_BMV_X['CLAVE'].unique())  # type: ignore
+        num_eventos_x2 = len(df_BMV_X)                     # type: ignore
 
     print(f"\n- Lista de lst_emisores_m1: {lst_emisores_m1}")
     print(f"- Lista de lst_emisores_m2: {lst_emisores_m2}")
@@ -367,8 +367,8 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto, cuerpo_m1, cuerpo_m2, ruta, nombre_archivo_m, df_BIVA_M, df_BMV_M)
     enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto, cuerpo_p1, cuerpo_p2, ruta, nombre_archivo_p, df_BIVA_P, df_BMV_P)
 
-    conteo_BIVA_X = (df_BIVA_X['CLAVE'] == 'none').sum()
-    conteo_BMV_X  = (df_BMV_X['CLAVE']  == 'none').sum()
+    conteo_BIVA_X = (df_BIVA_X['CLAVE'] == 'none').sum()     # type: ignore
+    conteo_BMV_X  = (df_BMV_X['CLAVE']  == 'none').sum()     # type: ignore
     conteo_X = conteo_BIVA_X + conteo_BMV_X
     if conteo_X != 2:  # Mandará un email en caso de que existan registros.
         print("- Se manda email con datos excluidos")
