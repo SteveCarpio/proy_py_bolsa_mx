@@ -60,8 +60,8 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
         #tabla_html1 = df1.to_html(index=True, escape=False)  # index=True, con el índice
         #tabla_html2 = df2.to_html(index=True, escape=False)  # index=True, con el índice
 
-        tabla_html1 = aplicar_colores_alternos(df1.to_html(index=True, escape=False))
-        tabla_html2 = aplicar_colores_alternos(df2.to_html(index=True, escape=False))
+        tabla_html1 = aplicar_colores_alternos(df1.to_html(index=False, escape=False))
+        tabla_html2 = aplicar_colores_alternos(df2.to_html(index=False, escape=False))
 
         # Cuerpo del correo usando HTML y CSS
         cuerpo_html = f"""
