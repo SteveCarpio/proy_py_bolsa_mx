@@ -109,7 +109,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
     if len(df_TOTAL) > 0:
 
         # Reasignar el índice para que empiece en 1
-        df_TOTAL.index = range(1, len(df_TOTAL) + 1)
+        df_TOTAL.index = pd.Index(range(1, len(df_TOTAL) + 1))
 
         # Cambio el nombre del índice a N en vez de que salga vació
         df_TOTAL.index.name = "N"
