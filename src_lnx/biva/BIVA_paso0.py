@@ -32,7 +32,7 @@ def borrar_archivos(ruta_carpeta, patron):
         print(Fore.RED + f'Archivo borrado:   {archivo}')
 
 # Función: Buscar Versión de GoogleChrome        
-def obtener_version_GoogleChrome():
+def obtener_version_GoogleChrome_WIN():
     try:
         # Ruta del registro donde se almacena la versión de Chrome
         ruta_registro = r"SOFTWARE\Google\Chrome\BLBeacon"
@@ -50,6 +50,35 @@ def obtener_version_GoogleChrome():
 
     print(f" Versión de GoogleChrome {version_chrome} ")
     return ultima_parte
+
+def obtener_version_GoogleChrome_LNX():
+    """
+    Devuelve la versión principal de Google Chrome usando dpkg.
+    Si no se encuentra el paquete, devuelve "0".
+    """
+    try:
+        # Ejecutamos dpkg y filtramos la línea que contiene "google-chrome"
+        salida = subprocess.check_output(
+            ["dpkg", "-l"],
+            stderr=subprocess.STDOUT,
+            universal_newlines=True
+        )
+        for linea in salida.splitlines():
+            if "google-chrome" in linea.lower() and "ii" in linea.split()[0]:
+                # La línea tiene la forma: ii  google-chrome-stable  129.0.6668.65-1  ...
+                partes = linea.split()
+                if len(partes) >= 3:
+                    # La versión del paquete
+                    ver_paquete = partes[2]
+                    # Eliminar el sufijo "-1", "-2", etc.
+                    ver = ver_paquete.split('-')[0]
+                    print(f" Versión de GoogleChrome {ver}")
+                    return ver.split('.')[0]  # solo la parte antes del primer punto
+    except subprocess.CalledProcessError as e:
+        print(f"Error ejecutando dpkg: {e}")
+
+    print("Google Chrome no encontrado con dpkg.")
+    return "0"
 
 # Función: Buscar Versión de ChromeDriver
 def obtener_version_ChromeDriver(chromedriver_path):
@@ -100,8 +129,8 @@ def sTv_paso0(var_NombreSalida, var_Fechas3):
     
 
     # Validar versiones de GoogleChrome y ChromeDriver
-    verGoogleChrome = obtener_version_GoogleChrome()
-    chromedriver_path = f"C:\\MisCompilados\\cfg\\chromedriver-win32\\{verGoogleChrome}\\chromedriver.exe"
+    verGoogleChrome = obtener_version_GoogleChrome_LNX()
+    chromedriver_path = f"/srv/apps/MisCompilados/cfg/chromedriver/{verGoogleChrome}/chromedriver"
     verChromeDriver = obtener_version_ChromeDriver(chromedriver_path)
     if verChromeDriver == verGoogleChrome:
         print(f"OK: Versiones Igualadas GoogleChrome {verGoogleChrome} y ChromeDriver {verChromeDriver}")
