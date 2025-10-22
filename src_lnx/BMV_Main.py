@@ -106,7 +106,7 @@ def paso8():
     print(Fore.YELLOW + "\nPaso 8 completado! \n")
 
 def pasoHelp():
-    os.system("cls")
+    os.system("clear")
     print(Fore.MAGENTA + "=" * 94)
     print(Fore.MAGENTA + "                         Proceso WebScraping Bolsa BMV")
     print(Fore.MAGENTA + "=" * 94)
