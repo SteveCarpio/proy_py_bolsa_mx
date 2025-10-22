@@ -17,14 +17,16 @@ def sTv_paso1_WebScraping(var_NombreSalida, par_url, par_i):
 
     # Esperar que la página cargue completamente
     time.sleep(12)
+    
     WebDriverWait(driver, 60).until(
         lambda driver: driver.execute_script('return document.readyState') == 'complete'
     )
     time.sleep(10)
-       
+      
     # Extraer el código HTML completo, tenemos 2 métodos para hacerlo
     #page_source = driver.find_element("xpath", "//*").get_attribute("outerHTML")   ## usarlo si la web tiene objetos dinámicos, usa el puntero de inicio de HTML
     page_source = driver.page_source                                                ## usarlo si la web no tiene muchos objetos que cargar como javascript, etc..
+    print(page_source)
 
     # Comprueba si la página leída tiene datos para descargar, será el número de páginas existentes para este dia y sea. 
     if "Toggle__encabezado_card2__2r5PN" in page_source:  
