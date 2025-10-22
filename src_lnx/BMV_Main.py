@@ -54,7 +54,7 @@ var_Fechas3 = fecha_reducida.strftime('%Y%m%d')    # Formato "20250304"
 # ----
 var_FechasSalida= ""  # tiempo_inicio.strftime("%Y%m%d_%H%M%S")
 
-os.system("cls")
+os.system("clear")
 
 # Inicializar colorama
 init(autoreset=True)
@@ -200,7 +200,7 @@ def todos():
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
-    os.system("cls")  
+    os.system("clear")  
 
 # Menú interactivo
 def mostrar_menu(par_FechasSalida):

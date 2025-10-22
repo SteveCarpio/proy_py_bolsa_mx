@@ -17,7 +17,6 @@ import re                                                         # -- -- -- -- 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- p8 # 
 import sys                                                        # ma -- -- -- -- -- -- -- -- -- #
 import subprocess                                                 # -- p0 -- -- -- -- -- -- -- -- #
-import winreg                                                     # -- p0 -- -- -- -- -- -- -- -- #
 from colorama import init, Fore, Back, Style                      # ma -- -- -- -- -- -- -- -- -- #
 from selenium import webdriver                                    # -- -- p1 -- -- -- -- -- -- -- #
 from selenium.webdriver.chrome.service import Service             # -- -- p1 -- -- -- -- -- -- -- #
@@ -32,7 +31,8 @@ from email.mime.multipart import MIMEMultipart                    # -- -- -- -- 
 from email.mime.text import MIMEText                              # -- -- -- -- -- -- -- -- -- p8 #
 from email.mime.application import MIMEApplication                # -- -- -- -- -- -- -- -- -- p8 #
 # -------------------------------------------------------------------------------------------------
-
+#import winreg                                                    # -- p0 -- -- -- -- -- -- -- -- #
+# -------------------------------------------------------------------------------------------------
 
 # CUSTOMIZAR LAS LIBRERIAS ---------------------------------------------------------------------------------------------------
 chrome_options = Options()

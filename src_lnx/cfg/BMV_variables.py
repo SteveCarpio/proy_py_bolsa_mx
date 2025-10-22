@@ -7,7 +7,7 @@
 # ----------------------------------------------------------------------------------------
 #                          API GOOGLE CHROMEDRIVER
 # ----------------------------------------------------------------------------------------
-var_CHROMEDRIVER="C:/MisCompilados/cfg/chromedriver-win32/chromedriver.exe"   #   131 OFICINA, 134 SERVER_PYTHON y 134 CASA
+var_CHROMEDRIVER="/srv/apps/MisCompilados/cfg/chromedriver/chromedriver"   #   131 OFICINA, 134 SERVER_PYTHON WINDOWS, 134 CASA, 139 PYTHON-LNX
 
 # ----------------------------------------------------------------------------------------
 #                          URL WEBSCARPING
@@ -20,11 +20,12 @@ var_WEBSCRAPING4="https://www.bmv.com.mx/es/emisoras/eventosrelevantes/"
 #-----------------------------------------------------------------------------------------
 #                          RUTAS DE APOYO
 # ----------------------------------------------------------------------------------------
-var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\BMV\\'
-var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
-var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES\\'
-var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
-var_RutaLog=f'{var_RutaRaiz}LOG\\'
+
+var_RutaRaiz='/srv/apps/MisCompilados/PROY_BOLSA_MX/BMV/'
+var_RutaInforme=f'{var_RutaRaiz}INFORMES/'
+var_RutaWebFiles=f'{var_RutaRaiz}WEBFILES/'
+var_RutaConfig=f'{var_RutaRaiz}CONFIG/'
+var_RutaLog=f'{var_RutaRaiz}LOG/'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
