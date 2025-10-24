@@ -53,7 +53,7 @@ def sTv_paso1(var_NombreSalida, var_Fechas1):
     var_fecha_fin = var_Fechas1
 
     # Bucle para leer todas las Paginas de la WEB
-    for i in range(15):  # 15 será como un valor máximo de paginas que creemos que tendrá el Diario
+    for i in range(30):  # 15 será como un valor máximo de paginas que creemos que tendrá el Diario
         var_pagina = f'{i+1}'
         var_url = f'{sTv.var_WEBSCRAPING1}?fechaInicio={var_fecha_ini}&fechaFin={var_fecha_fin}&page={var_pagina}'
         print(f'Filtro a Analizar: {var_url}')
