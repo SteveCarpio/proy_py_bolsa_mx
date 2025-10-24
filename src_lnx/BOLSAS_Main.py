@@ -49,7 +49,7 @@ var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')  # Formato "2025-03-04"
 var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')  # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')    # Formato "20250304"
 
-os.system("cls")
+os.system("clear")
 
 # Inicializar colorama
 init(autoreset=True)
@@ -88,7 +88,7 @@ def paso5():
     print(Fore.YELLOW + "\nPaso 5 completado - Envió de datos Oracle! \n")
 
 def pasoHelp():
-    os.system("cls")
+    os.system("clear")
     print(Fore.MAGENTA + "=" * 94)
     print(Fore.MAGENTA + "                         Proceso WebScraping Bolsas BIVA y BMV")
     print(Fore.MAGENTA + "=" * 94)
@@ -176,7 +176,7 @@ def todos():
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
-    os.system("cls")  
+    os.system("clear")  
 
 # Menú interactivo
 def mostrar_menu(par_FechasSalida):
