@@ -7,7 +7,7 @@
 # ----------------------------------------------------------------------------------------
 #                          API GOOGLE CHROMEDRIVER
 # ----------------------------------------------------------------------------------------
-var_CHROMEDRIVER="/srv/apps/MisCompilados/cfg/chromedriver/chromedriver"   #   131 OFICINA, 134 SERVER_PYTHON y 134 CASA
+var_CHROMEDRIVER="/srv/apps/MisCompilados/.cfg/chromedriver/chromedriver"   #   131 OFICINA, 134 SERVER_PYTHON y 134 CASA
 
 # ----------------------------------------------------------------------------------------
 #                          URL WEBSCRAPING
