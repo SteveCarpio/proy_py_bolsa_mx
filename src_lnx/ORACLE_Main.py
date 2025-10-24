@@ -22,15 +22,19 @@ if len(sys.argv) > 1 :
     var_param1 = sys.argv[1]
 
 # Parámetro2: Producción o Desarrollo
-var_Entorno="DEV"
+var_Entorno="DEV" 
 if len(sys.argv) > 2 :
     var_param2 = sys.argv[2]
     if var_param2 == "PRO":
         var_Entorno = var_param2
 
+print(len(sys.argv))
+
 if var_Entorno != "PRO":
     print("El programa está preparado para ejecutarse sobre tablas de PRODUCCIÓN el resto de modos no están preparados")
-    sys.exit(0)
+    #sys.exit(0)
+
+print("fffff")
 
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
@@ -51,7 +55,7 @@ var_Fechas1 = fecha_reducida.strftime('%Y-%m-%d')  # Formato "2025-03-04"
 var_Fechas2 = fecha_reducida.strftime('%d-%m-%Y')  # Formato "04-03-2025"
 var_Fechas3 = fecha_reducida.strftime('%Y%m%d')    # Formato "20250304"
 
-os.system("cls")
+os.system("clear")
 
 # Inicializar colorama
 init(autoreset=True)
@@ -81,7 +85,7 @@ def paso3():
     print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
 
 def pasoHelp():
-    os.system("cls")
+    os.system("clear")
     print(Fore.MAGENTA + "=" * 94)
     print(Fore.MAGENTA + "                         Proceso WebScraping Oracle BIVA y BMV")
     print(Fore.MAGENTA + "=" * 94)
@@ -156,7 +160,7 @@ def todos():
 
 # Función para limpiar la pantalla (en sistemas basados en UNIX)
 def limpiar_pantalla():
-    os.system("cls")  
+    os.system("clear")  
 
 # Menú interactivo
 def mostrar_menu(par_FechasSalida):
