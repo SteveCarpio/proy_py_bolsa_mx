@@ -8,11 +8,11 @@ import pandas as pd
 #-----------------------------------------------------------------------------------------
 #                          RUTAS DE APOYO
 # ----------------------------------------------------------------------------------------
-var_RutaRaiz='C:\\MisCompilados\\PROY_BOLSA_MX\\ORACLE\\'
-var_RutaInforme=f'{var_RutaRaiz}INFORMES\\'
-var_RutaConfig=f'{var_RutaRaiz}CONFIG\\'
-var_RutaLog=f'{var_RutaRaiz}LOG\\'
-var_RutaIN='C:\\MisCompilados\\PROY_BOLSA_MX\\INFORMES\\'
+var_RutaRaiz='/srv/apps/MisCompilados/PROY_BOLSA_MX/ORACLE/'
+var_RutaInforme=f'{var_RutaRaiz}INFORMES/'
+var_RutaConfig=f'{var_RutaRaiz}CONFIG/'
+var_RutaLog=f'{var_RutaRaiz}LOG/'
+var_RutaIN='/srv/apps/MisCompilados/PROY_BOLSA_MX/INFORMES/'
 
 # ----------------------------------------------------------------------------------------
 #                          VARIABLES DE APOYO
