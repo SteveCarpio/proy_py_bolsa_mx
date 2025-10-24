@@ -100,7 +100,7 @@ def pasoHelp():
     print(Fore.WHITE + "    C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\")
     print("")
     print(Fore.WHITE + "Ejecución:")
-    print(Fore.WHITE + "    BIVA_Main_v3.exe RUN-NO-EMAIL")
+    print(Fore.WHITE + "    BIVA_Main.exe RUN-NO-EMAIL PRO")
     print("")
     print(Fore.WHITE + "Parámetros [RUN/RUN-NO-EMAIL] [DEV/PRO] AAAA-MM-DD(opcional):")
     print(Fore.WHITE + "    [vació]: Muestra el menú actual")

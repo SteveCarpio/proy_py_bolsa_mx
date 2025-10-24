@@ -134,7 +134,7 @@ def sTv_paso0(var_NombreSalida, var_FechasSalida, var_Fechas3):
     
     # Validar versiones de GoogleChrome y ChromeDriver
     verGoogleChrome = obtener_version_GoogleChrome_LNX()
-    chromedriver_path = f"/srv/apps/MisCompilados/cfg/chromedriver/{verGoogleChrome}/chromedriver"
+    chromedriver_path = f"/srv/apps/MisCompilados/.cfg/chromedriver/{verGoogleChrome}/chromedriver"
     verChromeDriver = obtener_version_ChromeDriver(chromedriver_path)
     if verChromeDriver == verGoogleChrome:
         print(f"OK: Versiones Igualadas GoogleChrome {verGoogleChrome} y ChromeDriver {verChromeDriver}")
