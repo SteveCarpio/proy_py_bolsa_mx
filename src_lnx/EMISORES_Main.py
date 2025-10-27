@@ -9,6 +9,7 @@
 import pandas as pd
 import smtplib
 import sys
+import os
 from email.mime.multipart import MIMEMultipart                    
 from email.mime.text import MIMEText                                
 
@@ -122,22 +123,6 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
     # El cuerpo del mensaje en formato: html
     mensaje.attach(MIMEText(cuerpo_html, 'html'))
 
-    # El cuerpo del mensaje en formato: TXT
-    #mensaje.attach(MIMEText(cuerpo, 'plain'))
-
-    # Combinar la ruta con el nombre del archivo
-    # archivo_completo = os.path.join(ruta, nombre_archivo)
-
-    # Adjuntar el archivo Excel  --- HEMOS DECIDIDO NO MANDAR EL EXCEL
-    #try:
-    #    with open(archivo_completo, 'rb') as archivo:
-    #        # Crear el objeto MIME para el archivo adjunto
-    #        adjunto = MIMEApplication(archivo.read(), _subtype='xlsx')
-    #        adjunto.add_header('Content-Disposition', 'attachment', filename=nombre_archivo)
-    #        mensaje.attach(adjunto)
-    #except Exception as e:
-    #    print(f"Error al adjuntar el archivo: {e}")
-
     # Enviar el correo
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as servidor:
@@ -145,6 +130,14 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
         print(f"- Correo enviado exitosamente a: {', '.join(todos_destinatarios)}")
     except Exception as e:
         print(f"- Error al enviar el correo: {e}")
+
+
+def verifica_existencia_archivo(carpeta, archivo):
+    ruta_completa = os.path.join(carpeta, archivo)
+    if os.path.isfile(ruta_completa):
+        return True
+    else:
+        return False
 
 # ----------------------------------------------------------------------------------------
 #                               INICIO DEL PROGRAMA
@@ -158,15 +151,39 @@ if len(sys.argv) > 1 :
         Entorno = var_param
 
 
-RutaRaiz = "C:\\MisCompilados\\PROY_BOLSA_MX\\"
-RutaBIVA = f"{RutaRaiz}BIVA\\"
-RutaBMV  = f"{RutaRaiz}BMV\\"
+RutaRaiz = "/srv/apps/MisCompilados/PROY_BOLSA_MX/"    #  C:\\MisCompilados\\PROY_BOLSA_MX\\"
+RutaBIVA = f"{RutaRaiz}BIVA/"
+RutaBMV  = f"{RutaRaiz}BMV/"
+
+# Verificar si existe el file, si existen los 4 se ejecuta
+
+if verifica_existencia_archivo(f"{RutaBIVA}CONFIG/", "BIVA_Filtro_Emisores_PRO.xlsx"):
+    print(f"El archivo 'BIVA_Filtro_Emisores_PRO.xlsx' existe en la carpeta '{RutaBIVA}CONFIG/'.")
+else:
+    print(f"El archivo 'BIVA_Filtro_Emisores_PRO.xlsx' no existe en la carpeta '{RutaBIVA}CONFIG/'.")
+    sys.exit(0)
+if verifica_existencia_archivo(f"{RutaBIVA}INFORMES/", "BIVA_paso3_id_emisores.xlsx"):
+    print(f"El archivo 'BIVA_paso3_id_emisores.xlsx' existe en la carpeta '{RutaBIVA}INFORMES/'.")
+else:
+    print(f"El archivo 'BIVA_paso3_id_emisores.xlsx' no existe en la carpeta '{RutaBIVA}INFORMES/'.")
+    sys.exit(0)
+
+if verifica_existencia_archivo(f"{RutaBMV}CONFIG/", "BMV_Filtro_Emisores_PRO.xlsx"):
+    print(f"El archivo 'BMV_Filtro_Emisores_PRO.xlsx' existe en la carpeta '{RutaBMV}CONFIG/'.")
+else:
+    print(f"El archivo 'BMV_Filtro_Emisores_PRO.xlsx' no existe en la carpeta '{RutaBMV}CONFIG/'.")
+    sys.exit(0)
+if verifica_existencia_archivo(f"{RutaBMV}INFORMES/", "BMV_paso4_.xlsx"):
+    print(f"El archivo 'BMV_paso4_.xlsx' existe en la carpeta '{RutaBMV}INFORMES/'.")
+else:
+    print(f"El archivo 'BMV_paso4_.xlsx' no existe en la carpeta '{RutaBMV}INFORMES/'.")
+    sys.exit(0)
 
 # Leo los excel de entrada
-df_biva_1 = pd.read_excel(f"{RutaBIVA}CONFIG\\BIVA_Filtro_Emisores_PRO.xlsx")
-df_biva_2 = pd.read_excel(f"{RutaBIVA}INFORMES\\BIVA_paso3_id_emisores.xlsx")
-df_bmv_1  = pd.read_excel(f"{RutaBMV}CONFIG\\BMV_Filtro_Emisores_PRO.xlsx", sheet_name="FILTRO")      
-df_bmv_2  = pd.read_excel(f"{RutaBMV}INFORMES\\BMV_paso4_.xlsx")                       
+df_biva_1 = pd.read_excel(f"{RutaBIVA}CONFIG/BIVA_Filtro_Emisores_PRO.xlsx")
+df_biva_2 = pd.read_excel(f"{RutaBIVA}INFORMES/BIVA_paso3_id_emisores.xlsx")
+df_bmv_1  = pd.read_excel(f"{RutaBMV}CONFIG/BMV_Filtro_Emisores_PRO.xlsx", sheet_name="FILTRO")      
+df_bmv_2  = pd.read_excel(f"{RutaBMV}INFORMES/BMV_paso4_.xlsx")                       
 
 # Quedarnos con los campos CLAVE - CODIGO
 df_biva_1 = df_biva_1[['CLAVE','CODIGO']]

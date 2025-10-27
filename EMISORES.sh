@@ -27,7 +27,7 @@ source "${RUTA_JOB}venv/bin/activate"
 ahora=$(date +"%Y-%m-%d %H:%M:%S")
 runjob="python3 $exe PRO $fecha"
 echo "$ahora : Ini bash $NOMBRE_BASH: $runjob" 
-#python3 "$exe" "PRO" "$fecha" > "${logBase}_out.log" 2> "${logBase}_err.log"
+$runjob > "${logBase}_out.log" 2> "${logBase}_err.log"
 ahora=$(date +"%Y-%m-%d %H:%M:%S")
 echo "$ahora : Fin bash $NOMBRE_BASH: $runjob" 
 
