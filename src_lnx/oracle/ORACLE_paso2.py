@@ -6,6 +6,7 @@
 
 import cfg.ORACLE_variables as sTv
 from   cfg.ORACLE_librerias import *
+from   cfg.ORACLE_conection import *
 
 # ----------------------------------------------------------------------------------------
 #                                  FUNCIONES
