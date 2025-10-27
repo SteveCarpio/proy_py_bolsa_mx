@@ -1,0 +1,35 @@
+#!/bin/bash
+#################################################################################
+#  Script Bash para ejecutar el job BOLSAS_Main.py con parámetros
+#  específicos y gestionar los logs de salida y error.
+#  0 9 * * * /bin/bash /home/robot/Python/proy_py_bolsa_mx/BOLSAS.sh 1
+#  ** esto ejecutará el script todos los días 9:00 AM con la fecha de ayer (1).
+#  Autor: Steve Carpio
+#  Fecha: 2025-10-27
+#################################################################################
+
+# === CONFIGURACIÓN GENERAL ===
+NOMBRE_BASH="BOLSAS.sh"
+NOMBRE_JOB="BOLSAS_Main.py"
+RUTA_JOB="/home/robot/Python/proy_py_bolsa_mx/"
+RUTA_LOG="/srv/apps/MisCompilados/PROY_BOLSA_MX/LOG/"
+DIAS=$1
+
+# === DEFINE FECHA DE EJECUCIÓN RESTANDO DIAS Y DEFINE LOG DE SALIDA ===
+fecha=$(date -d "$DIAS days ago" +%F)
+exe="${RUTA_JOB}src_lnx/$NOMBRE_JOB"
+logBase="${RUTA_LOG}${NOMBRE_JOB%.*}_$fecha"
+
+# === ACTIVAR ENTORNO VIRTUAL ===
+source "${RUTA_JOB}venv/bin/activate"
+
+# === EJECUCIÓN DEL SCRIPT ===
+ahora=$(date +"%Y-%m-%d %H:%M:%S")
+runjob="python3 $exe RUN PRO $fecha"
+echo "$ahora : Ini bash $NOMBRE_BASH: $runjob" 
+python3 "$exe" "RUN" "DEV" "$fecha" > "${logBase}_out.log" 2> "${logBase}_err.log"
+ahora=$(date +"%Y-%m-%d %H:%M:%S")
+echo "$ahora : Fin bash $NOMBRE_BASH: $runjob" 
+
+# === DESACTIVAR ENTORNO VIRTUAL ===
+deactivate

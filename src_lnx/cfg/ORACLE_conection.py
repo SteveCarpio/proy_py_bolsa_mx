@@ -1,3 +1,6 @@
+
+from   ORACLE_librerias import *
+
 def Oracle_Establece_Conexion(par_dsn, par_uid, par_pwd):
     try:
         conn = oracledb.connect(user=par_uid, password=par_pwd, dsn=par_dsn)
