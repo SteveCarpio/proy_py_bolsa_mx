@@ -11,62 +11,6 @@ from   cfg.ORACLE_librerias import *
 #                                  FUNCIONES
 # ----------------------------------------------------------------------------------------
 
-
-def Oracle_Establece_Conexion(par_dsn, par_uid, par_pwd, lib_dir=None):
-    try:
-        # Si tu Instant Client no está en ldconfig, indícalo una vez
-        if lib_dir:
-            oracledb.init_oracle_client(lib_dir=lib_dir)
-        # par_dsn puede ser "host:port/servicename" o un TNS name si está en tnsnames.ora
-        conn = oracledb.connect(user=par_uid, password=par_pwd, dsn=par_dsn)
-        cur = conn.cursor()
-        print(Fore.CYAN + f"{dt.now().time()} - Conexión establecida.")
-        return conn, cur
-    except oracledb.Error as e:
-        print(Fore.RED + f'{dt.now().time()} - Error al conectar con Oracle\n{e}')
-        return None, None
-
-# Cierra una conexión a Oracle
-def Oracle_Cerrar_Conexion(conn, cur):
-    try:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
-        print(Fore.CYAN + f"{dt.now().time()} - Conexión cerrada.")
-    except oracledb.Error as e:
-        print(Fore.RED + f'{dt.now().time()} - Error al cerrar la conexión\n{e}')
-
-
-
-
-# Establece una conexión a Oracle 
-def Oracle_Establece_Conexion_old(par_dsn, par_uid,par_pwd):
-    try:
-        # Cadena de conexión a la base de datos Oracle
-        connection_string = f'DSN={par_dsn};UID={par_uid};PWD={par_pwd};'
-        # Establecer la conexión y un cursor a la base de datos Oracle
-        conexion = pyodbc.connect(connection_string)
-        cursor = conexion.cursor()
-        print(Fore.CYAN + f"{dt.now().time()} - Conexión establecida.")
-        return conexion, cursor
-    except pyodbc.Error as e:
-        print(Fore.RED + f'{dt.now().time()} - Error al conectar con Oracle \n{e}')
-        return None, None 
-
-# Cierra una conexión a Oracle
-def Oracle_Cerrar_Conexion_old(conexion, cursor):
-    try:
-        if cursor:
-            cursor.close()
-        if conexion:
-            conexion.close()
-        print(Fore.CYAN + f"{dt.now().time()} - Conexión cerrada. ")
-    except pyodbc.Error as e:
-        print(Fore.RED + f'{dt.now().time()} - Error al cerrar la conexión \n{e}')
-
-    ### -------------------------------- Inicio del programa ----------------------------
-
 # Valida si existe una tabla en concreto en oracle
 def existe_tabla(cursor, nombre_tabla):
     query = f"""
@@ -77,7 +21,7 @@ def existe_tabla(cursor, nombre_tabla):
     resultado = cursor.fetchone()
     return resultado is not None
   
-
+# Comprueba si el resgistro del dataframe"row" existe en la bbbdd de eventos relevantes
 def existe_en_oracle(cursor, row):
     """
     Comprueba si existe el registro 'row' en la tabla P_BOLSAS_EVENTOS_RELEVANTES.
@@ -135,50 +79,6 @@ def existe_en_oracle(cursor, row):
         print("SQL:", sql)
         print("Params:", params)
         raise
-
-
-
-# Validamos si el registro existe en ORACLE
-def existe_en_oracle_old(cursor, row):
-    condiciones = """
-    SELECT 1 FROM P_BOLSAS_EVENTOS_RELEVANTES
-    WHERE FECHA = ?
-      AND N = ?
-      AND CLAVE = ?
-      AND SECCION = ?
-      AND ASUNTO = ?
-      AND URL = ?
-    """
-    params = [
-        row['FECHA'],
-        row['N'],
-        row['CLAVE'],
-        row['SECCION'],
-        row['ASUNTO'],
-        row['URL'],
-    ]
-
-    # Verificamos si ARCHIVO es None (NULL)
-    if row['ARCHIVO'] is None:
-        condiciones += " AND ARCHIVO IS NULL"
-    else:
-        condiciones += " AND ARCHIVO = ?"
-        params.append(row['ARCHIVO'])
-
-    condiciones += """
-      AND ORIGEN = ?
-      AND T = ?
-      AND FILTRO = ?
-    """
-    params.extend([
-        row['ORIGEN'],
-        row['T'],
-        row['FILTRO']
-    ])
-
-    cursor.execute(condiciones, params)
-    return cursor.fetchone() is not None
-
         
 # ----------------------------------------------------------------------------------------
 #                               INICIO PROGRAMA
@@ -209,7 +109,6 @@ def sTv_paso2(var_Fechas3):
 
         # Validar duplicados
         for idx, row in sTv.df_Global.iterrows():
-
             if existe_en_oracle(cursor, row):
                 rutaEntrada=f'{sTv.var_RutaIN}{sTv.var_Files_IN}_{var_Fechas3}.xlsx'
                 print(Fore.RED + f"Duplicado(s) detectado, revisar el file: {rutaEntrada}")
@@ -219,11 +118,7 @@ def sTv_paso2(var_Fechas3):
 
         print(f"OK: No existen duplicados, se podrán subir los {len(sTv.df_Global)} registros")
 
-        # Crea una copia de seguridad
-        #cursor.execute(f"CREATE TABLE {sTv.var_Ora_TAB1}_{var_Fechas3} AS SELECT * FROM {sTv.var_Ora_TAB1} WHERE 1=0")
-        #cursor.execute(f"INSERT INTO {sTv.var_Ora_TAB1}_{var_Fechas3} SELECT * FROM {sTv.var_Ora_TAB1}")
-
-        # Crea una copia de seguridad (Opción 1: si existe, la borra y la vuelve a crear)
+        # Crea una copia de seguridad: Si existe la copia, la borra y la vuelve a crear)
         backup = f"{sTv.var_Ora_TAB1}_{var_Fechas3}"
         try:
             # Si ya existe, la eliminamos primero
@@ -257,7 +152,3 @@ def sTv_paso2(var_Fechas3):
 
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)
-
-        
-        
-        
