@@ -1,5 +1,5 @@
 
-from   ORACLE_librerias import *
+from   cfg.ORACLE_librerias import *
 
 def Oracle_Establece_Conexion(par_dsn, par_uid, par_pwd):
     try:
