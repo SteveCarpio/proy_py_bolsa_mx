@@ -14,6 +14,7 @@ NOMBRE_JOB="BMV_Main.py"
 RUTA_JOB="/home/robot/Python/proy_py_bolsa_mx/"
 RUTA_LOG="/srv/apps/MisCompilados/PROY_BOLSA_MX/BMV/LOG/"
 DIAS=$1
+ENTORNO=$2
 
 # === DEFINE FECHA DE EJECUCIÓN RESTANDO DIAS Y DEFINE LOG DE SALIDA ===
 fecha=$(date -d "$DIAS days ago" +%F)
@@ -25,9 +26,9 @@ source "${RUTA_JOB}venv/bin/activate"
 
 # === EJECUCIÓN DEL SCRIPT ===
 ahora=$(date +"%Y-%m-%d %H:%M:%S")
-runjob="python3 $exe RUN-NO-EMAIL PRO $fecha"
+runjob="python3 $exe RUN-NO-EMAIL $ENTORNO $fecha"
 echo "$ahora : Ini bash $NOMBRE_BASH: $runjob" 
-python3 "$exe" "RUN-NO-EMAIL" "PRO" "$fecha" > "${logBase}_out.log" 2> "${logBase}_err.log"
+python3 "$exe" "RUN-NO-EMAIL" "$ENTORNO" "$fecha" > "${logBase}_out.log" 2> "${logBase}_err.log"
 ahora=$(date +"%Y-%m-%d %H:%M:%S")
 echo "$ahora : Fin bash $NOMBRE_BASH: $runjob" 
 
