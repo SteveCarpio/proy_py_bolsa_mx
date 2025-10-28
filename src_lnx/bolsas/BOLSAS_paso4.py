@@ -24,22 +24,32 @@ def aplicar_colores_alternos(tabla_html):
 # Función envió de Email
 def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1, cuerpo2, ruta, nombre_archivo, df1, df2):
 
+    print("\n- Comprobando el número de registros para cada bolsas, si en una de ellas no hay registros no se mandará email")
+
     # Compruebo si hay valores de las bolsas
     if df1.iloc[0]['CLAVE'] == 'none':
         v_df1 = 0
+        print(f"Registros en BIVA: {v_df1}")
     else:
         v_df1 = 1
+        print(f"Registros en BIVA: {len(df1)}")
+
+    # Compruebo si hay valores de las bolsas
     if df2.iloc[0]['CLAVE'] == 'none':
         v_df2 = 0
+        print(f"Registros en BMV: {v_df2}")
     else:
         v_df2 = 1
+        print(f"Registros en BMV: {len(df2)}")
+
+    # Resultado     
     v_df = v_df1 + v_df2
 
-    # Si no hay registros de la bolsa no se manda email, creado por los fines de semana que manda email vacíos
-    if v_df == 0:
-        print("No se enviará un email, parece que no hay registros de las bolsas de BIVA y BMV")
+    # Si 'v_df' tiene el valor 0 o 1: NO se manda email
+    # Si 'v_df' tiene el valor >= 2 : OK se manda email
+    if v_df < 2:
+        print("¡ATENCIÓN! : No se enviará un email, parece que no hay registros en BIVA o BMV ")
     else:
-
         # Configuración del servidor SMTP (Zimbra)
         smtp_server = 'zimbra.tda-sgft.com'
         smtp_port = 25  
@@ -57,9 +67,6 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1
         todos_destinatarios = destinatarios_to + destinatarios_cc 
 
         # Convertir el DataFrame a HTML - escape=False para que tenga en cuenta las etiquetas HMTL
-        #tabla_html1 = df1.to_html(index=True, escape=False)  # index=True, con el índice
-        #tabla_html2 = df2.to_html(index=True, escape=False)  # index=True, con el índice
-
         tabla_html1 = aplicar_colores_alternos(df1.to_html(index=False, escape=False))
         tabla_html2 = aplicar_colores_alternos(df2.to_html(index=False, escape=False))
 
@@ -190,7 +197,6 @@ def sTv_paso4_lee_DF(ruta, bolsa, var_Fechas2):
                 df['ARCHIVO'] = '<a href=" ' + df['ARCHIVO'] + ' " target="_blank" > Abrir Archivo </a>'
 
             df['URL'] = '<a href=" ' + df['URL'] + ' " target="_blank" > Abrir URL </a>'
-
             return df
         except Exception as e:
             print(f"- Error al leer el archivo: {e} - {ruta} - {bolsa}")
