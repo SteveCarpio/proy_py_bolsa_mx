@@ -84,10 +84,10 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
             {tabla_html}  <!-- Aquí se inserta el DF convertido a HTML  -->
 
             <br>
-            <p>"Es necesario agregar el/los {len(df)} emisores en los archivos de configuración en el servidor Python para que se tengan en cuenta en la próxima ejecución.". 
+            <p>"Es necesario agregar el/los {len(df)} emisores en los archivos de configuración en el servidor Linux Python para que se tengan en cuenta en la próxima ejecución.". 
             </p><br>
-            Bolsa BIVA: C:\\MisCompilados\\PROY_BOLSA_MX\\BIVA\\CONFIG\\BIVA_Filtro_Emisores_PRO.xlsx <br>
-            Bolsa BMV:  C:\\MisCompilados\\PROY_BOLSA_MX\\BMV\\CONFIG\\BMV_Filtro_Emisores_PRO.xlsx <br><br>
+            Bolsa BIVA: /srv/apps/MisCompilados/PROY_BOLSA_MX/BIVA/CONFIG/BIVA_Filtro_Emisores_PRO.xlsx <br>
+            Bolsa BMV:  /srv/apps/MisCompilados/PROY_BOLSA_MX/BMV/CONFIG/BMV_Filtro_Emisores_PRO.xlsx <br><br>
             <p></p>
 
             <p>  </p><br><p></p>
