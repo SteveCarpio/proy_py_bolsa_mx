@@ -6,6 +6,9 @@
 import cfg.BMV_variables as sTv
 from   cfg.BMV_librerias import *
 
+# Deshabilita todas las advertencias de "InsecureRequestWarning"
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 # ----------------------------------------------------------------------------------------
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
@@ -36,8 +39,8 @@ def sTv_paso5_Descarga_Html(var_NombreSalida, var_FechasSalida, df):
         URL3 = f'{row.iloc[5]}'   #  Campo URL3
 
         # Realizamos la solicitud GET para obtener el contenido HTML
-        response2 = requests.get(URL2)
-        response3 = requests.get(URL3)
+        response2 = requests.get(URL2, verify=False)
+        response3 = requests.get(URL3, verify=False)
 
         print(f"({cont}/{num_registros}) Analizando URL2: {URL2}  -  URL3: {URL3}")
 

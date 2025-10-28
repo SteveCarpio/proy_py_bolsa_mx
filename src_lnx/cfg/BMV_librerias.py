@@ -17,6 +17,7 @@ import re                                                         # -- -- -- -- 
 import smtplib                                                    # -- -- -- -- -- -- -- -- -- p8 # 
 import sys                                                        # ma -- -- -- -- -- -- -- -- -- #
 import subprocess                                                 # -- p0 -- -- -- -- -- -- -- -- #
+import urllib3                                                    # -- -- -- -- -- -- p5 -- -- -- #
 from colorama import init, Fore, Back, Style                      # ma -- -- -- -- -- -- -- -- -- #
 from selenium import webdriver                                    # -- -- p1 -- -- -- -- -- -- -- #
 from selenium.webdriver.chrome.service import Service             # -- -- p1 -- -- -- -- -- -- -- #

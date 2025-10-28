@@ -24,13 +24,17 @@ logBase="${RUTA_LOG}${NOMBRE_JOB%.*}_$fecha"
 # === ACTIVAR ENTORNO VIRTUAL ===
 source "${RUTA_JOB}venv/bin/activate"
 
+# === CONFIGURAR TERM ===
+export TERM=xterm      # Para que no de un mensaje de error en la log "err", desde cron no encuentra esta variable 
+# o: export TERM=dumb
+
 # === EJECUCIÓN DEL SCRIPT ===
-ahora=$(date +"%Y-%m-%d %H:%M:%S")
+ahora=$(date +"%Y-%m-%d %H.%M")
 runjob="python3 $exe $ENTORNO $fecha"
-echo "$ahora : Ini bash $NOMBRE_BASH: $runjob" 
+echo "$ahora: Ini bash $NOMBRE_BASH: $runjob" 
 $runjob > "${logBase}_out.log" 2> "${logBase}_err.log"
-ahora=$(date +"%Y-%m-%d %H:%M:%S")
-echo "$ahora : Fin bash $NOMBRE_BASH: $runjob" 
+ahora=$(date +"%Y-%m-%d %H.%M")
+echo "$ahora: Fin bash $NOMBRE_BASH: $runjob" 
 
 # === DESACTIVAR ENTORNO VIRTUAL ===
-deactivate
+#deactivate
