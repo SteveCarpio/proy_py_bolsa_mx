@@ -1,6 +1,30 @@
 import ORACLE_variables as sTv
 from   ORACLE_librerias import *
-from   ORACLE_conection import *
+
+
+def Oracle_Establece_Conexion(par_dsn, par_uid, par_pwd):
+    try:
+        conn = oracledb.connect(user=par_uid, password=par_pwd, dsn=par_dsn)
+        cur = conn.cursor()
+        print(Fore.CYAN + f"{dt.now().time()} - Conexión establecida.")
+        return conn, cur
+    except oracledb.Error as e:
+        print(Fore.RED + f'{dt.now().time()} - Error al conectar con Oracle\n{e}')
+        return None, None
+
+# Cierra una conexión a Oracle
+def Oracle_Cerrar_Conexion(conn, cur):
+    try:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+        print(Fore.CYAN + f"{dt.now().time()} - Conexión cerrada.")
+    except oracledb.Error as e:
+        print(Fore.RED + f'{dt.now().time()} - Error al cerrar la conexión\n{e}')
+
+##############################################################
+
 init(autoreset=True)
 
 # Parámetros 
@@ -9,7 +33,7 @@ PWD = sTv.var_Ora_PWD
 DSN = sTv.var_Ora_DNS
 TABLE = sTv.var_Ora_TAB1
 
-F_PROCESO   = "2025-10-27"    # OJO hace referencia a la fecha del día en el que se ejecuta el proceso "FPROCESO" no la feha de datos "FDATOS".
+F_PROCESO   = "2025-10-30"    # OJO hace referencia a la fecha del día en el que se ejecuta el proceso "FPROCESO" no la feha de datos "FDATOS".
 TIPO_ACCION = "LISTAR"        # LISTAR | ELIMINAR
 
 def main():

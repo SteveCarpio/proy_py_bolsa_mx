@@ -33,7 +33,10 @@ def sTv_paso3(var_Fechas3):
 
             # Importación del DataFrame
             df = sTv.df_Global.copy()
-            df['FPROCESO'] = dt.now()
+
+            # Agregar variable FPROCESO
+            fecha_dt = pd.to_datetime(var_Fechas3, format='%Y%m%d')  # Convertirla a datetime (solo fecha)
+            df['FPROCESO'] = fecha_dt
 
             # Recorro el DataFrame registro por registro
             for index, row in df.iterrows():
