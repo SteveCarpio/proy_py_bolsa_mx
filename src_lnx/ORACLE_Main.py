@@ -34,8 +34,6 @@ if var_Entorno != "PRO":
     print("El programa está preparado para ejecutarse sobre tablas de PRODUCCIÓN el resto de modos no están preparados")
     #sys.exit(0)
 
-print("fffff")
-
 # Parámetro3: Fecha (opcional)
 tiempo_inicio = tiempo_inicio2
 #tiempo_inicio = dt(2025, 6, 7)    #   dt(2025, 3, 31)

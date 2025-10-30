@@ -8,6 +8,11 @@
 #  Fecha: 2025-10-27
 #################################################################################
 
+# === EXPORT ORACLE ===
+export LD_LIBRARY_PATH="/opt/oracle/instantclient:$LD_LIBRARY_PATH"
+export TNS_ADMIN="/opt/oracle/instantclient/network/admin"
+
+
 # === CONFIGURACIÓN GENERAL ===
 NOMBRE_BASH="ORACLE.sh"
 NOMBRE_JOB="ORACLE_Main.py"

@@ -5,6 +5,10 @@
 #
 #########################################################################################
 
+# Exportar las variables que necesita Oracle
+export LD_LIBRARY_PATH="/opt/oracle/instantclient:$LD_LIBRARY_PATH"
+export TNS_ADMIN="/opt/oracle/instantclient/network/admin"
+
 # Fuerza al shell a detenerse inmediatamente si cualquier comando devuelve un error (-e)
 # Evita referencias a variables no definidas (-u)
 # Captura errores en tuberías (pipefail).
