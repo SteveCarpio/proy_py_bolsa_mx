@@ -25,6 +25,14 @@ from selenium.webdriver.chrome.options import Options             # -- -- p1 -- 
 from selenium.webdriver.support.ui import WebDriverWait           # -- -- p1 -- -- -- -- -- -- -- #
 from selenium.webdriver.support import expected_conditions as EC  # -- -- p1 -- -- -- -- -- -- -- #
 from selenium.webdriver.common.by import By                       # -- -- p1 -- -- -- -- -- -- -- #
+
+from selenium.common.exceptions import (
+        ElementClickInterceptedException,
+        ElementNotInteractableException,
+        StaleElementReferenceException,
+        TimeoutException,
+    )
+
 from datetime import datetime as dt                               # ma -- -- -- -- -- -- -- p7 -- #
 from datetime import timedelta                                    # ma -- -- -- -- p4 -- -- p7 -- #
 from bs4 import BeautifulSoup                                     # -- -- -- -- -- -- -- p6 -- -- #
