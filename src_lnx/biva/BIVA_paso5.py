@@ -234,6 +234,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
     else:
+        print("- NO hay registros en el DF 'df_paso8_P' --> (Este mensaje es normal porque pasamos todos los emisores a Monica) ")
         if var_SendEmail == "S":
             print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
      
@@ -281,5 +282,6 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
+        print("- NO hay registros en el DF 'df_paso8_M' -->  Revisar el excel 'BIVA......_paso4.xlsx' ")
         if var_SendEmail == "S":
             print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")
