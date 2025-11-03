@@ -16,7 +16,8 @@ def sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida, var_ab, va_Num):
     driver.get(sTv.var_WEBSCRAPING1)
 
     # Esperar que la página cargue completamente
-    time.sleep(8)
+    time.sleep(15)
+
     WebDriverWait(driver, 60).until(
         lambda driver: driver.execute_script('return document.readyState') == 'complete'
     )
@@ -65,7 +66,7 @@ def sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida, var_ab, va_Num):
     print(f"        -  HTML creado correctamente: {var_NombreSalida}_paso1_{var_ab}_{var_FechasSalida}.html")
     driver.quit()
 
-def sTv_paso1(var_NombreSalida, var_FechasSalida):
+def sTv_paso1(var_NombreSalida, var_FechasSalida):   #  var_FechasSalida lo mando "vacio" se podría quitar ese parametro
     sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida, "a", "2")  # WEBSCRAPING CAPITAL [2]
     sTv_paso1_WebScraping(var_NombreSalida, var_FechasSalida, "b", "3")  # WEBSCRAPING DEUDA   [3]
 

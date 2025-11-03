@@ -45,7 +45,12 @@ def sTv_paso6_lee_html_dato(file, seccion, tipo_html):
     # Extraer el CODIGO y la CLAVE:
     codigox = file.split('_')                     #  - divido el file "BMV_paso5__6842_2.html"
     codigo = codigox[3]                           #    me quedo con el 3er indice "6842"
-    clave = soup.find('span', class_='key').text  #  - busco en el hmtl el valor 
+
+    elem = soup.find('span', class_='key')               #  - meto en una variable el elemento del span para ver si luego existe
+    clave = elem.get_text(strip=True) if elem else None  #  - busco en el hmtl el valor, si no esxiste asigno None
+    
+    #clave = soup.find('span', class_='key').text  #  - busco en el hmtl el valor
+    #print(f"STV-{clave}---{elem}---")
 
     # Expresión regular para buscar SECCION en upcase o lowcase
     h2_tag = soup.find('h2', string=re.compile(seccion, re.IGNORECASE))
@@ -101,7 +106,7 @@ def sTv_paso6(var_NombreSalida, var_FechasSalida):
     cont2 = 0
     for file2 in files2:
         cont2 = cont2 + 1
-        print(f"\n({cont2}\{num_reg2}) Leyendo el html: {file2} ")
+        print(f"\n({cont2}-{num_reg2}) Leyendo el html: {file2} ")
         sTv_paso6_lee_html_dato(file2, "Tenedores y Amortizaciones", "2")
         sTv_paso6_lee_html_dato(file2, "Convocatorias de Asambleas", "2")
         sTv_paso6_lee_html_dato(file2, "Resumen de Acuerdos de Asamblea", "2")
@@ -111,7 +116,7 @@ def sTv_paso6(var_NombreSalida, var_FechasSalida):
     cont3 = 0
     for file3 in files3:
         cont3 = cont3 + 1
-        print(f"\n({cont3}\{num_reg3}) Leyendo el html: {file3} ")
+        print(f"\n({cont3}-{num_reg3}) Leyendo el html: {file3} ")
         sTv_paso6_lee_html_dato(file3, "Eventos relevantes de la emisora", "3")
         sTv_paso6_lee_html_dato(file3, "Relevantes de la calificadora", "3")
         sTv_paso6_lee_html_dato(file3, "Eventos relevantes del Representante Común", "3")
