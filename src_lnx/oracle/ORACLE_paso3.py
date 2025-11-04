@@ -102,13 +102,13 @@ def sTv_paso3(var_Fechas3):
 
             # Oracle, Confirma los cambios
             conexion.commit() # type: ignore
-
+        
         # Tratamiento del fichero de Origen:  BOLSAS_AAAAMMDD.xlsx
         fileOld = os.path.join(sTv.var_RutaIN, f'{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
         fileNew = os.path.join(sTv.var_RutaIN, f'ora_{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
         os.rename(fileOld, fileNew)                  # Renombro fichero origen
         shutil.copy2(fileNew, sTv.var_RutaInforme)   # Copio    fichero origen a destino    # type: ignore
         os.remove(fileNew)                           # Elimino  fichero origen
-
+        
         # Cierro de conexiones Oracle y libero memoria
         Oracle_Cerrar_Conexion(conexion, cursor)
