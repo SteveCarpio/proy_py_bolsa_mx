@@ -88,25 +88,27 @@ def sTv_paso3(var_Fechas3):
                         "NOTA": v_NOTA
                     }
 
-                    cursor.execute(sql, params)
+                    cursor.execute(sql, params) # type: ignore
 
-                    print(Fore.CYAN + f"Registro {index + 1} insertado en el servidor PYTHON ORACLE ({v_FPROCESO})")
+                    print(Fore.CYAN + f"Registro {index + 1} insertado en el servidor PYTHON ORACLE ({v_FPROCESO})") # type: ignore 
                     print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
                     print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} - {v_NOTA}\n")
 
                 except Exception as e:
                     # Puedes afinar el manejo según el código de error (duplicado, constraint, etc.)
-                    print(Fore.RED + f"Registro {index + 1} no insertado en el servidor PYTHON ORACLE: {e}")
+                    print(Fore.RED + f"Registro {index + 1} no insertado en el servidor PYTHON ORACLE: {e}") # type: ignore
                     print(Fore.WHITE + f"  {v_N} - {v_CLAVE} - {v_SECCION} - {v_FECHA} - {v_ASUNTO}")
                     print(Fore.WHITE + f"  {v_URL} - {v_ARCHIVO} - {v_ORIGEN} - {v_T} - {v_FILTRO} - {v_NOTA}\n")
 
             # Oracle, Confirma los cambios
-            conexion.commit()
+            conexion.commit() # type: ignore
 
-        # Renombro el file de entrada para que conste como leído
+        # Tratamiento del fichero de Origen:  BOLSAS_AAAAMMDD.xlsx
         fileOld = os.path.join(sTv.var_RutaIN, f'{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
         fileNew = os.path.join(sTv.var_RutaIN, f'ora_{sTv.var_Files_IN}_{var_Fechas3}.xlsx')
-        os.rename(fileOld, fileNew)
+        os.rename(fileOld, fileNew)                  # Renombro fichero origen
+        shutil.copy2(fileNew, sTv.var_RutaInforme)   # Copio    fichero origen a destino    # type: ignore
+        os.remove(fileNew)                           # Elimino  fichero origen
 
-        # Oracle, Cierre de conexiones y liberación de memoria:
+        # Cierro de conexiones Oracle y libero memoria
         Oracle_Cerrar_Conexion(conexion, cursor)

@@ -42,6 +42,7 @@ def sTv_paso1(var_Fechas3):
 
         else:
             print(f'NO Existe el fichero: {rutaEntrada}')
+            sys.exit(0)
 
     except Exception as e:
         print(f"Error al leer el archivo: {rutaEntrada} \n{e} ")
