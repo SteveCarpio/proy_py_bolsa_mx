@@ -125,31 +125,31 @@ def sTv_paso2(var_Fechas3):
             # Si ya existe, la eliminamos primero
             if existe_tabla(cursor, backup):
                 try:
-                    cursor.execute(f"DROP TABLE {backup} CASCADE CONSTRAINTS PURGE")
+                    cursor.execute(f"DROP TABLE {backup} CASCADE CONSTRAINTS PURGE")                                # type: ignore
                     print(Fore.CYAN + f"{dt.now().time()} - OK: Tabla de backup existente {backup} eliminada.")
                 except Exception as e:
                     print(Fore.RED + f"{dt.now().time()} - Error al eliminar la tabla {backup}: {e}")
-                    conexion.rollback()
+                    conexion.rollback()                                                                             # type: ignore
                     Oracle_Cerrar_Conexion(conexion, cursor)
                     raise
 
             # Crear tabla vacía con la misma estructura
-            cursor.execute(f"CREATE TABLE {backup} AS SELECT * FROM {sTv.var_Ora_TAB1} WHERE 1=0")
+            cursor.execute(f"CREATE TABLE {backup} AS SELECT * FROM {sTv.var_Ora_TAB1} WHERE 1=0")                  # type: ignore
             # Copiar datos
-            cursor.execute(f"INSERT INTO {backup} SELECT * FROM {sTv.var_Ora_TAB1}")
-            conexion.commit()
+            cursor.execute(f"INSERT INTO {backup} SELECT * FROM {sTv.var_Ora_TAB1}")                                # type: ignore
+            conexion.commit()                                                                                       # type: ignore
             print(Fore.CYAN + f"{dt.now().time()} - OK: Se creó la copia de respaldo en oracle: {backup}")
         except Exception as e:
             print(Fore.RED + f"{dt.now().time()} - Error al crear la copia de seguridad: {e}")
             try:
-                conexion.rollback()
+                conexion.rollback()                                                                                 # type: ignore
             except Exception:
                 pass
             Oracle_Cerrar_Conexion(conexion, cursor)
             raise
 
         print(f"OK: Se creó una copia de respaldo en oracle: {sTv.var_Ora_TAB1}_{var_Fechas3}")
-        conexion.commit()
+        conexion.commit()                                                                                           # type: ignore
 
         # Oracle, Cierre de conexiones y liberación de memoria:
         Oracle_Cerrar_Conexion(conexion, cursor)
