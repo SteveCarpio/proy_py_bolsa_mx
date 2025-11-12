@@ -323,8 +323,8 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     destinatarios_cc_p = [elemento.strip("'") for elemento in valor_cc_p.split(",")]
     destinatarios_to_m = [elemento.strip("'") for elemento in valor_to_m.split(",")]
     destinatarios_to_p = [elemento.strip("'") for elemento in valor_to_p.split(",")]
-    destinatarios_cc_x = ['carpios@tda-sgft.com']
-    destinatarios_to_x = ['carpios@tda-sgft.com']  # ['talavanf@tda-sgft.com','blancod@tda-sgft.com']
+    destinatarios_cc_x = ['notificacionespy@tda-sgft.com']                           # Email de Exluidos
+    destinatarios_to_x = ['talavanf@tda-sgft.com','blancod@tda-sgft.com']            # Email de Exluidos
     #------------------
     #destinatarios_cc_m = ['carpios@tda-sgft.com']
     #destinatarios_cc_p = ['carpios@tda-sgft.com']

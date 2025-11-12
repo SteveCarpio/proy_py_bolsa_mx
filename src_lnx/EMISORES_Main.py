@@ -213,7 +213,7 @@ if len(df_final) > 0:
     if Entorno == "PRO":
         print("- Ejecución en modo: PRO")
         destinatarios_to = ['repcomun@tda-sgft.com']
-        destinatarios_cc = ['carpios@tda-sgft.com']
+        destinatarios_cc = ['notificacionespy@tda-sgft.com']
     else:
         print("- Ejecución en modo: DEV")
         destinatarios_to = ['carpios@tda-sgft.com']
