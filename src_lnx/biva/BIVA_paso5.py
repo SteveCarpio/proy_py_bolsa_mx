@@ -142,7 +142,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
+def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Fechas1):
     
     # Leer el excel de entrada 
     df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx')
@@ -234,7 +234,7 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto_p, cuerpo_p, ruta, nombre_archivo_p, df_paso8_P)
     else:
-        print("- NO hay registros en el DF 'df_paso8_P' --> (Este mensaje es normal porque pasamos todos los emisores a Monica) ")
+        #print("- NO hay registros en el DF 'df_paso8_P' --> (Este mensaje es normal porque pasamos todos los emisores a Monica) ")
         if var_SendEmail == "S":
             print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (P)")
      
@@ -282,6 +282,11 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail):
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
-        print("- NO hay registros en el DF 'df_paso8_M' -->  Revisar el excel 'BIVA......_paso4.xlsx' ")
+        var_url = f'{sTv.var_WEBSCRAPING1}?fechaInicio={var_Fechas1}&fechaFin={var_Fechas1}'
+        print("- NO HAY REGISTROS FILTRADOS DE EVENTOS RELEVANTES EN EL DATAFRAME 'df_paso8_M' ")
+        print(f"-- Revisar el excel: {sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx")
+        print("-- Verificar si la FECHA_PROCESO es día NO lectivo en MEXICO")
+        print(f"-- Comprobar la URL: {var_url}")
+
         if var_SendEmail == "S":
             print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")

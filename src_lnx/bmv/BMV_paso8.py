@@ -281,5 +281,10 @@ def sTv_paso8(var_NombreSalida, var_FechasSalida, var_Fechas3, var_SendEmail):
         if var_SendEmail == "S":
             enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto_m, cuerpo_m, ruta, nombre_archivo_m, df_paso8_M)
     else:
+        print("- NO HAY REGISTROS FILTRADOS DE EVENTOS RELEVANTES EN EL DATAFRAME 'df_paso8_M' ")
+        print(f"-- Revisar el excel: {sTv.var_RutaInforme}{var_NombreSalida}_paso7_{var_FechasSalida}.xlsx")
+        print("-- Verificar si la FECHA_PROCESO es día NO lectivo en MEXICO")
+        print(f"-- Comprobar la URL: {sTv.var_WEBSCRAPING1}")
+
         if var_SendEmail == "S":
             print(f"- NO HAY DATOS PARA MANDAR UN EMAIL GRUPO (M)")

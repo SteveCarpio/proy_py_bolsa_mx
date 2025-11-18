@@ -142,7 +142,7 @@ def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo,
 #                               INICIO DEL PROGRAMA
 # ----------------------------------------------------------------------------------------
 
-def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emisor):
+def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Emisor, var_Fechas1):
     
     # Leer el excel de entrada 
     df_paso8 = pd.read_excel(f'{sTv.var_RutaInforme}{var_NombreSalida}_paso4.xlsx')

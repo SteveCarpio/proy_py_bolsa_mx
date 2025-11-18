@@ -82,7 +82,7 @@ def paso4():
 
 def paso5():
     print(Fore.YELLOW + f"\nEjecutando PASO_5........ {dt.now()} \n")
-    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail)
+    sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Fechas1) # pyright: ignore[reportCallIssue]
     print(Fore.YELLOW + "\nPaso 5 completado! \n")
 
 def pasoHelp():
