@@ -76,37 +76,40 @@ def sTv_paso5(var_NombreSalida, var_Fechas2, var_Fechas3):
     df_TOTAL = pd.DataFrame()
 
     # Ruta del archivo Excel
-    ruta_excel1 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_M.xlsx"
-    ruta_excel2 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_P.xlsx"
+    ruta_excel1 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_M.xlsx"  # obligatorio
+    ruta_excel2 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_P.xlsx"  
     ruta_excel5 = f"{sTv.var_RutaInforme}BIVA_{var_Fechas3}_X.xlsx"
-    ruta_excel3 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_M.xlsx"
+    ruta_excel3 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_M.xlsx"   # obligatorio
     ruta_excel4 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_P.xlsx"
     ruta_excel6 = f"{sTv.var_RutaInforme}BMV_{var_Fechas3}_X.xlsx"
     ruta_excelT = f"{sTv.var_RutaInforme}BOLSAS_{var_Fechas3}.xlsx"
 
     # Leer el archivo o crear el DataFrame por defecto
-    df_BIVA_M = sTv_paso5_lee_DF(ruta_excel1, "BIVA"  ,"M")
+    df_BIVA_M = sTv_paso5_lee_DF(ruta_excel1, "BIVA"  ,"M")   # obligatorio
     df_BIVA_P = sTv_paso5_lee_DF(ruta_excel2, "BIVA"  ,"P")
     df_BIVA_X = sTv_paso5_lee_DF(ruta_excel5, "BIVA_X"," ")
-    df_BMV_M = sTv_paso5_lee_DF(ruta_excel3,  "BMV"   ,"M")
+    df_BMV_M = sTv_paso5_lee_DF(ruta_excel3,  "BMV"   ,"M")   # obligatorio
     df_BMV_P = sTv_paso5_lee_DF(ruta_excel4,  "BMV"   ,"P")
     df_BMV_X = sTv_paso5_lee_DF(ruta_excel6,  "BMV_X" ," ")
 
     # Si RETURN df_xxxxxx es un DF lo concatena en el df_TOTAL
     if isinstance(df_BIVA_M, pd.DataFrame):
-        df_TOTAL = pd.concat([df_TOTAL, df_BIVA_M], ignore_index=True)
+        df_TOTAL = pd.concat([df_TOTAL, df_BIVA_M], ignore_index=True) # obligatorio
+        num_registro1 = len(df_BIVA_M)
     if isinstance(df_BIVA_P, pd.DataFrame):
         df_TOTAL = pd.concat([df_TOTAL, df_BIVA_P], ignore_index=True)
     if isinstance(df_BIVA_X, pd.DataFrame):
         df_TOTAL = pd.concat([df_TOTAL, df_BIVA_X], ignore_index=True)
     if isinstance(df_BMV_M, pd.DataFrame):
-        df_TOTAL = pd.concat([df_TOTAL, df_BMV_M], ignore_index=True)
+        df_TOTAL = pd.concat([df_TOTAL, df_BMV_M], ignore_index=True)  # obligatorio
+        num_registro2 = len(df_BMV_M)
     if isinstance(df_BMV_P, pd.DataFrame):
         df_TOTAL = pd.concat([df_TOTAL, df_BMV_P], ignore_index=True)
     if isinstance(df_BMV_X, pd.DataFrame):
         df_TOTAL = pd.concat([df_TOTAL, df_BMV_X], ignore_index=True)
 
-    if len(df_TOTAL) > 0:
+    # Si hay datos en los DF oblogatorios crea el excel BOLSAS.xlsx que sirve para oracle
+    if num_registro1 > 0 and num_registro2 > 0:
 
         # Reasignar el índice para que empiece en 1
         df_TOTAL.index = pd.Index(range(1, len(df_TOTAL) + 1))
