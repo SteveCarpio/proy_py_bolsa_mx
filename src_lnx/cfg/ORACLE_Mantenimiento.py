@@ -33,7 +33,7 @@ PWD = sTv.var_Ora_PWD
 DSN = sTv.var_Ora_DNS
 TABLE = sTv.var_Ora_TAB1
 
-F_PROCESO   = "2025-10-31"    # OJO hace referencia a la fecha del día en el que se ejecuta el proceso "FPROCESO" no la feha de datos "FDATOS".
+F_PROCESO   = "2025-11-18"    # OJO hace referencia a la fecha del día en el que se ejecuta el proceso "FPROCESO" no la feha de datos "FDATOS".
 TIPO_ACCION = "LISTAR"        # LISTAR | ELIMINAR
 
 def main():
