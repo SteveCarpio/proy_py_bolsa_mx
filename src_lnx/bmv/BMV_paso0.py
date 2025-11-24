@@ -35,8 +35,8 @@ def obtener_version_GoogleChrome_WIN():
     try:
         # Ruta del registro donde se almacena la versión de Chrome
         ruta_registro = r"SOFTWARE\Google\Chrome\BLBeacon"
-        clave_registro = winreg.OpenKey(winreg.HKEY_CURRENT_USER, ruta_registro)
-        version, _ = winreg.QueryValueEx(clave_registro, "version")
+        clave_registro = winreg.OpenKey(winreg.HKEY_CURRENT_USER, ruta_registro)  # type: ignore
+        version, _ = winreg.QueryValueEx(clave_registro, "version")               # type: ignore
         version_chrome = version
     except FileNotFoundError:
         print("Google Chrome no está instalado o no se encontró en el registro.")
@@ -61,7 +61,7 @@ def obtener_version_GoogleChrome_LNX():
             universal_newlines=True
         )
         for linea in salida.splitlines():
-            if "google-chrome" in linea.lower() and "ii" in linea.split()[0]:
+            if "google-chrome" in linea.lower():
                 # La línea tiene la forma: ii  google-chrome-stable  129.0.6668.65-1  ...
                 partes = linea.split()
                 if len(partes) >= 3:
