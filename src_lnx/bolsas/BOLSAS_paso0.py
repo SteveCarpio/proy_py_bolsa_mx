@@ -41,10 +41,14 @@ def sTv_paso0(var_Fechas3):
     valida_carpetas(sTv.var_RutaInforme)
     valida_carpetas(sTv.var_RutaLog)
 
-    # Borra todos los files 
+    # Borra todos los files temporales de BIVA
     borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_M.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_P.xlsx')
+    borrar_archivos(sTv.var_RutaInforme,  f'BIVA_*_X.xlsx')
+    
+    # Borra todos los files temporales de BMV
     borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_M.xlsx')
     borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_P.xlsx')
-  
+    borrar_archivos(sTv.var_RutaInforme,  f'BMV_*_X.xlsx')
+      
     print(Fore.WHITE + "\nRequisitos previos ok\n")

@@ -36,10 +36,10 @@ echo "`date "+%Y-%m-%d %H.%M"`: Ejecutando ${JOB2}"
 # ${RUTA_RAIZ}${JOB2} $DIAS $ENTORNO
 echo "`date "+%Y-%m-%d %H.%M"`: ${JOB2} terminó correctamente"
 echo "`date "+%Y-%m-%d %H.%M"`: Ejecutando ${JOB3}"
-# ${RUTA_RAIZ}${JOB3} $DIAS $ENTORNO
+ ${RUTA_RAIZ}${JOB3} $DIAS $ENTORNO
 echo "`date "+%Y-%m-%d %H.%M"`: ${JOB3} terminó correctamente"
 echo "`date "+%Y-%m-%d %H.%M"`: Ejecutando ${JOB4}"
-${RUTA_RAIZ}${JOB4} $DIAS $ENTORNO
+# ${RUTA_RAIZ}${JOB4} $DIAS $ENTORNO
 echo "`date "+%Y-%m-%d %H.%M"`: ${JOB4} terminó correctamente"
 echo "`date "+%Y-%m-%d %H.%M"`: Ejecutando ${JOB5}"
 # ${RUTA_RAIZ}${JOB5} $DIAS $ENTORNO
