@@ -13,6 +13,7 @@ from   oracle.ORACLE_paso0  import sTv_paso0
 from   oracle.ORACLE_paso1  import sTv_paso1
 from   oracle.ORACLE_paso2  import sTv_paso2
 from   oracle.ORACLE_paso3  import sTv_paso3
+from   oracle.ORACLE_paso4  import sTv_paso4
 
 var_NombreSalida = 'ORACLE'
 tiempo_inicio2 = dt.now()
@@ -35,8 +36,8 @@ if var_Entorno != "PRO":
     #sys.exit(0)
 
 # Parámetro3: Fecha (opcional)
-tiempo_inicio = tiempo_inicio2
-#tiempo_inicio = dt(2025, 6, 7)    #   dt(2025, 3, 31)
+#tiempo_inicio = tiempo_inicio2
+tiempo_inicio = dt(2025, 11, 22)    #   dt(2025, 3, 31)
 if len(sys.argv) > 3 :
     var_param3 = sys.argv[3]
     if re.match(r"^\d{4}-\d{2}-\d{2}$", var_param3):
@@ -72,7 +73,6 @@ def paso1():
     print(Fore.YELLOW + "\nPaso 1 completado - Importación de Datos! \n")
 
 def paso2():
- 
     print(Fore.GREEN + f"\nEjecutando PASO2: Valida Datos de entrada (Local vs Oracle)....... {dt.now()} \n")
     sTv_paso2(var_Fechas3)
     print(Fore.GREEN + "\nPaso 2 completado - Validación de Datos! \n")
@@ -81,6 +81,11 @@ def paso3():
     print(Fore.BLUE + f"\nEjecutando PASO3: Carga de Datos al Servidor Oracle....... {dt.now()} \n")
     sTv_paso3(var_Fechas3)
     print(Fore.BLUE + "\nPaso 3 completado - Anexado de Datos a Oracle! \n")
+
+def paso4():
+    print(Fore.BLUE + f"\nEjecutando PASO4: Borrar Versiones de la BBDD Oracle....... {dt.now()} \n")
+    sTv_paso4()
+    print(Fore.BLUE + "\nPaso 4 completado - Borrar Versiones de la BBDD Oracle! \n")
 
 def pasoHelp():
     os.system("clear")
@@ -120,6 +125,9 @@ def pasoHelp():
     print(Fore.WHITE + "    3) Carga de Datos al Servidor Oracle:")
     print(Fore.WHITE + "       Subimos los datos validados al servidor Oracle")
     print("")
+    print(Fore.WHITE + "    4) Borrar Versiones de la BBDD Oracle:")
+    print(Fore.WHITE + "       Nos quedamos con 10 backups de la bbdd Oracle, el resto se borrarán")
+    print("")
     print(Fore.WHITE + "Dependencias importantes:")
     print("")
     print(Fore.WHITE + "    1) TNS de ORACLE:")
@@ -151,6 +159,7 @@ def todos():
     paso1()
     paso2()
     paso3()
+    paso4()
     print(Fore.WHITE + "¡Todos los pasos completados exitosamente!  \n")
     print(Fore.MAGENTA + f"---------------------------------------------------------------------------------------")
     print(Fore.WHITE + f" Tiempo Transcurrido INI: {tiempo_inicio2} - FIN: {dt.now()}")
@@ -173,6 +182,7 @@ def mostrar_menu(par_FechasSalida):
     print(Fore.YELLOW  + "1) 🟡 Importar Datos de Entrada                ")
     print(Fore.GREEN   + "2) 🟢 Validar Datos Locales vs Oracle          ")
     print(Fore.BLUE    + "3) 🔵 Carga de Datos al Servidor Oracle        ")
+    print(Fore.BLUE    + "4) 🔵 Borrar Backups antiguos de BBDD Oracle   ")
     print("")
     print(Fore.MAGENTA + "?) 🟣 Ayuda                      ")
     print(Fore.RED     + "x) ❌ Salir del programa   " + Fore.WHITE + "    (.v1)")
@@ -192,7 +202,8 @@ def ejecutar_menu(par_FechasSalida):
             paso2()
         elif option == '3':
             paso3()
-        
+        elif option == '4':
+            paso4()
         elif option == '?':
             pasoHelp()
         elif option.upper() == 'X':
