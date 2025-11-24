@@ -67,18 +67,23 @@ def existe_en_oracle(cursor, row):
         params[col] = row[col]
 
     sql = "SELECT 1 FROM P_BOLSAS_EVENTOS_RELEVANTES WHERE " + " AND ".join(where_clauses)
+    from pprint import pprint
 
     try:
         # DEBUG: descomenta si quieres ver SQL y params en cada ejecución
-        # print("SQL:", sql)
-        # print("Params:", params)
+        print("--- Consulta SQL:")
+        pprint(sql)
+        print("--- Parametros ROW:")
+        pprint(params)
         cursor.execute(sql, params)
         return cursor.fetchone() is not None
     except Exception as e:
         # Mostrar información útil para depurar
         print(Fore.RED + f"{dt.now().time()} - Error en existe_en_oracle: {e}")
-        print("SQL:", sql)
-        print("Params:", params)
+        print("--- Consulta SQL:")
+        pprint(sql)
+        print("--- Parametros ROW:")
+        pprint(params)
         raise
         
 # ----------------------------------------------------------------------------------------
@@ -112,9 +117,9 @@ def sTv_paso2(var_Fechas3):
         for idx, row in sTv.df_Global.iterrows():
             if existe_en_oracle(cursor, row):
                 rutaEntrada=f'{sTv.var_RutaIN}{sTv.var_Files_IN}_{var_Fechas3}.xlsx'
-                print(Fore.RED + f"Duplicado(s) detectado, revisar el file: {rutaEntrada}")
+                print(Fore.RED + f"- ¡¡¡AVISO!!!: Existen registros duplicado(s) en el file: {rutaEntrada} vs BBDD Oracle")
                 Oracle_Cerrar_Conexion(conexion, cursor)
-                print("Cerramos el programa en el paso2")
+                print("\nCerramos el programa en el Paso2")
                 sys.exit(0)
 
         print(f"OK: No existen duplicados, se podrán subir los {len(sTv.df_Global)} registros")
