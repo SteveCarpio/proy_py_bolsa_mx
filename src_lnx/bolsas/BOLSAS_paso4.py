@@ -24,7 +24,7 @@ def aplicar_colores_alternos(tabla_html):
 # Función envió de Email
 def enviar_email_con_adjunto(destinatarios_to, destinatarios_cc, asunto, cuerpo1, cuerpo2, ruta, nombre_archivo, df1, df2):
 
-    print("\n- Comprobando el número de registros para cada bolsas, si en una de ellas no hay registros no se mandará email")
+    print("\n\n- Comprobando el número de registros para cada bolsas, si en una de ellas no hay registros no se mandará email")
 
     # Compruebo si hay valores de las bolsas
     if df1.iloc[0]['CLAVE'] == 'none':
@@ -331,7 +331,7 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     #destinatarios_to_m = ['talavanf@tda-sgft.com']
     #destinatarios_to_p = ['talavanf@tda-sgft.com']
     #destinatarios_cc_x = ['carpios@tda-sgft.com']
-    #destinatarios_to_x = ['talavanf@tda-sgft.com']
+    #destinatarios_to_x = ['carpios@tda-sgft.com']
     #------------------
     asunto = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Update '
     asunto_x = f'Eventos Relevantes y Comunicados Bolsas_{var_Fechas2} | Tda Excluidos '
@@ -373,9 +373,25 @@ def sTv_paso4(var_NombreSalida, var_Fechas2, var_Fechas3, var_SendEmail, var_Ent
     enviar_email_con_adjunto(destinatarios_to_m, destinatarios_cc_m, asunto, cuerpo_m1, cuerpo_m2, ruta, nombre_archivo_m, df_BIVA_M, df_BMV_M)
     enviar_email_con_adjunto(destinatarios_to_p, destinatarios_cc_p, asunto, cuerpo_p1, cuerpo_p2, ruta, nombre_archivo_p, df_BIVA_P, df_BMV_P)
 
+    # Email de Excluidos
     conteo_BIVA_X = (df_BIVA_X['CLAVE'] == 'none').sum()     # type: ignore
     conteo_BMV_X  = (df_BMV_X['CLAVE']  == 'none').sum()     # type: ignore
+
     conteo_X = conteo_BIVA_X + conteo_BMV_X
+
     if conteo_X != 2:  # Mandará un email en caso de que existan registros.
-        print("- Se manda email con datos excluidos")
+        print("\n- Se manda email con datos excluidos")
+
+        if conteo_BIVA_X == 1:
+            print("Creamos una muestra para BIVA")
+            data = {'CLAVE': ["No hay eventos excluidos en la bolsa BIVA"]}
+            df_BIVA_X = pd.DataFrame(data)
+            print(df_BIVA_X)
+        
+        if conteo_BMV_X == 1:
+            print("Creamos una muestra para BMV")
+            data = {'CLAVE': ["No hay eventos excluidos en la bolsa BMV"]}
+            df_BMV_X = pd.DataFrame(data)
+            print(df_BMV_X)
+
         enviar_email_con_adjunto(destinatarios_to_x, destinatarios_cc_x, asunto_x, cuerpo_x1, cuerpo_x2, ruta, nombre_archivo_x, df_BIVA_X, df_BMV_X)
