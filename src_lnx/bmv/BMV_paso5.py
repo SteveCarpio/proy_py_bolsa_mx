@@ -5,9 +5,11 @@
 
 import cfg.BMV_variables as sTv
 from   cfg.BMV_librerias import *
+import urllib3
 
 # Deshabilita todas las advertencias de "InsecureRequestWarning"
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# pip install -U requests urllib3 certifi   STV: si falla actualia los certificados TLS
 
 # ----------------------------------------------------------------------------------------
 #                               INICIO DEL PROGRAMA
@@ -25,41 +27,35 @@ def sTv_paso5_Crear_DataFrame(var_NombreSalida, var_FechasSalida):
 
     return df_paso5_filtrado
 
+# Modificado: Se agrego el uso de Session y Timeout para las peticiones request
 def sTv_paso5_Descarga_Html(var_NombreSalida, var_FechasSalida, df):
 
+    session = requests.Session()  # Mantiene la conexión
     num_registros = len(df)
     cont = 0
 
-    # Recorro el DataFrame con todas las URLs filtrados
     for i, row in df.iterrows():
-        cont = cont + 1
-        CLA  = f'{row.iloc[0]}'   #  Campo CLAVE PIZARRA
-        COD  = f'{row.iloc[1]}'   #  Campo CODIGO
-        URL2 = f'{row.iloc[4]}'   #  Campo URL2
-        URL3 = f'{row.iloc[5]}'   #  Campo URL3
-
-        # Realizamos la solicitud GET para obtener el contenido HTML
-        response2 = requests.get(URL2, verify=False)
-        response3 = requests.get(URL3, verify=False)
+        cont += 1
+        CLA  = f'{row.iloc[0]}' #  Campo CLAVE PIZARRA
+        COD  = f'{row.iloc[1]}' #  Campo CODIGO
+        URL2 = f'{row.iloc[4]}' #  Campo URL2
+        URL3 = f'{row.iloc[5]}' #  Campo URL3
 
         print(f"({cont}/{num_registros}) Analizando URL2: {URL2}  -  URL3: {URL3}")
 
-        # Comprobamos si la solicitud fue exitosa URL2 (código de estado 200)
-        if response2.status_code == 200:
-            # Guardamos el contenido HTML 2 en un archivo .html
-            with open(f"{sTv.var_RutaWebFiles}{var_NombreSalida}_paso5_{var_FechasSalida}_{COD}_2.html", "w", encoding="utf-8") as file:
-                file.write(response2.text)  # Escribimos el contenido HTML en el archivo
-        else:
-            print(f"Error al descargar la página. Código de estado: {response2.status_code}")
+        for idx, url in [(2, URL2), (3, URL3)]:
+            try:
+                response = session.get(url, timeout=10)  # + timeout
+                if response.status_code == 200:
+                    filename = f"{sTv.var_RutaWebFiles}{var_NombreSalida}_paso5_{var_FechasSalida}_{COD}_{idx}.html"
+                    with open(filename, "w", encoding="utf-8") as file:
+                        file.write(response.text)
+                else:
+                    print(f"[{idx}] Error HTTP {response.status_code} en {url}")
+            except requests.exceptions.RequestException as e:
+                print(f"[{idx}] Error al solicitar {url}: {e}")
 
-        # Comprobamos si la solicitud fue exitosa URL3 (código de estado 200)
-        if response3.status_code == 200:
-            # Guardamos el contenido HTML 3 en un archivo .html
-            with open(f"{sTv.var_RutaWebFiles}{var_NombreSalida}_paso5_{var_FechasSalida}_{COD}_3.html", "w", encoding="utf-8") as file:
-                file.write(response3.text)  # Escribimos el contenido HTML en el archivo
-        else:
-            print(f"Error al descargar la página. Código de estado: {response3.status_code}")
-
+            time.sleep(1)  # Pausa entre peticiones para evitar bloqueos
 
 def sTv_paso5(var_NombreSalida, var_FechasSalida):
     df = sTv_paso5_Crear_DataFrame(var_NombreSalida, var_FechasSalida)
